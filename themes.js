@@ -18,7 +18,7 @@
     { v: "ancien-arctique", nom: "Arctique (clair)", g: "Ancien look", ancien: "arctique" },
     { v: "ancien-contraste", nom: "Contraste", g: "Ancien look", ancien: "contraste" }
   ];
-  var VARIANTES = ["Bunker", "Verre calme", "HUD"];
+  var VARIANTES = ["Arsenal", "Verre calme", "HUD"];
   var CLE = "bac-rapide-choix", par = {};
   CHOIX.forEach(function (c) { par[c.v] = c; });
   var racine = document.documentElement;
@@ -67,7 +67,7 @@
   function bougerSurlignage() { var el = items[varCourante]; highlight.style.width = el.offsetWidth + "px"; highlight.style.transform = "translateX(" + el.offsetLeft + "px)"; }
   function variante(i) {
     if (i < 0 || i >= VARIANTES.length) return; varCourante = i;
-    racine.setAttribute("data-variante", ["bunker", "verre", "hud"][i]);
+    racine.setAttribute("data-variante", ["arsenal", "verre", "hud"][i]);
     items.forEach(function (el, j) { el.toggleAttribute("data-active", j === i); if (j === i) el.setAttribute("aria-current", "true"); else el.removeAttribute("aria-current"); });
     bougerSurlignage();
     var u = new URL(location.href); u.searchParams.set("v", i + 1); history.replaceState(null, "", u);
