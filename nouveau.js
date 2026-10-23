@@ -30,11 +30,11 @@
     return '<span class="nv-piece">' + p + "</span>" +
       slot("nv-c1 nv-grise", "Mod général, " + p.toLowerCase() + " : " + RAISON, ' aria-disabled="true"') + slot("nv-c2 nv-grise", "Ajustement, " + p.toLowerCase() + " : " + RAISON, ' aria-disabled="true"') +
       [1, 2, 3].map(function (k) { return slot("nv-c3 nv-vide", "Mod " + k + " de " + p.toLowerCase() + " : à choisir"); }).join("");
-  }).join("") + '</div><div class="nv-bonus"><div class="nv-texte"><span class="nv-etiq" style="margin:0;color:#dbe6ff;font-size:15px">Bonus d\'ensemble</span><p class="nv-aide">Deux ensembles au plus</p></div>' +
+  }).join("") + '</div><div class="nv-bonus"><div class="nv-texte"><span class="nv-etiq" style="margin:0;color:var(--txt);font-size:13px;font-weight:600">Bonus d\'ensemble</span><p class="nv-aide">Deux ensembles au plus</p></div>' +
     slot("nv-vide", "Choisir le bonus d'ensemble 1") + slot("nv-vide", "Choisir le bonus d'ensemble 2") + "</div>");
 
   var artefact = bloc("", "Artefact", "", '<div class="nv-ligne"><div class="nv-texte"><span class="nv-aide">Ton compte n\'est pas encore lu</span></div>' + slot("nv-art nv-vide", "Artefact : ton compte n'est pas encore lu", " disabled") + "</div>" +
-    '<p class="nv-etiq" style="margin:16px 0 0">Atouts</p><div class="nv-atouts">' + [1, 2, 3, 4, 5, 6, 7].map(function (i) { return rond("Atout " + i); }).join("") + "</div>");
+    '<p class="nv-etiq" style="margin:12px 0 0">Atouts</p><div class="nv-atouts">' + [1, 2, 3, 4, 5, 6, 7].map(function (i) { return rond("Atout " + i); }).join("") + "</div>");
 
   var cases = function (n, noms, classe) { return '<div class="nv-cases nv-n' + n + '">' + noms.map(function (nom, i) { return '<div class="nv-case">' + slot("nv-doc " + (classe || ""), nom + " : choisis d'abord la doctrine", " disabled") + (n === 6 ? "" : "<small>" + nom + "</small>") + "</div>"; }).join("") + "</div>"; };
   var doctrine = bloc("nv-doctrine", "Doctrine", "", '<div class="nv-rang"><div class="nv-doc-ligne"><div class="nv-case">' + slot("nv-vide", "Choisir la doctrine (classe et élément)", ' data-nv="doc"') + "<small>Doctrine</small></div>" +
@@ -46,7 +46,7 @@
   var page = '<header class="nv-nav"><button type="button" class="nv-retour" data-nv="retour" aria-label="Retour">' + SVG_RETOUR + '<span class="nv-retour-txt">Retour</span></button>' +
     '<div class="nv-nav-titre"><h1>Création de build</h1><span class="nv-temoin" role="status" aria-live="polite" data-etat="vide">Rien à enregistrer</span></div>' +
     '<button type="button" class="nv-icone nv-pleinecran" aria-pressed="false" aria-label="Plein écran" title="Plein écran">' + SVG_PLEIN + "</button></header>" +
-    '<main class="nv-page"><section class="nv-identite"><img class="nv-logo" src="' + LOGO + '" alt="Le Bunker" width="64" height="64">' +
+    '<main class="nv-page"><section class="nv-identite"><img class="nv-logo" src="' + LOGO + '" alt="Le Bunker" width="48" height="48">' +
     '<label class="nv-champ"><span class="nv-cache">Nom du build</span><input type="text" maxlength="40" data-c-nom value="" placeholder="Nom du build" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="done"></label>' +
     '<div class="nv-msg"><p role="status">Rien à enregistrer pour l\'instant : commence par choisir une pièce.</p><button type="button" class="nv-btn nv-btn-2 nv-carte-ouvrir" data-nv="ouvrir-carte">Ouvrir une carte</button></div></section>' +
     exo + armes + stats + armure + artefact + doctrine + "</main>" +
