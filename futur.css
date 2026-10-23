@@ -1,0 +1,175 @@
+/* Le build rapide, version « hologramme de la Tour » : du verre en couches sur une nébuleuse, des emplacements creusés avec leurs repères d'angle,
+   l'exotique en or, une couleur par élément. AUCUNE position ne change : ce fichier ne fait que repeindre les mêmes boutons.
+   Il se charge après rapide.css ; les couleurs viennent de themes.css (--f-a = couleur principale, --f-b = couleur d'appoint).
+   Tout est préfixé « html:not([data-theme="actuel"]) » : le thème « Ancien look » montre rapide.css seul, pour comparer. */
+
+:root {
+  --f-a: #55d3ff; --f-b: #7b8cff; --f-fond: #04070f; --f-neb: #0a1a33;
+  --f-or: #f2cf6a; --f-ex: #d9b53f;
+  --f-txt: #e9f2ff; --f-mut: #93a8cc; --f-verre: rgba(10,16,34,.58);
+}
+
+html:not([data-theme="actuel"]) #rapide { --u: calc(100cqw / 816); background: radial-gradient(70% 45% at 50% 0, color-mix(in srgb, var(--f-a) 20%, transparent), transparent 75%), radial-gradient(50% 40% at 100% 100%, color-mix(in srgb, var(--f-b) 14%, transparent), transparent 75%), var(--f-fond); color: var(--f-txt); font-family: "Barlow Semi Condensed", "Oxanium", system-ui, sans-serif; }
+html:not([data-theme="actuel"]) #rapide :is(button, input, select) { font-family: inherit; }
+
+/* ---------- Le fond : nébuleuse teintée, étoiles, quadrillage holographique qui s'efface ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau {
+  --u: calc(100cqw / 816); isolation: isolate;
+  background:
+    radial-gradient(1px 1px at 8% 2.1%, #fff 50%, transparent), radial-gradient(1.5px 1.5px at 41% 1.4%, #fff 50%, transparent), radial-gradient(1px 1px at 71% 3.2%, #cfe0f4 50%, transparent),
+    radial-gradient(1.5px 1.5px at 86% 7.4%, #fff 50%, transparent), radial-gradient(1px 1px at 33% 11.2%, #cfe0f4 50%, transparent), radial-gradient(1px 1px at 4% 40%, #cfe0f4 50%, transparent),
+    radial-gradient(1px 1px at 98% 58%, #cfe0f4 50%, transparent), radial-gradient(1px 1px at 2% 77%, #fff 50%, transparent), radial-gradient(1px 1px at 97% 88%, #fff 50%, transparent),
+    radial-gradient(95% 20% at 10% 3%, color-mix(in srgb, var(--f-a) 34%, transparent), transparent 72%),
+    radial-gradient(70% 16% at 98% 27%, color-mix(in srgb, var(--f-b) 22%, transparent), transparent 72%),
+    radial-gradient(75% 16% at 2% 58%, color-mix(in srgb, var(--f-b) 17%, transparent), transparent 72%),
+    radial-gradient(85% 15% at 96% 84%, color-mix(in srgb, var(--f-a) 20%, transparent), transparent 72%),
+    radial-gradient(90% 12% at 10% 99%, color-mix(in srgb, var(--f-a) 24%, transparent), transparent 72%),
+    linear-gradient(180deg, var(--f-neb) 0, var(--f-fond) 15%, var(--f-fond) 90%, var(--f-neb) 100%);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(color-mix(in srgb, var(--f-a) 10%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--f-a) 10%, transparent) 1px, transparent 1px);
+  background-size: 44px 44px; background-position: -1px -1px;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.18) 38%, rgba(0,0,0,.45) 100%); mask-image: linear-gradient(180deg, rgba(0,0,0,.85), rgba(0,0,0,.18) 38%, rgba(0,0,0,.45) 100%);
+}
+html:not([data-theme="actuel"]) #rapide .rp-rail { width: 2px !important; background: linear-gradient(transparent, color-mix(in srgb, var(--f-a) 60%, transparent) 12% 88%, transparent); box-shadow: 0 0 10px color-mix(in srgb, var(--f-a) 70%, transparent); }
+html:not([data-theme="actuel"]) #rapide .rp-sep { background: linear-gradient(transparent, color-mix(in srgb, var(--f-a) 55%, transparent) 15% 85%, transparent); box-shadow: 0 0 6px color-mix(in srgb, var(--f-a) 40%, transparent); }
+
+/* ---------- Les panneaux : verre, reflet en haut, ombre portée dessous, repères d'angle lumineux ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau {
+  border: 1px solid color-mix(in srgb, var(--f-a) 30%, transparent); border-radius: calc(12 * var(--u));
+  background:
+    linear-gradient(118deg, transparent 34%, rgba(255,255,255,.055) 47%, rgba(255,255,255,.012) 54%, transparent 62%),
+    linear-gradient(180deg, color-mix(in srgb, var(--f-a) 11%, transparent), rgba(255,255,255,.018) 24%, rgba(2,4,12,.5) 100%),
+    var(--f-verre);
+  -webkit-backdrop-filter: blur(7px) saturate(1.25); backdrop-filter: blur(7px) saturate(1.25);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.15), inset 0 0 0 1px rgba(255,255,255,.02), inset 0 -26px 46px -22px rgba(0,0,0,.6),
+    0 18px 32px -14px rgba(0,0,0,.85), 0 0 calc(36 * var(--u)) calc(-6 * var(--u)) color-mix(in srgb, var(--f-a) 26%, transparent);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau::before,
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau::after { width: calc(40 * var(--u)); height: calc(40 * var(--u)); filter: drop-shadow(0 0 4px color-mix(in srgb, var(--f-a) 85%, transparent)); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau::before { top: -1px; left: -1px; border: 0 solid var(--f-a); border-width: 2px 0 0 2px; border-top-left-radius: inherit; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau::after { right: -1px; bottom: -1px; border: 0 solid var(--f-b); border-width: 0 2px 2px 0; border-bottom-right-radius: inherit; }
+/* L'exotique : tout le panneau passe à l'or. */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau[data-panneau="EXO"] {
+  border-color: color-mix(in srgb, var(--f-ex) 50%, transparent);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--f-ex) 17%, transparent), rgba(255,255,255,.02) 30%, rgba(10,7,2,.55) 100%), var(--f-verre);
+  box-shadow: inset 0 1px 0 rgba(255,238,170,.22), inset 0 -26px 46px -22px rgba(0,0,0,.6), 0 18px 32px -14px rgba(0,0,0,.85), 0 0 calc(40 * var(--u)) calc(-4 * var(--u)) color-mix(in srgb, var(--f-ex) 38%, transparent);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau[data-panneau="EXO"]::before,
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-panneau[data-panneau="EXO"]::after { border-color: var(--f-or); filter: drop-shadow(0 0 5px color-mix(in srgb, var(--f-ex) 90%, transparent)); }
+
+/* ---------- Les titres : une languette de verre sur le bord du panneau ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-titre-p {
+  padding: 2px 11px 2px 19px; border: 1px solid color-mix(in srgb, var(--f-a) 50%, transparent); border-radius: 7px;
+  font: 600 12px/1.2 "Oxanium", "Barlow Semi Condensed", system-ui, sans-serif; letter-spacing: .05em; text-transform: none; color: color-mix(in srgb, var(--f-a) 38%, #fff);
+  background: linear-gradient(90deg, color-mix(in srgb, var(--f-a) 26%, #050814), #050814 85%); box-shadow: 0 0 14px color-mix(in srgb, var(--f-a) 28%, transparent), inset 0 1px 0 rgba(255,255,255,.12);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-titre-p::before { content: ""; position: absolute; left: 7px; top: 50%; width: 5px; height: 5px; transform: translateY(-50%) rotate(45deg); background: var(--f-a); box-shadow: 0 0 8px var(--f-a); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-ex .rp-titre-p { border-color: color-mix(in srgb, var(--f-ex) 60%, transparent); color: #ffeaa6; background: linear-gradient(90deg, color-mix(in srgb, var(--f-ex) 30%, #0a0702), #0a0702 85%); box-shadow: 0 0 14px color-mix(in srgb, var(--f-ex) 35%, transparent), inset 0 1px 0 rgba(255,238,170,.2); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-ex .rp-titre-p::before { background: var(--f-or); box-shadow: 0 0 8px var(--f-or); }
+
+/* ---------- Les emplacements : un puits creusé, quatre repères d'angle, un plus quand c'est vide ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre, .rp-rond, .ct-case) {
+  --c: var(--f-a);
+  --ticks:
+    linear-gradient(var(--c), var(--c)) left 3px top 3px / 8px 1.5px no-repeat, linear-gradient(var(--c), var(--c)) left 3px top 3px / 1.5px 8px no-repeat,
+    linear-gradient(var(--c), var(--c)) right 3px top 3px / 8px 1.5px no-repeat, linear-gradient(var(--c), var(--c)) right 3px top 3px / 1.5px 8px no-repeat,
+    linear-gradient(var(--c), var(--c)) left 3px bottom 3px / 8px 1.5px no-repeat, linear-gradient(var(--c), var(--c)) left 3px bottom 3px / 1.5px 8px no-repeat,
+    linear-gradient(var(--c), var(--c)) right 3px bottom 3px / 8px 1.5px no-repeat, linear-gradient(var(--c), var(--c)) right 3px bottom 3px / 1.5px 8px no-repeat;
+  border: 1px solid color-mix(in srgb, var(--c) 42%, transparent); border-radius: 11%;
+  background: var(--ticks), radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.1), transparent 56%), linear-gradient(165deg, #131d3c 0%, #070b19 72%);
+  box-shadow: inset 0 3px 9px rgba(0,0,0,.75), inset 0 -1px 0 rgba(255,255,255,.07), 0 1px 0 rgba(255,255,255,.06), 0 7px 12px -5px rgba(0,0,0,.85);
+  transition: box-shadow .18s ease, border-color .18s ease, filter .18s ease;
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .ct-case:not(.c1):not(.c2) { --c: #8fa6d6; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .ct-case.c2 { --c: var(--f-or); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-carre:is(.exo-libre, .exo) { --c: var(--f-ex); border-width: 1px; border-color: color-mix(in srgb, var(--f-ex) 78%, transparent); box-shadow: inset 0 3px 9px rgba(0,0,0,.75), inset 0 0 18px color-mix(in srgb, var(--f-ex) 20%, transparent), 0 0 16px -2px color-mix(in srgb, var(--f-ex) 55%, transparent), 0 7px 12px -5px rgba(0,0,0,.85); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-carre.art { --c: var(--f-or); }
+/* Les ronds (perks, atouts d'artefact) : une lentille avec son anneau. */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-rond {
+  --c: var(--f-b); border-radius: 50%; border: 1px solid color-mix(in srgb, var(--c) 75%, transparent);
+  background: radial-gradient(circle at 50% 22%, rgba(255,255,255,.16), transparent 52%), radial-gradient(circle, #0c1328 0 52%, #04060f 100%);
+  box-shadow: inset 0 3px 8px rgba(0,0,0,.8), 0 0 0 2px rgba(0,0,0,.55), 0 0 0 3px color-mix(in srgb, var(--c) 32%, transparent), 0 8px 12px -5px rgba(0,0,0,.9);
+}
+/* Le plus des emplacements vides. */
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre:not(.plein, .inactif, :disabled), .ct-case.vide:not(.grise))::before {
+  content: ""; position: absolute; inset: 0; margin: auto; width: 32%; height: 32%; color: var(--c); opacity: .6; pointer-events: none;
+  background: linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat, linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat; filter: drop-shadow(0 0 3px currentColor);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .ct-case.grise::before { content: ""; position: absolute; inset: 0; margin: auto; width: 26%; height: 2px; background: rgba(255,255,255,.2); pointer-events: none; }
+/* Plein : l'icône du choix, cadre franc, lueur de la couleur de l'emplacement. */
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre, .rp-rond, .ct-case):is(.plein, .mod:not(.vide)) {
+  border-color: var(--c);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, transparent), inset 0 0 16px color-mix(in srgb, var(--c) 26%, transparent), 0 0 15px -2px color-mix(in srgb, var(--c) 60%, transparent), 0 7px 12px -5px rgba(0,0,0,.85);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre, .rp-rond, .ct-case).ouvert { box-shadow: 0 0 0 2px var(--f-a), 0 0 24px color-mix(in srgb, var(--f-a) 75%, transparent), inset 0 0 14px color-mix(in srgb, var(--f-a) 30%, transparent); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre, .ct-case):is(:disabled, .inactif) { background: var(--ticks), linear-gradient(165deg, #0d1429, #05080f 72%); opacity: .62; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .ct-case.grise { opacity: .5; }
+@media (hover: hover) and (pointer: fine) {
+  html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-carre, .rp-rond, .ct-case):not(:disabled, .inactif, .grise):hover { border-color: var(--c); filter: brightness(1.22); box-shadow: inset 0 3px 9px rgba(0,0,0,.6), 0 0 18px -2px color-mix(in srgb, var(--c) 70%, transparent), 0 7px 12px -5px rgba(0,0,0,.85); }
+}
+
+/* ---------- Les statistiques : un afficheur avec sa barre de couleur à gauche ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-stat-cell {
+  gap: 5px; padding: 0 6px 0 9px; font: 600 12.5px/1 "Barlow Semi Condensed", system-ui, sans-serif; letter-spacing: .02em; color: var(--f-txt);
+  border: 1px solid color-mix(in srgb, var(--f-a) 36%, transparent); border-left: 3px solid var(--f-a); border-radius: 6px 12px 12px 6px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--f-a) 17%, transparent), transparent 62%), linear-gradient(180deg, #121b38, #070b19);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.1), inset 0 -10px 18px -10px rgba(0,0,0,.75), 0 7px 12px -5px rgba(0,0,0,.85);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-stat-cell :is(svg, img) { filter: drop-shadow(0 0 4px color-mix(in srgb, var(--f-a) 80%, transparent)); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-niveau { border-radius: 50%; border: 1px solid color-mix(in srgb, var(--f-a) 65%, transparent); font: 700 13px/1 "Oxanium", system-ui, sans-serif; color: var(--f-a); background: radial-gradient(circle at 50% 25%, #1a2548, #060a16); box-shadow: inset 0 2px 5px rgba(0,0,0,.7); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-stat-cell.pris { background: linear-gradient(90deg, color-mix(in srgb, var(--f-a) 34%, transparent), color-mix(in srgb, var(--f-a) 6%, transparent) 70%), linear-gradient(180deg, #14224a, #070b19); box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 0 18px -3px color-mix(in srgb, var(--f-a) 65%, transparent), 0 7px 12px -5px rgba(0,0,0,.85); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-stat-cell.pris .rp-niveau { color: #03101a; background: var(--f-a); border-color: transparent; box-shadow: 0 0 12px var(--f-a); }
+
+/* ---------- Les textes ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-txt { font: 500 12px/1.2 "Barlow Semi Condensed", system-ui, sans-serif; letter-spacing: .015em; color: var(--f-mut); text-shadow: 0 1px 8px rgba(0,0,0,.95); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.ct-s-nom, .rp-ligne > .rp-et) { font-weight: 600; font-size: 12.5px; color: #cfdcf7; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-arme .rp-et { color: color-mix(in srgb, var(--f-a) 55%, #fff); font-family: "Oxanium", system-ui, sans-serif; font-weight: 600; letter-spacing: .04em; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau :is(.rp-arme .rp-nomarme, .rp-exo-nom, .rp-doc-nom) { color: var(--f-or); font-weight: 600; }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-sous { font: 600 12.5px/1.2 "Oxanium", system-ui, sans-serif; letter-spacing: .04em; color: color-mix(in srgb, var(--f-a) 45%, #fff); }
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-doc-aide { color: color-mix(in srgb, var(--f-a) 30%, #fff); font-weight: 600; }
+html:not([data-theme="actuel"]) #rapide .rp-msg { color: var(--f-mut); font-size: 12.5px; text-shadow: 0 1px 8px rgba(0,0,0,.95); }
+
+/* ---------- La barre du haut : verre dépoli, filet lumineux dessous ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-tete {
+  background: linear-gradient(180deg, rgba(9,14,32,.86), rgba(5,8,18,.62)); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+  border-bottom: 1px solid transparent; border-image: linear-gradient(90deg, transparent, var(--f-a) 30%, var(--f-b) 70%, transparent) 1; box-shadow: 0 10px 26px -10px rgba(0,0,0,.9);
+}
+html:not([data-theme="actuel"]) #rapide .rp-tete h2 { font: 700 16px/1.2 "Oxanium", system-ui, sans-serif; letter-spacing: .03em; color: #fff; text-shadow: 0 0 14px color-mix(in srgb, var(--f-a) 70%, transparent); }
+html:not([data-theme="actuel"]) #rapide .rp-temoin { font: 500 12px/1.2 "Barlow Semi Condensed", system-ui, sans-serif; letter-spacing: .02em; }
+html:not([data-theme="actuel"]) #rapide :is(.rp-retour, .rp-plein-ecran, .rp-chercher, .bac-themes select) {
+  color: var(--f-txt); background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.02)); border: 1px solid color-mix(in srgb, var(--f-a) 38%, transparent); border-radius: 12px; box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 4px 10px -4px rgba(0,0,0,.8);
+}
+html:not([data-theme="actuel"]) #rapide .rp-retour { padding: 0 12px 0 8px; font-weight: 600; }
+html:not([data-theme="actuel"]) #rapide .rp-retour.rp-confirme { color: var(--f-or); border-color: var(--f-or); }
+html:not([data-theme="actuel"]) #rapide .rp-plein-ecran[aria-pressed="true"] { color: var(--f-a); border-color: var(--f-a); box-shadow: 0 0 14px -2px var(--f-a); }
+
+/* ---------- Le haut de la page et la barre du bas ---------- */
+html:not([data-theme="actuel"]) #rapide .rp-logo { filter: drop-shadow(0 0 16px color-mix(in srgb, var(--f-a) 60%, transparent)) drop-shadow(0 3px 6px #000); }
+html:not([data-theme="actuel"]) #rapide .rp-nom input {
+  font: 500 16px/1 "Barlow Semi Condensed", system-ui, sans-serif; color: var(--f-txt); border: 1px solid color-mix(in srgb, var(--f-a) 42%, transparent); border-radius: 12px;
+  background: linear-gradient(180deg, #050816, #0b1330); box-shadow: inset 0 3px 8px rgba(0,0,0,.75), 0 1px 0 rgba(255,255,255,.07);
+}
+html:not([data-theme="actuel"]) #rapide .rp-nom input::placeholder { color: color-mix(in srgb, var(--f-mut) 80%, transparent); }
+html:not([data-theme="actuel"]) #rapide .rp-nom input:focus { outline: none; border-color: var(--f-a); box-shadow: inset 0 3px 8px rgba(0,0,0,.75), 0 0 0 3px color-mix(in srgb, var(--f-a) 30%, transparent), 0 0 18px -2px var(--f-a); }
+html:not([data-theme="actuel"]) #rapide .bouton { text-transform: none; letter-spacing: .03em; font: 700 15px/1 "Oxanium", system-ui, sans-serif; border-radius: 12px; transition: filter .18s ease, box-shadow .18s ease; }
+html:not([data-theme="actuel"]) #rapide :is(.rp-bt-image, .rp-plateau .rp-ouvrir-carte) {
+  color: var(--f-txt); border: 1px solid color-mix(in srgb, var(--f-a) 58%, transparent); background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.02)), #0a1024;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 8px 16px -8px rgba(0,0,0,.9), 0 0 14px -6px var(--f-a);
+}
+html:not([data-theme="actuel"]) #rapide .rp-plateau .rp-ouvrir-carte { font-size: 13px; border-color: color-mix(in srgb, var(--f-or) 62%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 8px 16px -8px rgba(0,0,0,.9), 0 0 14px -6px var(--f-or); }
+html:not([data-theme="actuel"]) #rapide .rp-enregistrer.bouton.plein {
+  color: #03101a; border: 1px solid color-mix(in srgb, var(--f-a) 55%, #fff);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--f-a) 82%, #fff), var(--f-a) 46%, color-mix(in srgb, var(--f-a) 62%, #000));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), 0 10px 22px -8px color-mix(in srgb, var(--f-a) 85%, transparent), 0 0 0 1px rgba(0,0,0,.35);
+}
+html:not([data-theme="actuel"]) #rapide .rp-enregistrer.bouton.plein:disabled { opacity: .42; filter: saturate(.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.4); }
+@media (hover: hover) and (pointer: fine) { html:not([data-theme="actuel"]) #rapide .bouton:not(:disabled):hover { filter: brightness(1.15); } }
+html:not([data-theme="actuel"]) #rapide :is(.rp-carre, .rp-rond, .ct-case, .ct-s-carre, .rp-enregistrer, .rp-bt-image, .rp-retour, .rp-plein-ecran):focus-visible { outline: 2px solid var(--f-or); outline-offset: 2px; }
+
+/* ---------- Un seul moment animé : la fiche se déploie à l'ouverture ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  html:not([data-theme="actuel"]) #rapide .rp-plateau { animation: f-ouverture .75s cubic-bezier(.2, .8, .2, 1) both; }
+  @keyframes f-ouverture { from { opacity: 0; filter: blur(8px) brightness(1.6); } to { opacity: 1; filter: none; } }
+}
