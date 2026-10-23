@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build rapide, maquette CSS (brouillon)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#cfd5dc;font-family:'Rajdhani',system-ui,sans-serif;color:#111827}
+header{padding:20px 24px 0;text-align:center}
+header h1{margin:0;font-size:28px}
+header p{margin:6px 0 0;font-size:18px;color:#374151}
+.planches{display:flex;flex-wrap:wrap;gap:28px;padding:24px;justify-content:center}
+.cadre{flex:1 1 360px;max-width:620px}
+.cadre h2{margin:0 0 10px;font-size:22px;text-align:center}
+.scene{position:relative;width:100%;aspect-ratio:1080/2560;overflow:hidden;border-radius:12px;box-shadow:0 4px 24px rgba(0,0,0,.25)}
+.board{position:absolute;left:0;top:0;width:1080px;height:2560px;overflow:hidden;transform-origin:0 0;background-color:var(--bg);background-image:var(--sky);background-repeat:no-repeat;color:var(--text);font-family:inherit}
+.blanc{--bg:#fff;--sky:none;--panel:#F6F8FA;--panelb:#1F6F9E;--case:#E9EEF3;--caseb:#7C8794;--blue:#1F6F9E;--amber:#9A6410;--text:#111827;--muted:#4B5563;--primbg:#9A6410;--primtx:#fff;--sec:#fff}
+.noir{--bg:#07090D;--sky:radial-gradient(1.5px 1.5px at 90px 40px,#cfe9ff 99%,transparent),radial-gradient(1px 1px at 240px 90px,#cfe9ff 99%,transparent),radial-gradient(2px 2px at 400px 30px,#cfe9ff 99%,transparent),radial-gradient(1px 1px at 560px 70px,#cfe9ff 99%,transparent),radial-gradient(1.5px 1.5px at 700px 22px,#cfe9ff 99%,transparent),radial-gradient(1px 1px at 820px 96px,#cfe9ff 99%,transparent),radial-gradient(2px 2px at 940px 50px,#cfe9ff 99%,transparent),radial-gradient(1px 1px at 1010px 12px,#cfe9ff 99%,transparent),radial-gradient(1px 1px at 150px 20px,#cfe9ff 99%,transparent),radial-gradient(1.5px 1.5px at 330px 100px,#cfe9ff 99%,transparent);--panel:#0C1017;--panelb:#5FB8E6;--case:#12161D;--caseb:#6B7480;--blue:#5FB8E6;--amber:#E0A33A;--text:#E8EDF3;--muted:#9AA5B1;--primbg:#E0A33A;--primtx:#0B0E13;--sec:#07090D}
+.board *{position:absolute}
+.tx{white-space:nowrap;overflow:hidden;font-weight:600;color:var(--text)}
+.tx.mu{color:var(--muted)} .tx.k{letter-spacing:6px} .tx.ce{text-align:center}
+.tx.h{font-size:30px;font-weight:700}
+.pn{left:36px;width:1008px;border:2px solid var(--panelb);border-radius:28px;background:var(--panel)}
+.c{width:100px;height:100px;background:var(--case);border:2px dashed var(--caseb);border-radius:14px;padding:0;margin:0;cursor:default;font-family:inherit}
+.c::after{content:"+";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:36px;font-weight:600}
+.c.nr::after{content:none}
+.c.w{width:120px;height:120px}
+.c.o{width:76px;height:76px;border-radius:50%;border-color:var(--amber)}
+.c.a{width:84px;height:84px;border-radius:50%;border-color:var(--amber)}
+.c.bl{border-color:var(--blue)} .c.am{border-color:var(--amber)}
+.st{width:312px;height:80px;background:var(--case);border:2px solid var(--blue);border-radius:14px;padding:0 18px 0 22px;margin:0;cursor:default;font-family:inherit}
+.st span{position:static;font-size:30px;font-weight:600;color:var(--text)}
+.st i{position:absolute;right:18px;top:15px;width:44px;height:44px;border-radius:50%;border:2px dashed var(--caseb);font-style:normal;font-size:26px;font-weight:600;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.st span{left:22px;top:20px;position:absolute;line-height:36px}
+.rl{left:60px;width:170px;height:100px;display:flex;align-items:center;font-size:26px;line-height:28px;font-weight:600;color:var(--text)}
+.logo{left:20px;top:150px;width:150px;height:150px;border:2px dashed var(--caseb);border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;color:var(--muted);letter-spacing:3px}
+.pill{height:64px;background:var(--sec);border:2px solid var(--blue);border-radius:32px;color:var(--text);font-size:28px;font-weight:600;font-family:inherit;padding:0;margin:0;cursor:default}
+.pill.ic{width:64px}
+.pill svg{position:absolute;left:14px;top:14px;width:32px;height:32px;fill:none;stroke:var(--text);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.pyr{left:760px;top:1950px;width:240px;height:200px;fill:none;stroke:var(--blue);stroke-width:2;stroke-linejoin:round;opacity:.6}
+.bar{top:2450px;width:300px;height:80px;background:var(--sec);border:2px solid var(--blue);border-radius:40px;color:var(--text);font-size:32px;font-weight:700;font-family:inherit;padding:0;margin:0;cursor:default}
+.bar.prim{background:var(--primbg);border-color:var(--primbg);color:var(--primtx)}
+</style>
+</head>
+<body>
+<header>
+<h1>Build rapide, maquette en CSS</h1>
+<p>Brouillon : même disposition que l’image (grille 1080 × 2560), boutons non cliquables.</p>
+</header>
+<main class="planches">
+<section class="cadre"><h2>Fond blanc</h2><div class="scene"><div class="board blanc">
+<div class="tx mu k" style="left:190px;top:196px;width:600px;height:32px;line-height:32px;font-size:24px;">BUNKER ARSENAL</div>
+<div class="tx " style="left:190px;top:228px;width:700px;height:64px;line-height:64px;font-size:56px;font-weight:700;">Build rapide</div>
+<div class="logo">LOGO</div>
+<button type="button" tabindex="-1" class="pill" style="left:190px;top:118px;width:170px">‹ Retour</button>
+<div class="tx mu" style="left:560px;top:118px;width:260px;height:64px;line-height:64px;font-size:26px;text-align:right;">● Enregistré</div>
+<button type="button" tabindex="-1" aria-label="Rechercher" class="pill ic" style="left:880px;top:118px"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7"/></svg></button>
+<button type="button" tabindex="-1" aria-label="Plein écran" class="pill ic" style="left:960px;top:118px"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 12V5h7M20 5h7v7M27 20v7h-7M12 27H5v-7"/></svg></button>
+<div class="pn" style="top:316px;height:180px"></div>
+<div class="tx h" style="left:60px;top:336px;width:600px;height:36px;line-height:36px;">Exotique d’armure</div>
+<div class="tx mu" style="left:60px;top:384px;width:800px;height:32px;line-height:32px;font-size:26px;font-weight:500;">Aucune choisie</div>
+<button type="button" tabindex="-1" aria-label="Exotique d’armure" class="c " style="left:920px;top:376px"></button>
+<div class="pn" style="top:510px;height:296px"></div>
+<div class="tx ce" style="left:124px;top:524px;width:160px;height:30px;line-height:30px;font-size:26px;font-weight:700;">Cinétique</div>
+<button type="button" tabindex="-1" aria-label="Arme cinétique" class="c w" style="left:144px;top:566px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 1, arme cinétique" class="c o nr" style="left:118px;top:706px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 2, arme cinétique" class="c o nr" style="left:214px;top:706px"></button>
+<div class="tx ce" style="left:460px;top:524px;width:160px;height:30px;line-height:30px;font-size:26px;font-weight:700;">Énergétique</div>
+<button type="button" tabindex="-1" aria-label="Arme énergétique" class="c w" style="left:480px;top:566px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 1, arme énergétique" class="c o nr" style="left:454px;top:706px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 2, arme énergétique" class="c o nr" style="left:550px;top:706px"></button>
+<div class="tx ce" style="left:796px;top:524px;width:160px;height:30px;line-height:30px;font-size:26px;font-weight:700;">Lourde</div>
+<button type="button" tabindex="-1" aria-label="Arme lourde" class="c w" style="left:816px;top:566px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 1, arme lourde" class="c o nr" style="left:790px;top:706px"></button>
+<button type="button" tabindex="-1" aria-label="Perk 2, arme lourde" class="c o nr" style="left:886px;top:706px"></button>
+<div class="pn" style="top:820px;height:242px"></div>
+<div class="tx h" style="left:60px;top:832px;width:700px;height:36px;line-height:36px;">Statistiques visées</div>
+<button type="button" tabindex="-1" aria-label="Santé, priorité" class="st" style="left:60px;top:874px"><span>Santé</span><i>–</i></button>
+<button type="button" tabindex="-1" aria-label="Mêlée, priorité" class="st" style="left:384px;top:874px"><span>Mêlée</span><i>–</i></button>
+<button type="button" tabindex="-1" aria-label="Grenade, priorité" class="st" style="left:708px;top:874px"><span>Grenade</span><i>–</i></button>
+<button type="button" tabindex="-1" aria-label="Super, priorité" class="st" style="left:60px;top:966px"><span>Super</span><i>–</i></button>
+<button type="button" tabindex="-1" aria-label="Classe, priorité" class="st" style="left:384px;top:966px"><span>Classe</span><i>–</i></button>
+<button type="button" tabindex="-1" aria-label="Armes, priorité" class="st" style="left:708px;top:966px"><span>Armes</span><i>–</i></button>
+<div class="pn" style="top:1076px;height:618px"></div>
+<div class="tx h" style="left:60px;top:1090px;width:170px;height:36px;line-height:36px;">Armure</div>
+<div class="tx mu ce" style="left:235px;top:1098px;width:110px;height:30px;line-height:30px;font-size:22px;">Général</div>
+<div class="tx mu ce" style="left:345px;top:1098px;width:110px;height:30px;line-height:30px;font-size:22px;">Ajust.</div>
+<div class="tx mu ce" style="left:455px;top:1098px;width:110px;height:30px;line-height:30px;font-size:22px;">Mod</div>
+<div class="tx mu ce" style="left:565px;top:1098px;width:110px;height:30px;line-height:30px;font-size:22px;">Mod</div>
+<div class="tx mu ce" style="left:675px;top:1098px;width:110px;height:30px;line-height:30px;font-size:22px;">Mod</div>
+<div class="rl" style="top:1134px">Casque</div>
+<button type="button" tabindex="-1" aria-label="Casque, case 1" class="c bl" style="left:240px;top:1134px"></button>
+<button type="button" tabindex="-1" aria-label="Casque, case 2" class="c am" style="left:350px;top:1134px"></button>
+<button type="button" tabindex="-1" aria-label="Casque, case 3" class="c " style="left:460px;top:1134px"></button>
+<button type="button" tabindex="-1" aria-label="Casque, case 4" class="c " style="left:570px;top:1134px"></button>
+<button type="button" tabindex="-1" aria-label="Casque, case 5" class="c " style="left:680px;top:1134px"></button>
+<div class="rl" style="top:1244px">Gantelets</div>
+<button type="button" tabindex="-1" aria-label="Gantelets, case 1" class="c bl" style="left:240px;top:1244px"></button>
+<button type="button" tabindex="-1" aria-label="Gantelets, case 2" class="c am" style="left:350px;top:1244px"></button>
+<button type="button" tabindex="-1" aria-label="Gantelets, case 3" class="c " style="left:460px;top:1244px"></button>
+<button type="button" tabindex="-1" aria-label="Gantelets, case 4" class="c " style="left:570px;top:1244px"></button>
+<button type="button" tabindex="-1" aria-label="Gantelets, case 5" class="c " style="left:680px;top:1244px"></button>
+<div class="rl" style="top:1354px">Torse</div>
+<button type="button" tabindex="-1" aria-label="Torse, case 1" class="c bl" style="left:240px;top:1354px"></button>
+<button type="button" tabindex="-1" aria-label="Torse, case 2" class="c am" style="left:350px;top:1354px"></button>
+<button type="button" tabindex="-1" aria-label="Torse, case 3" class="c " style="left:460px;top:1354px"></button>
+<button type="button" tabindex="-1" aria-label="Torse, case 4" class="c " style="left:570px;top:1354px"></button>
+<button type="button" tabindex="-1" aria-label="Torse, case 5" class="c " style="left:680px;top:1354px"></button>
+<div class="rl" style="top:1464px">Jambières</div>
+<button type="button" tabindex="-1" aria-label="Jambières, case 1" class="c bl" style="left:240px;top:1464px"></button>
+<button type="button" tabindex="-1" aria-label="Jambières, case 2" class="c am" style="left:350px;top:1464px"></button>
+<button type="button" tabindex="-1" aria-label="Jambières, case 3" class="c " style="left:460px;top:1464px"></button>
+<button type="button" tabindex="-1" aria-label="Jambières, case 4" class="c " style="left:570px;top:1464px"></button>
+<button type="button" tabindex="-1" aria-label="Jambières, case 5" class="c " style="left:680px;top:1464px"></button>
+<div class="rl" style="top:1574px">Objet de classe</div>
+<button type="button" tabindex="-1" aria-label="Objet de classe, case 1" class="c bl" style="left:240px;top:1574px"></button>
+<button type="button" tabindex="-1" aria-label="Objet de classe, case 2" class="c am" style="left:350px;top:1574px"></button>
+<button type="button" tabindex="-1" aria-label="Objet de classe, case 3" class="c " style="left:460px;top:1574px"></button>
+<button type="button" tabindex="-1" aria-label="Objet de classe, case 4" class="c " style="left:570px;top:1574px"></button>
+<button type="button" tabindex="-1" aria-label="Objet de classe, case 5" class="c " style="left:680px;top:1574px"></button>
+<div class="tx mu ce" style="left:826px;top:1160px;width:200px;height:30px;line-height:30px;font-size:22px;">Bonus d’ensemble</div>
+<button type="button" tabindex="-1" aria-label="Bonus d’ensemble 1" class="c " style="left:860px;top:1200px"></button>
+<button type="button" tabindex="-1" aria-label="Bonus d’ensemble 2" class="c " style="left:860px;top:1320px"></button>
+<div class="pn" style="top:1708px;height:178px"></div>
+<div class="tx h" style="left:60px;top:1718px;width:600px;height:36px;line-height:36px;">Artefact</div>
+<button type="button" tabindex="-1" aria-label="Artefact" class="c am" style="left:60px;top:1766px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 1" class="c a nr" style="left:180px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 2" class="c a nr" style="left:280px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 3" class="c a nr" style="left:380px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 4" class="c a nr" style="left:480px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 5" class="c a nr" style="left:580px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 6" class="c a nr" style="left:680px;top:1774px"></button>
+<button type="button" tabindex="-1" aria-label="Atout d’artefact 7" class="c a nr" style="left:780px;top:1774px"></button>
+<div class="pn" style="top:1900px;height:508px"></div>
+<div class="tx h" style="left:60px;top:1912px;width:600px;height:36px;line-height:36px;">Doctrine</div>
+<div class="rl" style="top:1958px">Doctrine et Super</div>
+<button type="button" tabindex="-1" aria-label="Doctrine et Super 1" class="c " style="left:240px;top:1958px"></button>
+<button type="button" tabindex="-1" aria-label="Doctrine et Super 2" class="c " style="left:350px;top:1958px"></button>
+<div class="rl" style="top:2068px">Compétences</div>
+<button type="button" tabindex="-1" aria-label="Compétences 1" class="c " style="left:240px;top:2068px"></button>
+<button type="button" tabindex="-1" aria-label="Compétences 2" class="c " style="left:350px;top:2068px"></button>
+<button type="button" tabindex="-1" aria-label="Compétences 3" class="c " style="left:460px;top:2068px"></button>
+<button type="button" tabindex="-1" aria-label="Compétences 4" class="c " style="left:570px;top:2068px"></button>
+<div class="rl" style="top:2178px">Aspects</div>
+<button type="button" tabindex="-1" aria-label="Aspects 1" class="c " style="left:240px;top:2178px"></button>
+<button type="button" tabindex="-1" aria-label="Aspects 2" class="c " style="left:350px;top:2178px"></button>
+<div class="rl" style="top:2288px">Fragments</div>
+<button type="button" tabindex="-1" aria-label="Fragments 1" class="c " style="left:240px;top:2288px"></button>
+<button type="button" tabindex="-1" aria-label="Fragments 2" class="c " style="left:350px;top:2288px"></button>
+<button type="button" tabindex="-1" aria-label="Fragments 3" class="c " style="left:460px;top:2288px"></button>
+<button type="button" tabindex="-1" aria-label="Fragments 4" class="c " style="left:570px;top:2288px"></button>
+<button type="button" tabindex="-1" aria-label="Fragments 5" class="c " style="left:680px;top:2288px"></button>
+<button type="button" tabindex="-1" aria-label="Fragments 6" class="c " style="left:790px;top:2288px"></button>
+<svg class="pyr" viewBox="0 0 240 200" aria-hidden="true"><path d="M120 10L230 190H10Z"/><path d="M120 10V190M65 100h110"/></svg>
+<button type="button" tabindex="-1" class="bar prim" style="left:60px">Enregistrer</button>
+<button type="button" tabindex="-1" class="bar" style="left:390px">Capture</button>
+<button type="button" tabindex="-1" class="bar" style="left:720px">Envoyer</button>
+</div></div></section>
+<section class="cadre"><h2>Fond noir</h2><div class="scene" id="scene-noir"></div></section>
+</main>
+<script>
+(function () {
+  var premiere = document.querySelector('.board.blanc');
+  var copie = premiere.cloneNode(true);
+  copie.className = 'board noir';
+  document.getElementById('scene-noir').appendChild(copie);
+  function ajuster() {
+    document.querySelectorAll('.scene').forEach(function (s) {
+      var b = s.querySelector('.board');
+      b.style.transform = 'scale(' + (s.clientWidth / 1080) + ')';
+    });
+  }
+  ajuster();
+  window.addEventListener('resize', ajuster);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(ajuster);
+})();
+</script>
+</body>
+</html>
