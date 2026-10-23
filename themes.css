@@ -34,7 +34,7 @@ body[data-element="prismatique"] {
 }
 /* Sans doctrine : « Obsidienne », l'ivoire du Bunker sur un noir chaud. Seulement dans le nouveau build rapide. */
 html:not([data-look="ancien"]) body:not([data-element]) {
-  --solaire: #e6dfcc; --solaire-clair: #f6f1e3; --solaire-sombre: #8d8670;
+  --solaire: #e6dfcc; --solaire-clair: #f6f1e3; --solaire-sombre: #6b6552;
   --bandeau: rgba(58, 56, 48, .96); --bandeau-bord: rgba(236, 231, 220, .2);
   --corps: rgba(29, 28, 23, .9); --corps-clair: rgba(44, 42, 35, .88); --case: rgba(16, 15, 12, .62);
   --fond-page: #14130f;
