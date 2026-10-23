@@ -11,5 +11,5 @@
 .proto-picker-divider { width: 1px; height: 16px; margin: 0 4px; background: rgba(255, 255, 255, 0.12); }
 .proto-picker[data-position="top"] { bottom: auto; top: 24px; }
 /* Réglages du banc d'essai seulement : le sélecteur flotte sous la barre du haut, la page lui laisse la place. */
-.proto-picker[data-position="top"] { top: calc(64px + env(safe-area-inset-top, 0px)); }
-html:not([data-look="ancien"]) .nv-page { padding-top: 64px !important; }
+.proto-picker[data-position="top"] { top: calc(54px + env(safe-area-inset-top, 0px)); }
+html:not([data-look="ancien"]) .nv-page { padding-top: 50px !important; }
