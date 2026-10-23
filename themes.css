@@ -1,41 +1,50 @@
-/* LES COULEURS SELON LA DOCTRINE. L'Arsenal fait déjà le travail : à chaque choix de doctrine il pose body[data-element] = DOCTRINES[id].adj
-   (solaire, cryo-électrique, abyssal, stasique, filobscur, prismatique) et change ses variables (--solaire, --solaire-clair, --solaire-sombre, --fond-page…).
-   Les cinq blocs ci-dessous sont COPIÉS TELS QUELS de site/index.html ; « solaire » est la valeur par défaut (:root de socle.css).
-   Le seul ajout : un sombre doux quand AUCUNE doctrine n'est choisie (body sans data-element), seulement dans le build rapide. */
+/* LES COULEURS SELON LA DOCTRINE : un seul thème par doctrine, travaillé en profondeur.
+   L'Arsenal pose déjà body[data-element] = DOCTRINES[id].adj (solaire, cryo-électrique, abyssal, stasique, filobscur, prismatique) : on garde ce mécanisme et les
+   mêmes noms de variables (--solaire, --solaire-clair, --solaire-sombre, --fond-page, --corps, --case…). Ces blocs REMPLACENT ceux de site/index.html (du CSS seulement).
+   Ce qui est nouveau, pour la profondeur : des fonds de couleur riche (un ton bijou très sombre, pas un gris), une lumière du haut (--p-haut), une ombre du bas (--p-bas),
+   une deuxième lueur d'une autre teinte (--p-lueur), et des accents un peu moins vifs : la couleur vit dans l'ambiance, pas dans de grands aplats criards.
+   « Solaire » est la valeur par défaut du site (:root de socle.css) : son bloc est donc posé aussi pour [data-element="solaire"]. */
+
+body[data-element="solaire"] {
+  --solaire: #dd8341; --solaire-clair: #f0b57b; --solaire-sombre: #8f4520;
+  --bandeau: rgba(112, 52, 24, .96); --bandeau-bord: rgba(240, 181, 123, .25);
+  --corps: rgba(30, 17, 11, .92); --corps-clair: rgba(52, 31, 20, .9); --case: rgba(16, 8, 5, .66);
+  --fond-page: #1c0f08; --p-haut: #4a2511; --p-bas: #0c0503; --p-lueur: #b9852f;
+}
 body[data-element="cryo-électrique"] {
-  --solaire: #4fb3e8; --solaire-clair: #8fd4ff; --solaire-sombre: #1f6c9c;
-  --bandeau: rgba(30, 84, 122, .96); --bandeau-bord: rgba(140, 210, 255, .25);
-  --corps: rgba(11, 17, 23, .9); --corps-clair: rgba(24, 36, 46, .88); --case: rgba(7, 12, 18, .62);
-  --fond-page: #08131c;
+  --solaire: #4ea9d4; --solaire-clair: #98d3ee; --solaire-sombre: #19587f;
+  --bandeau: rgba(25, 80, 112, .96); --bandeau-bord: rgba(152, 211, 238, .25);
+  --corps: rgba(8, 25, 36, .92); --corps-clair: rgba(18, 45, 62, .9); --case: rgba(4, 14, 21, .66);
+  --fond-page: #071a26; --p-haut: #0f3d56; --p-bas: #030d14; --p-lueur: #3f6fb0;
 }
 body[data-element="abyssal"] {
-  --solaire: #a66be0; --solaire-clair: #cfa3ff; --solaire-sombre: #5e3496;
-  --bandeau: rgba(78, 46, 122, .96); --bandeau-bord: rgba(206, 170, 255, .25);
-  --corps: rgba(16, 12, 24, .9); --corps-clair: rgba(34, 26, 48, .88); --case: rgba(12, 8, 20, .62);
-  --fond-page: #120a1e;
+  --solaire: #9d6fd2; --solaire-clair: #c7a6ee; --solaire-sombre: #52308c;
+  --bandeau: rgba(72, 42, 114, .96); --bandeau-bord: rgba(199, 166, 238, .25);
+  --corps: rgba(20, 12, 34, .92); --corps-clair: rgba(40, 26, 64, .9); --case: rgba(10, 6, 20, .66);
+  --fond-page: #140c25; --p-haut: #2f1a56; --p-bas: #07040f; --p-lueur: #94457f;
 }
 body[data-element="stasique"] {
-  --solaire: #6f8ff0; --solaire-clair: #a9bdff; --solaire-sombre: #3a4fa6;
-  --bandeau: rgba(46, 62, 128, .96); --bandeau-bord: rgba(180, 200, 255, .25);
-  --corps: rgba(12, 14, 26, .9); --corps-clair: rgba(26, 30, 50, .88); --case: rgba(8, 10, 20, .62);
-  --fond-page: #0b1024;
+  --solaire: #6c8fe2; --solaire-clair: #a9c1ff; --solaire-sombre: #324a92;
+  --bandeau: rgba(42, 58, 122, .96); --bandeau-bord: rgba(169, 193, 255, .25);
+  --corps: rgba(10, 17, 42, .92); --corps-clair: rgba(22, 34, 78, .9); --case: rgba(5, 9, 24, .66);
+  --fond-page: #0a1331; --p-haut: #1b2b69; --p-bas: #04081a; --p-lueur: #3f9ec0;
 }
 body[data-element="filobscur"] {
-  --solaire: #3fbf7f; --solaire-clair: #8fe8b4; --solaire-sombre: #1f7a4c;
-  --bandeau: rgba(30, 96, 64, .96); --bandeau-bord: rgba(160, 240, 200, .25);
-  --corps: rgba(10, 20, 16, .9); --corps-clair: rgba(22, 40, 32, .88); --case: rgba(6, 16, 12, .62);
-  --fond-page: #08160f;
+  --solaire: #3eb87b; --solaire-clair: #8ee3b3; --solaire-sombre: #1b6c46;
+  --bandeau: rgba(27, 90, 60, .96); --bandeau-bord: rgba(142, 227, 179, .25);
+  --corps: rgba(8, 26, 17, .92); --corps-clair: rgba(18, 48, 33, .9); --case: rgba(4, 15, 9, .66);
+  --fond-page: #08180f; --p-haut: #14432b; --p-bas: #030b06; --p-lueur: #2b9488;
 }
 body[data-element="prismatique"] {
-  --solaire: #d77cf0; --solaire-clair: #f3c4ff; --solaire-sombre: #7a3b96;
-  --bandeau: rgba(96, 46, 122, .96); --bandeau-bord: rgba(243, 196, 255, .25);
-  --corps: rgba(18, 10, 24, .9); --corps-clair: rgba(38, 24, 48, .88); --case: rgba(14, 8, 20, .62);
-  --fond-page: #160b1e;
+  --solaire: #c673e3; --solaire-clair: #edbbfa; --solaire-sombre: #72358d;
+  --bandeau: rgba(88, 42, 114, .96); --bandeau-bord: rgba(237, 187, 250, .25);
+  --corps: rgba(24, 12, 36, .92); --corps-clair: rgba(46, 26, 68, .9); --case: rgba(12, 6, 22, .66);
+  --fond-page: #180c28; --p-haut: #3b1d5f; --p-bas: #08040f; --p-lueur: #3f9fc8;
 }
-/* Sans doctrine : « Obsidienne », l'ivoire du Bunker sur un noir chaud. Seulement dans le nouveau build rapide. */
+/* Sans doctrine : « Obsidienne » — un graphite chaud, une lueur dorée en haut, une ombre ardoise en bas ; l'ivoire du Bunker comme accent. Seulement dans le nouveau build rapide. */
 html:not([data-look="ancien"]) body:not([data-element]) {
-  --solaire: #e6dfcc; --solaire-clair: #f6f1e3; --solaire-sombre: #6b6552;
+  --solaire: #e2dac6; --solaire-clair: #f4eede; --solaire-sombre: #6b6552;
   --bandeau: rgba(58, 56, 48, .96); --bandeau-bord: rgba(236, 231, 220, .2);
-  --corps: rgba(29, 28, 23, .9); --corps-clair: rgba(44, 42, 35, .88); --case: rgba(16, 15, 12, .62);
-  --fond-page: #14130f;
+  --corps: rgba(27, 26, 22, .92); --corps-clair: rgba(44, 42, 35, .9); --case: rgba(14, 13, 10, .66);
+  --fond-page: #15140f; --p-haut: #2c2920; --p-bas: #090908; --p-lueur: #4d5670;
 }
