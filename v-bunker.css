@@ -1,0 +1,71 @@
+/* VARIANTE 1 · BUNKER : la matière pleine du Store Jeu Bunker. Surfaces mates, traits de 2 px, ombres dures sans flou, Oswald en capitales pour les titres,
+   IBM Plex Mono pour les étiquettes, une bande de hachures en haut et en bas. La couleur de la doctrine ne sert que d'accent. Aucune transparence sur les cartes. */
+html[data-variante="bunker"] #build {
+  --nv-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", sans-serif;
+  --nv-titre: "Oswald", "Arial Narrow", Impact, sans-serif;
+  --nv-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --surf: color-mix(in srgb, var(--bg) 95%, #fff 5%);
+  --puits: color-mix(in srgb, var(--bg) 72%, #000);
+  --line: color-mix(in srgb, var(--bg) 80%, #fff 20%);
+  --on-acc: #14130f;
+  background: var(--bg);
+}
+/* barres */
+html[data-variante="bunker"] .nv-nav { background: var(--bg); border-bottom: 2px solid var(--line); }
+html[data-variante="bunker"] .nv-nav::after, html[data-variante="bunker"] .nv-barre::before { content: ""; position: absolute; left: 0; right: 0; height: 12px; pointer-events: none;
+  background: repeating-linear-gradient(135deg, color-mix(in srgb, var(--acc) 85%, transparent) 0 10px, transparent 10px 20px); }
+html[data-variante="bunker"] .nv-nav::after { bottom: -14px; }
+html[data-variante="bunker"] .nv-barre { background: var(--surf); border-top: 2px solid var(--line); }
+html[data-variante="bunker"] .nv-barre::before { top: -14px; }
+html[data-variante="bunker"] .nv-retour { color: var(--txt); font-family: var(--nv-titre); font-weight: 500; letter-spacing: .03em; text-transform: uppercase; font-size: 15px; }
+html[data-variante="bunker"] .nv-nav-titre h1 { font-family: var(--nv-titre); font-weight: 600; font-size: 17px; letter-spacing: .04em; text-transform: uppercase; color: var(--txt); }
+html[data-variante="bunker"] .nv-temoin { font-family: var(--nv-mono); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--mut); }
+html[data-variante="bunker"] .nv-temoin[data-etat="non"] { color: #ff9a85; }
+html[data-variante="bunker"] .nv-icone { color: var(--txt); background: var(--surf); border: 2px solid var(--line); border-radius: 10px; }
+html[data-variante="bunker"] .nv-icone[aria-pressed="true"] { border-color: var(--acc); color: var(--acc); }
+/* haut de page */
+html[data-variante="bunker"] .nv-page { padding-top: 32px; }
+html[data-variante="bunker"] .nv-logo { filter: drop-shadow(0 3px 0 rgba(0,0,0,.5)); }
+html[data-variante="bunker"] .nv-champ input { font-weight: 500; color: var(--txt); background: var(--puits); border: 2px solid var(--line); border-radius: 10px; box-shadow: inset 0 3px 0 rgba(0,0,0,.35); }
+html[data-variante="bunker"] .nv-champ input::placeholder { color: var(--mut); opacity: .8; }
+html[data-variante="bunker"] .nv-champ input:focus { outline: none; border-color: var(--acc); }
+html[data-variante="bunker"] .nv-msg p { color: var(--mut); }
+/* boutons : un seul plein par écran */
+html[data-variante="bunker"] .nv-btn { font-family: var(--nv-titre); font-weight: 600; font-size: 18px; letter-spacing: .07em; text-transform: uppercase; border-radius: 10px; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), box-shadow 120ms cubic-bezier(.23, 1, .32, 1); }
+html[data-variante="bunker"] .nv-btn-1 { color: var(--on-acc); background: var(--acc); border: 2px solid var(--acc-2); box-shadow: 0 4px 0 color-mix(in srgb, var(--acc) 50%, #000); }
+html[data-variante="bunker"] .nv-btn-1:active { transform: translateY(3px); box-shadow: 0 1px 0 color-mix(in srgb, var(--acc) 50%, #000); }
+html[data-variante="bunker"] .nv-btn-1:disabled { color: var(--mut); background: var(--puits); border-color: var(--line); box-shadow: none; transform: none; }
+html[data-variante="bunker"] .nv-btn-2 { color: var(--txt); background: transparent; border: 2px solid color-mix(in srgb, var(--txt) 55%, transparent); box-shadow: 0 4px 0 rgba(0,0,0,.35); }
+html[data-variante="bunker"] .nv-btn-2:active { transform: translateY(3px); box-shadow: 0 1px 0 rgba(0,0,0,.35); }
+html[data-variante="bunker"] .nv-carte-ouvrir { font-size: 15px; letter-spacing: .05em; border-color: color-mix(in srgb, var(--or) 70%, transparent); color: var(--or); }
+/* blocs : une languette de couleur sur le bord haut, ombre dure */
+html[data-variante="bunker"] .nv-bloc { background: var(--surf); border: 2px solid var(--line); border-radius: 14px; box-shadow: 0 5px 0 rgba(0,0,0,.4); }
+html[data-variante="bunker"] .nv-bloc::before { content: ""; position: absolute; left: 20px; top: -2px; width: 56px; height: 5px; background: var(--acc); border-radius: 0 0 3px 3px; }
+html[data-variante="bunker"] .nv-bloc.nv-exo { border-color: color-mix(in srgb, var(--or) 70%, var(--line)); }
+html[data-variante="bunker"] .nv-bloc.nv-exo::before { background: var(--or); }
+html[data-variante="bunker"] .nv-bloc > header { padding-top: 6px; }
+html[data-variante="bunker"] .nv-bloc h2 { font-family: var(--nv-titre); font-weight: 600; font-size: 20px; letter-spacing: .07em; text-transform: uppercase; color: var(--txt); }
+html[data-variante="bunker"] .nv-aide { color: var(--mut); }
+html[data-variante="bunker"] .nv-etiq, html[data-variante="bunker"] .nv-armure .nv-tete, html[data-variante="bunker"] .nv-case > small { font-family: var(--nv-mono); font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mut); }
+html[data-variante="bunker"] .nv-armure .nv-tete { font-family: var(--nv-font); font-weight: 500; letter-spacing: 0; text-transform: none; font-size: 12px; }
+html[data-variante="bunker"] .nv-arme .nv-etiq { font-family: var(--nv-titre); font-weight: 500; font-size: 16px; letter-spacing: .08em; color: var(--txt); }
+html[data-variante="bunker"] .nv-arme + .nv-arme { border-left: 2px solid var(--line); }
+html[data-variante="bunker"] .nv-piece { color: var(--txt); font-weight: 500; }
+html[data-variante="bunker"] .nv-nom { color: var(--or); font-weight: 600; }
+html[data-variante="bunker"] .nv-arme-nom { color: var(--or); font-weight: 500; }
+html[data-variante="bunker"] .nv-bonus { border-top: 2px dashed var(--line); }
+/* emplacements : des puits creusés, trait de 2 px, la couleur seulement quand c'est plein */
+html[data-variante="bunker"] .nv-slot, html[data-variante="bunker"] .nv-rond { background: var(--puits); border: 2px solid var(--line); box-shadow: inset 0 3px 0 rgba(0,0,0,.4); transition: border-color 150ms ease-out, background-color 150ms ease-out; }
+html[data-variante="bunker"] .nv-slot { border-radius: 10px; }
+html[data-variante="bunker"] .nv-rond { border-radius: 50%; }
+html[data-variante="bunker"] .nv-slot.nv-vide::before { color: var(--txt); opacity: .4; }
+html[data-variante="bunker"] .nv-slot.nv-exo-slot, html[data-variante="bunker"] .nv-slot.nv-art { border-color: color-mix(in srgb, var(--or) 80%, transparent); }
+html[data-variante="bunker"] .nv-slot.nv-exo-slot.nv-vide::before, html[data-variante="bunker"] .nv-slot.nv-art.nv-vide::before { color: var(--or); opacity: .7; }
+html[data-variante="bunker"] .nv-slot.nv-plein, html[data-variante="bunker"] .nv-rond.nv-plein { border-color: var(--c); box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--c) 28%, transparent); }
+html[data-variante="bunker"] .nv-slot.nv-ouvert, html[data-variante="bunker"] .nv-rond.nv-ouvert { border-color: var(--acc-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 45%, transparent); }
+@media (hover: hover) and (pointer: fine) { html[data-variante="bunker"] .nv-slot:not(:disabled, .nv-grise):hover, html[data-variante="bunker"] .nv-rond:hover { border-color: color-mix(in srgb, var(--c) 80%, var(--txt)); } }
+/* statistiques : une barre de couleur à gauche, le niveau dans un carré */
+html[data-variante="bunker"] .nv-stat { font-weight: 600; color: var(--txt); background: var(--puits); border: 2px solid var(--line); border-left: 6px solid var(--acc); border-radius: 10px; transition: background-color 150ms ease-out; }
+html[data-variante="bunker"] .nv-niveau { font-family: var(--nv-mono); font-weight: 600; font-size: 15px; color: var(--mut); border: 2px solid var(--line); border-radius: 6px; }
+html[data-variante="bunker"] .nv-stat.nv-pris { background: color-mix(in srgb, var(--acc) 14%, var(--puits)); border-color: color-mix(in srgb, var(--acc) 55%, var(--line)); border-left-color: var(--acc); }
+html[data-variante="bunker"] .nv-stat.nv-pris .nv-niveau { color: var(--on-acc); background: var(--acc); border-color: var(--acc); }
