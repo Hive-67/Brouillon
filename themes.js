@@ -1,9 +1,10 @@
-/* Banc d'essai du build rapide : le choix de la doctrine simulée (ou de l'ancien look), le plein écran, la démo « rempli ».
-   RIEN de tout cela n'existe dans l'Arsenal. Dans l'Arsenal, une seule règle : html[data-element] = DOCTRINES[id].adj (voir LISEZ-MOI.md). */
+/* Banc d'essai du build rapide : doctrine simulée, ancien look, plein écran, démo, et le sélecteur de variantes (spec du skill prototype).
+   RIEN de tout cela n'existe dans l'Arsenal. Dans l'Arsenal, l'élément est déjà posé : document.body.dataset.element = DOCTRINES[id].adj.
+   Adresse : /Brouillon/?v=2#cryo+rempli  (v = la variante 1 à 3 ; après # la doctrine ; +rempli pose la démo ; +long teste les noms très longs). */
 (function () {
   "use strict";
   var CHOIX = [
-    { v: "neutre", nom: "Sans doctrine", g: "Nouveau design", el: "neutre" },
+    { v: "neutre", nom: "Sans doctrine", g: "Nouveau design", el: null },
     { v: "solaire", nom: "Doctrine solaire", g: "Nouveau design", el: "solaire" },
     { v: "cryo", nom: "Doctrine cryo-électrique", g: "Nouveau design", el: "cryo-électrique" },
     { v: "abyssal", nom: "Doctrine abyssale", g: "Nouveau design", el: "abyssal" },
@@ -17,28 +18,32 @@
     { v: "ancien-arctique", nom: "Arctique (clair)", g: "Ancien look", ancien: "arctique" },
     { v: "ancien-contraste", nom: "Contraste", g: "Ancien look", ancien: "contraste" }
   ];
+  var VARIANTES = ["Bunker", "Verre calme", "HUD"];
   var CLE = "bac-rapide-choix", par = {};
   CHOIX.forEach(function (c) { par[c.v] = c; });
   var racine = document.documentElement;
+  var drapeaux = (location.hash || "").slice(1).split("+");
+  var rempli = drapeaux.indexOf("rempli") >= 0 || drapeaux.indexOf("long") >= 0, long = drapeaux.indexOf("long") >= 0;
   var nomHash = function () { return (location.hash || "").slice(1).split("+")[0]; };
-  var rempli = /\+rempli/.test(location.hash || "");
-  var selects = [], courant = "neutre", ancienRempli = false;
+  var selects = [], courant = "neutre", ancienRempli = false, varCourante = 0;
 
   function lire() {
     var h = nomHash(); if (par[h]) return h;
     try { var v = localStorage.getItem(CLE); if (par[v]) return v; } catch (e) { /* rien */ }
     return "neutre";
   }
+  function suffixe() { return (rempli ? (long ? "+long" : "+rempli") : ""); }
   function poser(v) {
     var c = par[v]; if (!c) return; courant = v;
     racine.setAttribute("data-look", c.ancien ? "ancien" : "nouveau");
-    if (c.ancien) { racine.setAttribute("data-ancien", c.ancien); racine.removeAttribute("data-element"); }
-    else { racine.setAttribute("data-element", c.el); racine.removeAttribute("data-ancien"); }
-    if (window.NV) { window.NV.doctrine(c.el && c.el !== "neutre" ? c.el : null); if (rempli && !c.ancien) window.NV.remplir(); }
+    if (c.ancien) { racine.setAttribute("data-ancien", c.ancien); delete document.body.dataset.element; }
+    else { racine.removeAttribute("data-ancien"); if (c.el) document.body.dataset.element = c.el; else delete document.body.dataset.element; }
+    if (window.NV) { window.NV.doctrine(c.el); if (rempli && !c.ancien) window.NV.remplir(long); }
     if (rempli && c.ancien) remplirAncien();
     selects.forEach(function (s) { s.value = v; });
+    if (picker) picker.hidden = !!c.ancien;
     try { localStorage.setItem(CLE, v); } catch (e) { /* rien */ }
-    try { history.replaceState(null, "", location.pathname + location.search + "#" + v + (rempli ? "+rempli" : "")); } catch (e) { /* rien */ }
+    try { history.replaceState(null, "", location.pathname + location.search + "#" + v + suffixe()); } catch (e) { /* rien */ }
   }
   function pastille() {
     var p = document.createElement("div"); p.className = "bac-pastille";
@@ -52,7 +57,33 @@
   if (navNouveau) navNouveau.insertBefore(pastille(), pleinNouveau);
   var teteAncien = document.querySelector("#rapide .rp-tete"), pleinAncien = document.querySelector("#rapide .rp-plein-ecran");
   if (teteAncien) { var pa = pastille(); pa.style.margin = "0 2px"; teteAncien.insertBefore(pa, pleinAncien); }
+
+  /* Le sélecteur de variantes : la spec du skill prototype (PICKER.md), en haut pour ne pas cacher la barre du bas. */
+  var picker = document.createElement("nav");
+  picker.className = "proto-picker"; picker.setAttribute("aria-label", "Variantes du design"); picker.setAttribute("data-position", "top");
+  picker.innerHTML = '<span class="proto-picker-highlight" aria-hidden="true"></span>' + VARIANTES.map(function (n, i) { return '<button class="proto-picker-item"' + (i === 0 ? ' data-active aria-current="true"' : "") + ">" + n + "</button>"; }).join("");
+  document.body.appendChild(picker);
+  var highlight = picker.querySelector(".proto-picker-highlight"), items = [].slice.call(picker.querySelectorAll(".proto-picker-item"));
+  function bougerSurlignage() { var el = items[varCourante]; highlight.style.width = el.offsetWidth + "px"; highlight.style.transform = "translateX(" + el.offsetLeft + "px)"; }
+  function variante(i) {
+    if (i < 0 || i >= VARIANTES.length) return; varCourante = i;
+    racine.setAttribute("data-variante", ["bunker", "verre", "hud"][i]);
+    items.forEach(function (el, j) { el.toggleAttribute("data-active", j === i); if (j === i) el.setAttribute("aria-current", "true"); else el.removeAttribute("aria-current"); });
+    bougerSurlignage();
+    var u = new URL(location.href); u.searchParams.set("v", i + 1); history.replaceState(null, "", u);
+  }
+  items.forEach(function (el, i) { el.addEventListener("click", function () { variante(i); }); });
+  window.addEventListener("resize", bougerSurlignage);
+  document.addEventListener("keydown", function (e) {
+    if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || e.target.isContentEditable || e.metaKey || e.ctrlKey || e.altKey) return;
+    var n = parseInt(e.key, 10);
+    if (n >= 1 && n <= VARIANTES.length) variante(n - 1);
+    else if (e.key === "ArrowRight") variante((varCourante + 1) % VARIANTES.length);
+    else if (e.key === "ArrowLeft") variante((varCourante - 1 + VARIANTES.length) % VARIANTES.length);
+  });
+  variante((parseInt(new URLSearchParams(location.search).get("v"), 10) || 1) - 1);
   poser(lire());
+  requestAnimationFrame(function () { requestAnimationFrame(function () { picker.setAttribute("data-ready", ""); }); });
   window.addEventListener("hashchange", function () { var h = nomHash(); if (par[h] && h !== courant) poser(h); });
 
   /* Le plein écran, comme dans l'Arsenal : le bouton n'existe que si le navigateur le permet. */
@@ -62,7 +93,7 @@
   if (!permis) {
     document.querySelectorAll(".nv-pleinecran, #rapide .rp-plein-ecran").forEach(function (b) { b.hidden = true; });
     note("Plein écran : ce navigateur ne le permet pas (c'est le cas de l'iPhone). Sur iPad et ordinateur, il marche.", 9000);
-  } else { note("Touche la pastille de couleur, en haut, pour choisir la doctrine ou l'ancien look.", 7000); }
+  } else { note("En haut : les 3 variantes (touches 1, 2, 3). La pastille de couleur choisit la doctrine ou l'ancien look.", 8000); }
   function etat() {
     var t = plein() ? "Quitter le plein écran" : "Plein écran";
     document.querySelectorAll(".nv-pleinecran, #rapide .rp-plein-ecran").forEach(function (b) { b.setAttribute("aria-pressed", String(!!plein())); b.setAttribute("aria-label", t); b.title = t; });
@@ -76,7 +107,7 @@
   document.addEventListener("fullscreenchange", etat);
   document.addEventListener("webkitfullscreenchange", etat);
 
-  /* Démo « rempli » de l'ancien look (adresse finissant par +rempli) : des pastilles de couleur dans quelques emplacements. Purement visuel. */
+  /* Démo « rempli » de l'ancien look : des pastilles de couleur dans quelques emplacements. Purement visuel. */
   function remplirAncien() {
     if (ancienRempli) return; ancienRempli = true;
     var pas = function (el, deg) { var i = document.createElement("i"); i.style.cssText = "display:block;width:100%;height:100%;border-radius:inherit;background:linear-gradient(" + deg + "deg,#ffffff55,transparent 45%),linear-gradient(" + deg + "deg,#7fb3e8,#f3b04a)"; el.appendChild(i); };
