@@ -4,7 +4,7 @@ html[data-variante="hud"] #build {
   --nv-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", sans-serif;
   --nv-titre: "Oxanium", "Arial Narrow", system-ui, sans-serif;
   --txt: #e9eef7; --mut: rgba(214, 222, 238, .64);
-  --ch: 16px;
+  --ch: 12px;
   --ligne: color-mix(in srgb, var(--acc) 58%, transparent);
   --carte: color-mix(in srgb, var(--bg) 86%, #000);
   --on-acc: #05070a;
@@ -17,48 +17,48 @@ html[data-variante="hud"] #build {
 /* barres */
 html[data-variante="hud"] .nv-nav { background: color-mix(in srgb, var(--bg) 92%, #000); border-bottom: 1px solid var(--ligne); }
 html[data-variante="hud"] .nv-barre { background: color-mix(in srgb, var(--bg) 92%, #000); border-top: 1px solid var(--ligne); }
-html[data-variante="hud"] .nv-retour { color: var(--acc-2); font-family: var(--nv-titre); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
-html[data-variante="hud"] .nv-nav-titre h1 { font-family: var(--nv-titre); font-weight: 600; font-size: 16px; letter-spacing: .04em; text-transform: uppercase; color: var(--txt); }
+html[data-variante="hud"] .nv-retour { color: var(--acc-2); font-family: var(--nv-titre); font-weight: 600; font-size: 13px; letter-spacing: .04em; text-transform: uppercase; }
+html[data-variante="hud"] .nv-nav-titre h1 { font-family: var(--nv-titre); font-weight: 600; font-size: 14px; letter-spacing: .05em; text-transform: uppercase; color: var(--txt); }
 html[data-variante="hud"] .nv-temoin { font-family: var(--nv-titre); font-weight: 500; font-size: 12px; letter-spacing: .06em; color: var(--mut); }
 html[data-variante="hud"] .nv-temoin[data-etat="non"] { color: #ffb38a; }
-html[data-variante="hud"] .nv-icone { color: var(--acc-2); background: transparent; border: 1.5px solid var(--ligne); border-radius: 12px 3px 12px 3px; }
+html[data-variante="hud"] .nv-icone { color: var(--acc-2); background: transparent; border: 1.5px solid var(--ligne); border-radius: 10px 3px 10px 3px; }
 html[data-variante="hud"] .nv-icone[aria-pressed="true"] { background: color-mix(in srgb, var(--acc) 22%, transparent); border-color: var(--acc); }
 /* haut de page */
 html[data-variante="hud"] .nv-logo { filter: drop-shadow(0 0 0 transparent); }
-html[data-variante="hud"] .nv-champ input { font-weight: 500; color: var(--txt); background: color-mix(in srgb, var(--acc) 5%, transparent); border: 1.5px solid var(--ligne); border-radius: 14px 3px 14px 3px; }
+html[data-variante="hud"] .nv-champ input { font-weight: 500; color: var(--txt); background: color-mix(in srgb, var(--acc) 5%, transparent); border: 1.5px solid var(--ligne); border-radius: 10px 3px 10px 3px; }
 html[data-variante="hud"] .nv-champ input::placeholder { color: var(--mut); }
 html[data-variante="hud"] .nv-champ input:focus { outline: none; border-color: var(--acc); background: color-mix(in srgb, var(--acc) 10%, transparent); }
 html[data-variante="hud"] .nv-msg p { color: var(--mut); }
 /* boutons */
-html[data-variante="hud"] .nv-btn { font-family: var(--nv-titre); font-weight: 700; font-size: 17px; letter-spacing: .08em; text-transform: uppercase; border-radius: 16px 4px 16px 4px; transition: transform 130ms cubic-bezier(.23, 1, .32, 1), background-color 130ms ease-out; }
+html[data-variante="hud"] .nv-btn { font-family: var(--nv-titre); font-weight: 700; font-size: 13.5px; letter-spacing: .08em; text-transform: uppercase; border-radius: 12px 3px 12px 3px; transition: transform 130ms cubic-bezier(.23, 1, .32, 1), background-color 130ms ease-out; }
 html[data-variante="hud"] .nv-btn-1 { color: var(--on-acc); background: var(--acc); border: 1.5px solid var(--acc-2); }
 html[data-variante="hud"] .nv-btn-1:disabled { color: var(--mut); background: transparent; border-color: var(--ligne); }
 html[data-variante="hud"] .nv-btn-2 { color: var(--acc-2); background: transparent; border: 1.5px solid var(--ligne); }
-html[data-variante="hud"] .nv-carte-ouvrir { font-size: 14px; color: var(--or); border-color: color-mix(in srgb, var(--or) 60%, transparent); }
+html[data-variante="hud"] .nv-carte-ouvrir { font-size: 12px; color: var(--or); border-color: color-mix(in srgb, var(--or) 60%, transparent); }
 /* blocs : coins coupés, un trait fin, un repère de couleur sur le bord haut */
 html[data-variante="hud"] .nv-bloc { isolation: isolate; background: var(--ligne);
   clip-path: polygon(var(--ch) 0, 100% 0, 100% calc(100% - var(--ch)), calc(100% - var(--ch)) 100%, 0 100%, 0 var(--ch)); }
 html[data-variante="hud"] .nv-bloc::before { content: ""; position: absolute; inset: 1px; z-index: -1; background: linear-gradient(180deg, color-mix(in srgb, var(--acc) 7%, var(--carte)), var(--carte) 60%);
   clip-path: polygon(calc(var(--ch) - .59px) 0, 100% 0, 100% calc(100% - var(--ch) + .59px), calc(100% - var(--ch) + .59px) 100%, 0 100%, 0 calc(var(--ch) - .59px)); }
-html[data-variante="hud"] .nv-bloc::after { content: ""; position: absolute; top: 0; left: var(--ch); width: 56px; height: 3px; background: var(--acc); }
+html[data-variante="hud"] .nv-bloc::after { content: ""; position: absolute; top: 0; left: var(--ch); width: 44px; height: 2px; background: var(--acc); }
 html[data-variante="hud"] .nv-bloc.nv-exo { background: color-mix(in srgb, var(--or) 62%, transparent); }
 html[data-variante="hud"] .nv-bloc.nv-exo::before { background: linear-gradient(180deg, color-mix(in srgb, var(--or) 10%, var(--carte)), var(--carte) 60%); }
 html[data-variante="hud"] .nv-bloc.nv-exo::after { background: var(--or); }
 html[data-variante="hud"] .nv-bloc > header { padding-top: 4px; }
-html[data-variante="hud"] .nv-bloc h2 { font-family: var(--nv-titre); font-weight: 600; font-size: 18px; letter-spacing: .09em; text-transform: uppercase; color: var(--txt); }
-html[data-variante="hud"] .nv-bloc h2::before { content: ""; flex: none; width: 8px; height: 8px; background: var(--acc); }
+html[data-variante="hud"] .nv-bloc h2 { font-family: var(--nv-titre); font-weight: 600; font-size: 14px; letter-spacing: .09em; text-transform: uppercase; color: var(--txt); }
+html[data-variante="hud"] .nv-bloc h2::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--acc); }
 html[data-variante="hud"] .nv-exo h2::before { background: var(--or); }
 html[data-variante="hud"] .nv-aide { color: var(--mut); }
-html[data-variante="hud"] .nv-etiq, html[data-variante="hud"] .nv-armure .nv-tete, html[data-variante="hud"] .nv-case > small { font-family: var(--nv-titre); font-weight: 500; font-size: 12.5px; letter-spacing: .07em; color: var(--mut); }
+html[data-variante="hud"] .nv-etiq, html[data-variante="hud"] .nv-armure .nv-tete, html[data-variante="hud"] .nv-case > small { font-family: var(--nv-titre); font-weight: 500; font-size: 12px; letter-spacing: .06em; color: var(--mut); }
 html[data-variante="hud"] .nv-armure .nv-tete { font-family: var(--nv-font); font-weight: 500; letter-spacing: 0; font-size: 12px; }
-html[data-variante="hud"] .nv-arme .nv-etiq { font-weight: 600; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc-2); }
+html[data-variante="hud"] .nv-arme .nv-etiq { font-weight: 600; font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc-2); }
 html[data-variante="hud"] .nv-arme + .nv-arme { border-left: 1px solid color-mix(in srgb, var(--acc) 25%, transparent); }
 html[data-variante="hud"] .nv-piece { color: var(--txt); font-weight: 500; }
 html[data-variante="hud"] .nv-nom, html[data-variante="hud"] .nv-arme-nom { color: var(--or); font-weight: 600; }
 html[data-variante="hud"] .nv-bonus { border-top: 1px solid color-mix(in srgb, var(--acc) 25%, transparent); }
 /* emplacements : un trait, un coin plus rond que son voisin ; la couleur arrive quand c'est plein */
 html[data-variante="hud"] .nv-slot, html[data-variante="hud"] .nv-rond { background: color-mix(in srgb, var(--c) 5%, transparent); border: 1.5px solid color-mix(in srgb, var(--c) 50%, transparent); transition: background-color 140ms ease-out, border-color 140ms ease-out; }
-html[data-variante="hud"] .nv-slot { border-radius: 14px 3px 14px 3px; }
+html[data-variante="hud"] .nv-slot { border-radius: 10px 3px 10px 3px; }
 html[data-variante="hud"] .nv-rond { border-radius: 50%; box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg) 70%, #000), 0 0 0 4px color-mix(in srgb, var(--c) 30%, transparent); }
 html[data-variante="hud"] .nv-slot.nv-vide::before { --plus: 1.5px; opacity: .75; }
 html[data-variante="hud"] .nv-slot.nv-c3 { --c: var(--acc-2); }
@@ -68,7 +68,7 @@ html[data-variante="hud"] .nv-slot.nv-plein, html[data-variante="hud"] .nv-rond.
 html[data-variante="hud"] .nv-slot.nv-ouvert, html[data-variante="hud"] .nv-rond.nv-ouvert { border-color: var(--acc-2); box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 55%, transparent); }
 @media (hover: hover) and (pointer: fine) { html[data-variante="hud"] .nv-slot:not(:disabled, .nv-grise):hover, html[data-variante="hud"] .nv-rond:hover { background: color-mix(in srgb, var(--c) 14%, transparent); border-color: var(--c); } }
 /* statistiques */
-html[data-variante="hud"] .nv-stat { font-weight: 500; color: var(--txt); background: color-mix(in srgb, var(--acc) 5%, transparent); border: 1.5px solid color-mix(in srgb, var(--acc) 40%, transparent); border-radius: 14px 3px 14px 3px; transition: background-color 140ms ease-out, border-color 140ms ease-out; }
-html[data-variante="hud"] .nv-niveau { font-family: var(--nv-titre); font-weight: 700; font-size: 15px; color: var(--mut); border: 1.5px solid color-mix(in srgb, var(--acc) 45%, transparent); border-radius: 50%; }
+html[data-variante="hud"] .nv-stat { font-weight: 500; color: var(--txt); background: color-mix(in srgb, var(--acc) 5%, transparent); border: 1.5px solid color-mix(in srgb, var(--acc) 40%, transparent); border-radius: 10px 3px 10px 3px; transition: background-color 140ms ease-out, border-color 140ms ease-out; }
+html[data-variante="hud"] .nv-niveau { font-family: var(--nv-titre); font-weight: 700; font-size: 13px; color: var(--mut); border: 1.5px solid color-mix(in srgb, var(--acc) 45%, transparent); border-radius: 50%; }
 html[data-variante="hud"] .nv-stat.nv-pris { background: color-mix(in srgb, var(--acc) 16%, transparent); border-color: var(--acc); }
 html[data-variante="hud"] .nv-stat.nv-pris .nv-niveau { color: var(--on-acc); background: var(--acc); border-color: var(--acc); }
