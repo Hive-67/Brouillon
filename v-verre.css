@@ -1,0 +1,62 @@
+/* VARIANTE 2 · VERRE CALME : la retenue d'Apple. Un seul matériau translucide (les blocs), une typographie du système, des traits de 1 px, de grands arrondis,
+   aucune décoration. La couleur de la doctrine vit dans la lumière du fond et dans les états (plein, visé, bouton). Un sombre lisible avant tout. */
+html[data-variante="verre"] #build {
+  --nv-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, "Segoe UI", sans-serif;
+  --nv-titre: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, "Segoe UI", sans-serif;
+  --txt: #f2f1ee; --mut: rgba(242, 241, 238, .62);
+  --verre: rgba(255, 255, 255, .06); --filet: rgba(255, 255, 255, .11); --puits: rgba(255, 255, 255, .055);
+  --on-acc: #0b0d12;
+  background:
+    radial-gradient(120% 46% at 50% -8%, color-mix(in srgb, var(--acc) 22%, transparent), transparent 70%),
+    radial-gradient(80% 40% at 100% 62%, color-mix(in srgb, var(--acc-3) 22%, transparent), transparent 72%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg) 100%, #000), color-mix(in srgb, var(--bg) 55%, #000));
+}
+/* barres : verre dépoli, le contenu passe dessous */
+html[data-variante="verre"] .nv-nav { background: color-mix(in srgb, var(--bg) 62%, transparent); -webkit-backdrop-filter: blur(24px) saturate(1.7); backdrop-filter: blur(24px) saturate(1.7); border-bottom: 1px solid var(--filet); }
+html[data-variante="verre"] .nv-barre { background: color-mix(in srgb, var(--bg) 62%, transparent); -webkit-backdrop-filter: blur(24px) saturate(1.7); backdrop-filter: blur(24px) saturate(1.7); border-top: 1px solid var(--filet); }
+html[data-variante="verre"] .nv-retour { color: var(--acc-2); font-weight: 500; }
+html[data-variante="verre"] .nv-nav-titre h1 { font-family: var(--nv-titre); font-weight: 600; font-size: 17px; letter-spacing: -.01em; color: var(--txt); }
+html[data-variante="verre"] .nv-temoin { color: var(--mut); }
+html[data-variante="verre"] .nv-temoin[data-etat="non"] { color: #ffb38a; }
+html[data-variante="verre"] .nv-icone { color: var(--txt); background: var(--verre); border: 1px solid var(--filet); border-radius: 12px; }
+html[data-variante="verre"] .nv-icone[aria-pressed="true"] { color: var(--acc-2); border-color: var(--acc); }
+/* haut de page */
+html[data-variante="verre"] .nv-logo { filter: drop-shadow(0 6px 14px rgba(0,0,0,.45)); }
+html[data-variante="verre"] .nv-champ input { font-weight: 500; color: var(--txt); background: var(--puits); border: 1px solid var(--filet); border-radius: 14px; box-shadow: inset 0 1px 2px rgba(0,0,0,.3); }
+html[data-variante="verre"] .nv-champ input::placeholder { color: var(--mut); }
+html[data-variante="verre"] .nv-champ input:focus { outline: none; border-color: var(--acc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--acc) 25%, transparent); }
+html[data-variante="verre"] .nv-msg p { color: var(--mut); }
+/* boutons */
+html[data-variante="verre"] .nv-btn { font-weight: 600; border-radius: 16px; transition: transform 140ms cubic-bezier(.23, 1, .32, 1), filter 140ms ease-out; }
+html[data-variante="verre"] .nv-btn-1 { color: var(--on-acc); border: 0; background: linear-gradient(180deg, color-mix(in srgb, var(--acc) 82%, #fff), var(--acc)); box-shadow: 0 1px 0 rgba(255,255,255,.45) inset, 0 10px 24px -10px color-mix(in srgb, var(--acc) 80%, transparent); }
+html[data-variante="verre"] .nv-btn-1:disabled { color: var(--mut); background: var(--verre); box-shadow: 0 0 0 1px var(--filet) inset; }
+html[data-variante="verre"] .nv-btn-2 { color: var(--txt); background: rgba(255,255,255,.1); border: 0; box-shadow: 0 1px 0 rgba(255,255,255,.12) inset; }
+html[data-variante="verre"] .nv-carte-ouvrir { font-size: 15px; font-weight: 500; color: var(--acc-2); }
+/* blocs : le seul matériau translucide */
+html[data-variante="verre"] .nv-bloc { background: linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035)); border: 1px solid var(--filet); border-radius: 24px; -webkit-backdrop-filter: blur(24px) saturate(1.5); backdrop-filter: blur(24px) saturate(1.5); box-shadow: 0 1px 0 rgba(255,255,255,.12) inset, 0 18px 40px -20px rgba(0,0,0,.7); }
+html[data-variante="verre"] .nv-bloc.nv-exo { background: linear-gradient(180deg, color-mix(in srgb, var(--or) 16%, transparent), rgba(255,255,255,.035)); border-color: color-mix(in srgb, var(--or) 38%, var(--filet)); }
+html[data-variante="verre"] .nv-bloc h2 { font-family: var(--nv-titre); font-weight: 600; font-size: 20px; letter-spacing: -.012em; color: var(--txt); }
+html[data-variante="verre"] .nv-aide { color: var(--mut); }
+html[data-variante="verre"] .nv-etiq, html[data-variante="verre"] .nv-armure .nv-tete, html[data-variante="verre"] .nv-case > small { font-weight: 500; color: var(--mut); }
+html[data-variante="verre"] .nv-arme .nv-etiq { font-weight: 600; color: var(--txt); }
+html[data-variante="verre"] .nv-arme + .nv-arme { border-left: 1px solid var(--filet); }
+html[data-variante="verre"] .nv-piece { color: var(--txt); font-weight: 500; }
+html[data-variante="verre"] .nv-nom, html[data-variante="verre"] .nv-arme-nom { color: color-mix(in srgb, var(--or) 85%, #fff); font-weight: 600; }
+html[data-variante="verre"] .nv-bonus { border-top: 1px solid var(--filet); }
+/* emplacements : des creux doux, un anneau fin quand c'est plein */
+html[data-variante="verre"] .nv-slot, html[data-variante="verre"] .nv-rond { background: var(--puits); border: 1px solid var(--filet); box-shadow: inset 0 2px 5px rgba(0,0,0,.35); transition: box-shadow 160ms ease-out, border-color 160ms ease-out; }
+html[data-variante="verre"] .nv-slot { border-radius: 16px; }
+html[data-variante="verre"] .nv-slot.nv-vide::before { --plus: 1.5px; color: var(--txt); opacity: .45; }
+html[data-variante="verre"] .nv-slot.nv-exo-slot, html[data-variante="verre"] .nv-slot.nv-art { border-color: color-mix(in srgb, var(--or) 55%, transparent); }
+html[data-variante="verre"] .nv-slot.nv-plein, html[data-variante="verre"] .nv-rond.nv-plein { border-color: color-mix(in srgb, var(--c) 80%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--c) 55%, transparent), 0 6px 16px -6px color-mix(in srgb, var(--c) 60%, transparent); }
+html[data-variante="verre"] .nv-slot.nv-ouvert, html[data-variante="verre"] .nv-rond.nv-ouvert { box-shadow: 0 0 0 3px color-mix(in srgb, var(--acc) 55%, transparent); border-color: var(--acc-2); }
+@media (hover: hover) and (pointer: fine) { html[data-variante="verre"] .nv-slot:not(:disabled, .nv-grise):hover, html[data-variante="verre"] .nv-rond:hover { background: rgba(255,255,255,.1); } }
+/* statistiques : des rangées de liste, le niveau dans une pastille */
+html[data-variante="verre"] .nv-stat { font-weight: 500; color: var(--txt); background: var(--puits); border: 1px solid var(--filet); border-radius: 16px; transition: background-color 160ms ease-out, border-color 160ms ease-out; }
+html[data-variante="verre"] .nv-stat svg { opacity: .9; }
+html[data-variante="verre"] .nv-niveau { font-weight: 600; color: var(--mut); background: rgba(255,255,255,.08); border-radius: 999px; }
+html[data-variante="verre"] .nv-stat.nv-pris { background: color-mix(in srgb, var(--acc) 16%, var(--puits)); border-color: color-mix(in srgb, var(--acc) 50%, var(--filet)); }
+html[data-variante="verre"] .nv-stat.nv-pris .nv-niveau { color: var(--on-acc); background: var(--acc); }
+/* matière plus nette si le téléphone le demande */
+@media (prefers-reduced-transparency: reduce) { html[data-variante="verre"] .nv-bloc, html[data-variante="verre"] .nv-nav, html[data-variante="verre"] .nv-barre { background: color-mix(in srgb, var(--bg) 88%, #fff); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+@media (prefers-contrast: more) { html[data-variante="verre"] #build { --filet: rgba(255,255,255,.4); --mut: rgba(242,241,238,.85); } }
