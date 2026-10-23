@@ -94,9 +94,9 @@ html:not([data-look="ancien"]) #rapide { display: none; }
 .nv-perks .nv-rond { width: 34px; }
 
 /* ---------- Statistiques : deux colonnes, des rangées de 40 pt ---------- */
-.nv-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.nv-stat { position: relative; display: flex; align-items: center; gap: 7px; min-height: 40px; box-sizing: border-box; padding: 0 8px 0 10px; cursor: pointer; overflow: hidden; font-size: 13.5px; line-height: 1.2; }
-.nv-stat::after { inset: -3px; }
+.nv-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 6px; }
+.nv-stat { position: relative; display: flex; align-items: center; gap: 7px; min-height: 40px; box-sizing: border-box; padding: 0 8px 0 10px; cursor: pointer; font-size: 13.5px; line-height: 1.2; }
+.nv-stat::after { inset: -3px -4px; }
 .nv-stat svg { flex: none; width: 18px; height: 18px; }
 .nv-stat > span { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .nv-niveau { flex: none; display: grid; place-items: center; width: 24px; height: 24px; font-size: 13px; line-height: 1; }
