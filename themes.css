@@ -1,16 +1,41 @@
-/* LES COULEURS SELON LA DOCTRINE. Le nouveau design lit html[data-element] ; la valeur est celle que le code de l'Arsenal donne déjà à chaque doctrine
-   (DOCTRINES[id].adj : solaire, cryo-électrique, abyssal, stasique, filobscur, prismatique). Aucune doctrine choisie : « neutre » (Obsidienne, un sombre doux).
-   --f-a = couleur principale, --f-b = couleur d'appoint, --f-fond = le noir teinté, --f-neb = la teinte de la nébuleuse, --f-verre = le verre des blocs.
-   Les teintes sont celles des doctrines (champ « teinte » du code) : solaire 22-44, cryo-électrique 192-214, abyssal 262-285, stase 218-236. */
-:root {
-  --f-or: #f2cf6a; --f-ex: #d9b53f;                 /* l'or de l'exotique, le même partout */
-  --f-txt: #eaf1ff; --f-mut: #9aa9c6; --f-verre: rgba(14,19,36,.6);
-  --f-a: #9fb2d8; --f-b: #7a86b8; --f-fond: #07090f; --f-neb: #131b2e;
+/* LES COULEURS SELON LA DOCTRINE. L'Arsenal fait déjà le travail : à chaque choix de doctrine il pose body[data-element] = DOCTRINES[id].adj
+   (solaire, cryo-électrique, abyssal, stasique, filobscur, prismatique) et change ses variables (--solaire, --solaire-clair, --solaire-sombre, --fond-page…).
+   Les cinq blocs ci-dessous sont COPIÉS TELS QUELS de site/index.html ; « solaire » est la valeur par défaut (:root de socle.css).
+   Le seul ajout : un sombre doux quand AUCUNE doctrine n'est choisie (body sans data-element), seulement dans le build rapide. */
+body[data-element="cryo-électrique"] {
+  --solaire: #4fb3e8; --solaire-clair: #8fd4ff; --solaire-sombre: #1f6c9c;
+  --bandeau: rgba(30, 84, 122, .96); --bandeau-bord: rgba(140, 210, 255, .25);
+  --corps: rgba(11, 17, 23, .9); --corps-clair: rgba(24, 36, 46, .88); --case: rgba(7, 12, 18, .62);
+  --fond-page: #08131c;
 }
-html[data-element="neutre"]          { --f-a: #9fb2d8; --f-b: #7a86b8; --f-fond: #07090f; --f-neb: #131b2e; --f-verre: rgba(14,19,36,.6); }
-html[data-element="cryo-électrique"] { --f-a: #55d3ff; --f-b: #7b8cff; --f-fond: #04070f; --f-neb: #0a1a33; --f-verre: rgba(10,16,34,.6); }
-html[data-element="solaire"]         { --f-a: #ff8a3a; --f-b: #ffcf5a; --f-fond: #0a0504; --f-neb: #2b1106; --f-verre: rgba(26,12,6,.6); }
-html[data-element="abyssal"]         { --f-a: #b98cff; --f-b: #ff7fd8; --f-fond: #07040e; --f-neb: #1d0f33; --f-verre: rgba(18,10,34,.6); }
-html[data-element="stasique"]        { --f-a: #5b8dff; --f-b: #8af0ff; --f-fond: #040815; --f-neb: #0b1740; --f-verre: rgba(8,14,40,.6); }
-html[data-element="filobscur"]       { --f-a: #3ff2a0; --f-b: #b8ff6a; --f-fond: #030a07; --f-neb: #082a1d; --f-verre: rgba(6,22,16,.6); }
-html[data-element="prismatique"]     { --f-a: #ff6fd8; --f-b: #5ee7ff; --f-fond: #060613; --f-neb: #231046; --f-verre: rgba(16,10,36,.6); }
+body[data-element="abyssal"] {
+  --solaire: #a66be0; --solaire-clair: #cfa3ff; --solaire-sombre: #5e3496;
+  --bandeau: rgba(78, 46, 122, .96); --bandeau-bord: rgba(206, 170, 255, .25);
+  --corps: rgba(16, 12, 24, .9); --corps-clair: rgba(34, 26, 48, .88); --case: rgba(12, 8, 20, .62);
+  --fond-page: #120a1e;
+}
+body[data-element="stasique"] {
+  --solaire: #6f8ff0; --solaire-clair: #a9bdff; --solaire-sombre: #3a4fa6;
+  --bandeau: rgba(46, 62, 128, .96); --bandeau-bord: rgba(180, 200, 255, .25);
+  --corps: rgba(12, 14, 26, .9); --corps-clair: rgba(26, 30, 50, .88); --case: rgba(8, 10, 20, .62);
+  --fond-page: #0b1024;
+}
+body[data-element="filobscur"] {
+  --solaire: #3fbf7f; --solaire-clair: #8fe8b4; --solaire-sombre: #1f7a4c;
+  --bandeau: rgba(30, 96, 64, .96); --bandeau-bord: rgba(160, 240, 200, .25);
+  --corps: rgba(10, 20, 16, .9); --corps-clair: rgba(22, 40, 32, .88); --case: rgba(6, 16, 12, .62);
+  --fond-page: #08160f;
+}
+body[data-element="prismatique"] {
+  --solaire: #d77cf0; --solaire-clair: #f3c4ff; --solaire-sombre: #7a3b96;
+  --bandeau: rgba(96, 46, 122, .96); --bandeau-bord: rgba(243, 196, 255, .25);
+  --corps: rgba(18, 10, 24, .9); --corps-clair: rgba(38, 24, 48, .88); --case: rgba(14, 8, 20, .62);
+  --fond-page: #160b1e;
+}
+/* Sans doctrine : « Obsidienne », l'ivoire du Bunker sur un noir chaud. Seulement dans le nouveau build rapide. */
+html:not([data-look="ancien"]) body:not([data-element]) {
+  --solaire: #e6dfcc; --solaire-clair: #f6f1e3; --solaire-sombre: #8d8670;
+  --bandeau: rgba(58, 56, 48, .96); --bandeau-bord: rgba(236, 231, 220, .2);
+  --corps: rgba(29, 28, 23, .9); --corps-clair: rgba(44, 42, 35, .88); --case: rgba(16, 15, 12, .62);
+  --fond-page: #14130f;
+}
