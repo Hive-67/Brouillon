@@ -14,7 +14,7 @@
   var exo = bloc("nv-exo", "Exotique d'armure", "", '<div class="nv-ligne"><div class="nv-texte"><span class="nv-aide">Aucune choisie</span></div>' + slot("nv-vide nv-exo-slot", "Choisir l'exotique d'armure", ' data-nv="exo"') + "</div>");
 
   var armes = bloc("", "Armes", "", '<div class="nv-armes">' + ["Cinétique", "Énergétique", "Lourde"].map(function (n, i) {
-    return '<div class="nv-arme"><h3 class="nv-etiq">' + n + "</h3>" + slot("nv-vide", n + " : choisir une arme dans la liste du jeu", ' data-nv="arme"') +
+    return '<div class="nv-arme"><h3 class="nv-etiq">' + n + "</h3>" + slot("nv-vide", n + " : choisir une arme dans la liste du jeu", ' data-nv="arme"') + '<span class="nv-arme-nom" hidden></span>' +
       '<div class="nv-perks">' + [1, 2].map(function (k) { return rond("Choisir le perk " + k + " de la " + n.toLowerCase(), ' data-nv="perk"'); }).join("") + "</div></div>";
   }).join("") + "</div>");
 
@@ -43,7 +43,7 @@
     '<div class="nv-rang"><p class="nv-etiq">Aspects</p>' + cases(2, ["Aspect 1", "Aspect 2"]) + "</div>" +
     '<div class="nv-rang"><p class="nv-etiq">Fragments</p>' + cases(6, ["Fragment 1", "Fragment 2", "Fragment 3", "Fragment 4", "Fragment 5", "Fragment 6"]) + "</div>");
 
-  var page = '<header class="nv-nav"><button type="button" class="nv-retour" data-nv="retour" aria-label="Retour">' + SVG_RETOUR + "Retour</button>" +
+  var page = '<header class="nv-nav"><button type="button" class="nv-retour" data-nv="retour" aria-label="Retour">' + SVG_RETOUR + '<span class="nv-retour-txt">Retour</span></button>' +
     '<div class="nv-nav-titre"><h1>Création de build</h1><span class="nv-temoin" role="status" aria-live="polite" data-etat="vide">Rien à enregistrer</span></div>' +
     '<button type="button" class="nv-icone nv-pleinecran" aria-pressed="false" aria-label="Plein écran" title="Plein écran">' + SVG_PLEIN + "</button></header>" +
     '<main class="nv-page"><section class="nv-identite"><img class="nv-logo" src="' + LOGO + '" alt="Le Bunker" width="64" height="64">' +
@@ -64,12 +64,15 @@
     var d = z.querySelector('[data-nv="doc"]');
     if (d) { d.classList.toggle("nv-plein", oui); d.classList.toggle("nv-vide", !oui); var i = d.querySelector("i"); if (i) i.remove(); if (oui) pastille(d, 150); }
   }
-  function pastille(el, deg) { var i = document.createElement("i"); i.style.cssText = "background:linear-gradient(" + deg + "deg,#ffffff55,transparent 45%),linear-gradient(" + deg + "deg,var(--f-a),var(--f-b))"; el.appendChild(i); }
-  function remplir() {
+  function pastille(el, deg) { var i = document.createElement("i"); i.style.cssText = "background:linear-gradient(" + deg + "deg,#ffffff55,transparent 45%),linear-gradient(" + deg + "deg,var(--acc),var(--acc-2))"; el.appendChild(i); }
+  function remplir(long) {
     if (z.dataset.rempli) return; z.dataset.rempli = "1";
+    var NOMS_ARMES = long ? ["Fusil à impulsion « Dernier Souffle de la Sentinelle Abyssale » édition collector", "Mitrailleuse", "Lance-roquettes monumental"] : ["Fusil d'Aurore", "Mitrailleuse de la Tour", "Lance-roquettes Sentinelle"];
+    z.querySelectorAll(".nv-arme-nom").forEach(function (n, k) { n.textContent = NOMS_ARMES[k]; n.hidden = false; });
+    if (long) { z.querySelector(".nv-champ input").value = "Mon build de la mort qui tue pour les raids de fin de semaine"; }
     z.querySelectorAll(".nv-arme > .nv-slot").forEach(function (b, k) { b.classList.remove("nv-vide"); b.classList.add("nv-plein"); pastille(b, 135 + 40 * k); });
     var rs = z.querySelectorAll(".nv-perks .nv-rond"); rs.forEach(function (r, a) { if (a % 3 !== 2) { r.classList.add("nv-plein"); pastille(r, 160); } else if (a === 5) r.classList.add("nv-ouvert"); });
-    var e = z.querySelector(".nv-exo-slot"); e.classList.remove("nv-vide"); e.classList.add("nv-plein"); pastille(e, 140); z.querySelector(".nv-exo .nv-texte").innerHTML = '<span class="nv-nom">Exemple d\'exotique</span><span class="nv-aide">Casque</span>';
+    var e = z.querySelector(".nv-exo-slot"); e.classList.remove("nv-vide"); e.classList.add("nv-plein"); pastille(e, 140); z.querySelector(".nv-exo .nv-texte").innerHTML = '<span class="nv-nom">' + (long ? "Cuirasse du Guetteur Silencieux de la Cité Oubliée, forgée dans le Vide" : "Exemple d\'exotique") + '</span><span class="nv-aide">Casque</span>';
     z.querySelectorAll(".nv-armure .nv-c3").forEach(function (c, i) { if (i % 2 === 0) { c.classList.remove("nv-vide"); c.classList.add("nv-plein"); pastille(c, 120 + 20 * i); } });
     z.querySelectorAll(".nv-stat").forEach(function (s, i) { if (i < 4) { s.classList.add("nv-pris"); s.querySelector(".nv-niveau").textContent = String(6 - i); } });
     z.querySelectorAll(".nv-atouts .nv-rond").forEach(function (r, i) { if (i < 5) { r.classList.add("nv-plein"); pastille(r, 100 + 20 * i); } });
