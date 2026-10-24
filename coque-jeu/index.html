@@ -9,7 +9,9 @@
 <meta name="description" content="Modèle de la coque commune des jeux de l'Atelier, sur la base de Rancune : seuil, accueil, partie, pause, réglages, fin, bouton Duel.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Share+Tech+Mono&display=swap">
+<link rel="preload" as="image" href="assets/img/logo-bunker.webp">
+<link rel="stylesheet" href="lanceur/lanceur.css">
 <style>
 /* Coque des jeux, base Rancune. Une colonne de 430 px, un écran visible à la fois,
    les réglages et la pause en tiroir qui monte du bas.
@@ -64,13 +66,7 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 .bande:last-child { margin-bottom: env(safe-area-inset-bottom, 0px); }
 @keyframes chantier { to { background-position: 56px 0; } }
 
-/* Seuil : le blason, le nom, « Appuyer pour entrer » */
-.seuil { min-height: 100%; display: grid; place-items: center; background: #000000; border: 0; width: 100%; padding: 24px; }
-.seuil-centre { display: flex; flex-direction: column; align-items: center; gap: 14px; }
-.seuil-blason { width: 180px; height: 173px; background: url("logo-bunker.webp") center / contain no-repeat; }
-.seuil-nom { font: 900 46px/1 Cinzel, Georgia, serif; letter-spacing: 1px; background: linear-gradient(#f6dc8a, #c8952f); -webkit-background-clip: text; background-clip: text; color: transparent; text-transform: uppercase; }
-.seuil-mot { margin-top: 120px; font: 500 12px/1 var(--mono); letter-spacing: 0.4em; color: var(--gris); text-transform: uppercase; animation: souffle 2.4s ease-in-out infinite; }
-@keyframes souffle { 50% { opacity: 0.4; } }
+/* Le seuil et le lanceur : lanceur/lanceur.css (repris de Rancune, tel quel) */
 
 /* Accueil */
 .haut { display: flex; align-items: center; justify-content: space-between; min-height: 40px; }
@@ -123,7 +119,7 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 .duel-bleu svg { color: #cfe0ff; }
 .duel-mot { font: 700 24px/1 var(--titre); text-transform: uppercase; letter-spacing: 1.5px; white-space: nowrap; }
 .duel-sous { font: 600 9.5px/1.3 var(--mono); text-transform: uppercase; letter-spacing: 0.1em; text-align: left; }
-.duel-logo { position: relative; z-index: 1; width: 54px; height: 54px; background: url("logo-bunker.webp") center / contain no-repeat; }
+.duel-logo { position: relative; z-index: 1; width: 54px; height: 54px; background: url("assets/img/logo-bunker.webp") center / contain no-repeat; }
 
 /* En jeu */
 .hud { display: grid; grid-template-columns: 44px repeat(3, minmax(0, 1fr)) 44px; gap: 6px; align-items: center; width: 100%; max-width: 430px; margin: 0 auto; padding: 10px max(14px, env(safe-area-inset-right, 0px)) 6px max(14px, env(safe-area-inset-left, 0px)); }
@@ -168,9 +164,9 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 .duel4-cote { position: relative; border: 0; padding: 0 14px; display: flex; align-items: center; color: #ffffff; transition: transform 140ms var(--ease-out), filter 140ms ease; }
 .duel4-cote:active { transform: scale(0.97); filter: brightness(1.15); }
 .duel4-ordi { justify-content: flex-end; border-radius: 10px 0 0 10px; clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%); margin-right: -5px;
-  background: linear-gradient(90deg, rgba(200,16,27,0) 0, rgba(200,16,27,0.55) 32%, var(--bunker-rouge) 62%), url("duel-ordi.webp") left -6px center / auto 135% no-repeat, var(--bunker-rouge); }
+  background: linear-gradient(90deg, rgba(200,16,27,0) 0, rgba(200,16,27,0.55) 32%, var(--bunker-rouge) 62%), url("assets/img/duel-ordi.webp") left -6px center / auto 135% no-repeat, var(--bunker-rouge); }
 .duel4-pote { justify-content: flex-start; border-radius: 0 10px 10px 0; clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%); margin-left: -5px;
-  background: linear-gradient(270deg, rgba(42,98,189,0) 0, rgba(42,98,189,0.55) 32%, var(--bunker-bleu) 62%), url("duel-pote.webp") right -6px center / auto 135% no-repeat, var(--bunker-bleu); }
+  background: linear-gradient(270deg, rgba(42,98,189,0) 0, rgba(42,98,189,0.55) 32%, var(--bunker-bleu) 62%), url("assets/img/duel-pote.webp") right -6px center / auto 135% no-repeat, var(--bunker-bleu); }
 .duel4-txt { display: flex; flex-direction: column; gap: 1px; line-height: 1; text-transform: uppercase; }
 .duel4-ordi .duel4-txt { align-items: flex-end; text-align: right; padding-right: 16px; }
 .duel4-pote .duel4-txt { align-items: flex-start; padding-left: 16px; }
@@ -237,7 +233,7 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 .espace { flex: 1; min-height: 16px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .bande, .seuil-mot { animation: none; }
+  .bande { animation: none; }
   .tiroir { animation: fondu 0.2s ease; }
 }
 @keyframes fondu { from { opacity: 0; } }
@@ -245,19 +241,11 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 </head>
 <body>
 
-<!-- SEUIL : dans un vrai jeu, c'est bornes-seuil.js puis arcade-lanceur.js du Bunker (voir SKILL.md) -->
-<section class="ecran" data-ecran="seuil" aria-label="Entrée">
-  <button class="seuil" data-aller="accueil" aria-label="Appuyer pour entrer">
-    <span class="seuil-centre">
-      <span class="seuil-blason" aria-hidden="true"></span>
-      <span class="seuil-nom" data-app="nom">Ton jeu</span>
-      <span class="seuil-mot">Appuyer pour entrer</span>
-    </span>
-  </button>
-</section>
+<!-- LE SEUIL n'est plus dans cette page : BornesSeuil.ouvrir(), en bas, le pose par-dessus l'accueil.
+     Noir, « Appuyer pour entrer » ; au geste, le logo du Bunker avec son bruitage, les barres, le nom du jeu, « Système prêt ». -->
 
 <!-- ACCUEIL -->
-<section class="ecran" data-ecran="accueil" aria-label="Accueil" hidden>
+<section class="ecran" data-ecran="accueil" aria-label="Accueil">
   <div class="bande" aria-hidden="true"></div>
   <div class="corps">
     <div class="haut">
@@ -531,6 +519,9 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   </div>
 </div>
 
+<!-- Le lanceur du Bunker, repris de Rancune tel quel (voir lanceur/) -->
+<script src="lanceur/arcade-lanceur.js"></script>
+<script src="lanceur/bornes-seuil.js"></script>
 <script>
 // ===== Identité du jeu : la seule partie à remplir pour un nouveau jeu =====
 const APP = {
@@ -582,7 +573,7 @@ document.querySelectorAll('[data-bascule] .etat').forEach(function (e) {
 
 // ===== Écrans =====
 const pile = [];
-let courant = 'seuil';
+let courant = 'accueil';
 function montrer(nom) {
   courant = nom;
   document.querySelectorAll('[data-ecran]').forEach(function (e) { e.hidden = e.dataset.ecran !== nom; });
@@ -663,6 +654,9 @@ document.addEventListener('click', function (ev) {
   }
 });
 document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && ouvert) fermerTout(); });
+
+// ===== Le seuil du Bunker : noir, puis le logo avec son bruitage, puis le jeu =====
+BornesSeuil.ouvrir({ racine: '', titre: APP.nom });
 </script>
 </body>
 </html>

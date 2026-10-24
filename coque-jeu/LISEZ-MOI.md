@@ -4,19 +4,19 @@ Copie de travail du skill `store-jeu-bunker` (HiveSkills), pour la peaufiner ici
 
 Page à ouvrir : https://hive-67.github.io/Brouillon/coque-jeu/
 
-- `index.html` : la coque vide, un seul fichier. Seuil, accueil, partie, fin, Comment jouer, Classement, tiroirs Pause, Réglages (5 sections), Installer, Discord, À propos, Duel, Confirmation. Copie exacte de `modele.html` du skill au 24/10/2026 (version 2.3 du skill).
-- On ne remplit que le bloc `APP` et `CHANGELOG` en bas du fichier, plus `--jeu` et `--sur-jeu` en haut.
+- `index.html` : la coque vide, un seul fichier. Seuil, accueil, partie, fin, Comment jouer, Classement, tiroirs Pause, Réglages (5 sections), Installer, Discord, À propos, Duel, Confirmation.
+- `lanceur/` : le seuil et le lanceur du Bunker, repris de Rancune (HiveTools, branche `jeux/uno-maison`) sans rien changer : `lanceur.css`, `bornes-seuil.js`, `arcade-lanceur.js`.
+- On ne remplit que le bloc `APP` et `CHANGELOG` en bas de `index.html`, plus `--jeu` et `--sur-jeu` en haut.
 
-## Ce qui manque ici (fichiers binaires, que cet outil ne sait pas envoyer)
+## Ce qui manque ici (fichiers que cet outil ne sait pas envoyer)
 
-- `logo-bunker.webp` : le blason du seuil et la coupure du bouton Duel.
+Dans `assets/img/` (à créer à côté de `index.html`) :
+- `logo-bunker.webp` : le logo du lanceur.
 - `duel-ordi.webp` et `duel-pote.webp` : les deux têtes du bouton Duel.
 
-Sans eux, le blason est vide et le bouton Duel garde ses deux couleurs (rouge et bleu) sans les têtes. À déposer à côté de `index.html` depuis `skills/store-jeu-bunker/` de HiveSkills.
+Pour le bruit d'ouverture : `terminal-ouverture.m4a`, plus le moteur de son `son.js` de `sons-bunker`. Sans eux, le lanceur marche en silence.
 
-## Pas encore ici
-
-Le son : `sons-bunker` (moteur `son.js`, 91 sons) n'est pas branché sur cette coque.
+Sans le logo, la séquence attend au plus 1,2 seconde, puis continue sans lui.
 
 ## Règle
 
