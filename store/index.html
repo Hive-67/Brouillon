@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NolanGame</title>
+<meta name="description" content="Le store des jeux de Nolan">
+<meta name="theme-color" content="#16123f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="NolanGame">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#16123f; --nuit2:#211b5c; --encre:#f5f2ff; --doux:#b4aee3;
+  --citron:#ffd23f; --menthe:#35e0a1; --marge:18px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0}
+html{-webkit-text-size-adjust:100%;background:var(--nuit);scroll-behavior:smooth}
+body{
+  font-family:'Nunito','Avenir Next','Segoe UI Variable',system-ui,sans-serif;
+  font-weight:600;color:var(--encre);min-height:100dvh;
+  background:radial-gradient(130% 55% at 50% -8%,#3b2bb0 0,transparent 62%),linear-gradient(180deg,#1a1555,#120f33 62%);
+  background-repeat:no-repeat;
+  padding-bottom:calc(env(safe-area-inset-bottom) + 28px);
+}
+h1,h2,h3{font-family:'Baloo 2','Nunito',system-ui,sans-serif}
+a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--citron);outline-offset:3px;border-radius:14px}
+
+/* En-tête collant : le nom du store, puis les rayons */
+.haut{
+  position:sticky;top:0;z-index:5;
+  padding-top:calc(env(safe-area-inset-top) + 10px);
+  background:rgba(22,18,63,.84);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.marque{
+  display:flex;align-items:center;gap:10px;
+  padding:0 max(var(--marge),env(safe-area-inset-right)) 8px max(var(--marge),env(safe-area-inset-left));
+  max-width:1200px;margin:0 auto;
+}
+.marque svg{width:36px;height:36px;border-radius:11px;flex:none}
+h1{font-weight:800;font-size:28px;line-height:1;letter-spacing:-.01em}
+#installer{
+  margin-left:auto;min-height:40px;padding:0 18px;border:0;border-radius:999px;
+  background:var(--citron);color:var(--nuit);font-weight:900;cursor:pointer;
+}
+#installer[hidden]{display:none}
+.rayons{
+  display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;
+  padding:2px max(var(--marge),env(safe-area-inset-right)) 12px max(var(--marge),env(safe-area-inset-left));
+  max-width:1200px;margin:0 auto;
+}
+.rayons::-webkit-scrollbar{display:none}
+.rayon{
+  flex:none;min-height:44px;padding:0 18px;border:0;border-radius:999px;
+  background:rgba(255,255,255,.09);font-weight:800;font-size:15px;cursor:pointer;
+  transition:transform .12s,background .15s;
+}
+.rayon:active{transform:scale(.96)}
+.rayon[aria-pressed="true"]{background:var(--encre);color:var(--nuit)}
+
+main{max-width:1200px;margin:0 auto;padding-top:8px}
+
+.astuce{
+  display:flex;align-items:center;gap:12px;margin:10px var(--marge) 0;padding:12px 14px;
+  border-radius:18px;background:rgba(255,210,63,.14);font-size:14px;line-height:1.35;
+}
+.astuce[hidden]{display:none}
+.astuce button{margin-left:auto;flex:none;min-width:44px;min-height:44px;border:0;border-radius:12px;background:transparent;font-size:20px;cursor:pointer}
+
+/* À la une */
+.une{
+  display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  padding:10px var(--marge) 6px;
+}
+.une::-webkit-scrollbar{display:none}
+.banniere{
+  flex:0 0 min(86vw,540px);scroll-snap-align:start;
+  display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:6px;
+  aspect-ratio:2/1;padding:16px 14px 16px 22px;border-radius:30px;color:#fff;overflow:hidden;
+  background:linear-gradient(160deg,var(--a),var(--b));
+  box-shadow:0 18px 34px -18px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.16);
+  transition:transform .12s;
+}
+.banniere:active{transform:scale(.98)}
+.banniere h2{font-weight:800;font-size:clamp(25px,6vw,36px);line-height:1;text-shadow:0 2px 12px rgba(0,0,0,.3)}
+.banniere p{font-size:14px;line-height:1.3;margin:8px 0 14px;max-width:28ch;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+.banniere .art svg{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 14px rgba(0,0,0,.3))}
+
+/* Rangées de jeux */
+.rang h2{font-weight:800;font-size:23px;margin:26px var(--marge) 12px}
+.grille{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));
+  gap:22px 14px;padding:0 var(--marge);
+}
+.carte{display:flex;flex-direction:column;gap:2px;transition:transform .12s;min-width:0}
+.carte:active{transform:scale(.97)}
+.jaquette{
+  position:relative;aspect-ratio:1;border-radius:22%;overflow:hidden;
+  background:linear-gradient(160deg,var(--a),var(--b));
+  box-shadow:0 12px 24px -12px rgba(0,0,0,.7),inset 0 0 0 1px rgba(255,255,255,.16);
+  transition:transform .15s;
+}
+.jaquette svg{position:absolute;inset:0;width:100%;height:100%}
+.carte h3{font-weight:700;font-size:18px;line-height:1.1;margin-top:8px}
+.carte p{
+  font-size:13px;line-height:1.3;color:var(--doux);min-height:2.6em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.jouer{
+  align-self:flex-start;margin-top:6px;padding:8px 22px;border-radius:999px;
+  background:var(--menthe);color:#08281f;font-weight:900;font-size:15px;line-height:1;
+}
+.banniere .jouer{display:inline-block;margin:0}
+.pastille{
+  position:absolute;left:9px;top:9px;padding:4px 9px;border-radius:999px;
+  background:var(--citron);color:var(--nuit);font-size:11px;font-weight:900;line-height:1;
+}
+
+/* Tablette 10 pouces et plus */
+@media (min-width:700px){
+  :root{--marge:28px}
+  .grille{grid-template-columns:repeat(auto-fill,minmax(184px,1fr));gap:30px 22px}
+  .banniere{flex-basis:min(48vw,560px)}
+  h1{font-size:32px}
+  .carte h3{font-size:19px}
+  .carte p{font-size:14px}
+}
+
+@media (hover:hover){
+  .carte:hover .jaquette{transform:translateY(-3px)}
+  .rayon:hover{background:rgba(255,255,255,.16)}
+  .rayon[aria-pressed="true"]:hover{background:var(--encre)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+@media (prefers-reduced-transparency:reduce){.haut{background:var(--nuit)}}
+@media (prefers-contrast:more){.jaquette,.banniere{box-shadow:inset 0 0 0 2px #fff}.carte p{color:var(--encre)}}
+</style>
+</head>
+<body>
+
+<header class="haut">
+  <div class="marque">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6c4dff"/><stop offset="1" stop-color="#ff6b9a"/></linearGradient></defs><rect width="100" height="100" fill="url(#lg)"/><polygon points="30,72 30,28 42,28 58,52 58,28 70,28 70,72 58,72 42,48 42,72" fill="#fff"/><circle cx="74" cy="24" r="7" fill="#ffd23f"/></svg>
+    <h1>NolanGame</h1>
+    <button id="installer" type="button" hidden>Installer</button>
+  </div>
+  <nav class="rayons" id="rayons" aria-label="Rayons"></nav>
+</header>
+
+<main>
+  <div class="astuce" id="astuce" hidden>
+    <span>Pour l’installer : touche Partager, puis « Sur l’écran d’accueil ».</span>
+    <button type="button" id="astuce-fermer" aria-label="Fermer">✕</button>
+  </div>
+  <div id="contenu"></div>
+</main>
+
+<script>
+/* Le lien de lancement : l'aperçu de la branche du jeu (jamais le lien de publication). */
+const url = id => `https://jeux-${id}--hiveostools.netlify.app/jeux/${id}/`;
+
+const G = [
+  {id:'pont', nom:'PONT', sous:'Survie d’arcade : tiens bon sur le pont', cat:'Arcade', a:'#5b4bff', b:'#ff7a45'},
+  {id:'panique-depot', nom:'Panique au dépôt', sous:'Survie d’arcade dans un dépôt SNCF', cat:'Arcade', a:'#0f9d8f', b:'#0b3a6e'},
+  {id:'tetris', nom:'Tétriste', sous:'Un Tetris fait maison', cat:'Arcade', a:'#241a7a', b:'#4c2fd6'},
+  {id:'bunker-boy', nom:'Bunker Boy', sous:'Console portable rétro, joue les cartouches Game Boy', cat:'Arcade', a:'#3a4a9f', b:'#12142b'},
+  {id:'uno-maison', nom:'Rancune', sous:'Le jeu de cartes du Bunker, seul ou en ligne', cat:'Cartes et plateau', a:'#3a1c71', b:'#e63946'},
+  {id:'pokebunker', nom:'PokeBunker', sous:'Le poker du Bunker, seul, en duel ou entre amis', cat:'Cartes et plateau', a:'#0f7a4c', b:'#073b2b'},
+  {id:'echecs', nom:'Échecs', sous:'La partie classique, pion après pion', cat:'Cartes et plateau', a:'#f0d9b5', b:'#b58863'},
+  {id:'neromath', nom:'NéroMath', sous:'Course aux calculs avec Néro le robot', cat:'Apprendre', a:'#ff9ecb', b:'#7b61ff'},
+  {id:'nero-anglais-espace', nom:'Nero, anglais de l’espace', sous:'Le vocabulaire anglais avec Nero le robot', cat:'Apprendre', a:'#1b1646', b:'#5b2bd6'},
+  {id:'mission-multiplication', nom:'Mission multiplication', sous:'Les tables de multiplication en jouant', cat:'Apprendre', a:'#ff4d6d', b:'#ff9a3d'},
+  {id:'brickstudio', nom:'BrickStudio', sous:'Construis en briques 3D et crée tes cartes', cat:'Créer', a:'#ffd23f', b:'#ff7a45'},
+  {id:'village-de-nolan', nom:'Le village de Nolan', sous:'Explore un village façon Pokémon', cat:'Aventure', a:'#6ec5ff', b:'#5fd47a', bg:'linear-gradient(180deg,#6ec5ff 0 52%,#5fd47a 52%)', badge:'En chantier'}
+];
+const UNE = ['panique-depot','pont','tetris'];
+const RAYONS = ['Arcade','Cartes et plateau','Apprendre','Créer','Aventure'];
+
+/* Les jaquettes : dessinées à la main, une par jeu. */
+const bl = (x,y,c) => `<rect x="${x}" y="${y}" width="26" height="26" rx="6" fill="${c}"/><rect x="${x+4}" y="${y+4}" width="18" height="6" rx="3" fill="#fff" opacity=".35"/>`;
+const T = (x,y,s,t,f,fill) => `<text x="${x}" y="${y}" text-anchor="middle" font-family="'Baloo 2','Nunito',sans-serif" font-weight="800" font-size="${s}" fill="${fill}">${t}</text>`;
+const S = inner => `<svg viewBox="0 0 200 200" aria-hidden="true" focusable="false">${inner}</svg>`;
+const ART = {
+  'pont': () => S(`<circle cx="100" cy="96" r="34" fill="#ffd23f"/><path d="M8 142Q100 30 192 142" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M40 118V142M70 97V142M100 86V142M130 97V142M160 118V142" stroke="#fff" stroke-width="3"/><rect y="142" width="200" height="14" fill="#16123f"/><rect y="156" width="200" height="44" fill="#16123f" opacity=".55"/>`),
+  'panique-depot': () => S(`<rect x="88" y="44" width="24" height="13" rx="4" fill="#ffd23f"/><rect x="48" y="58" width="104" height="92" rx="16" fill="#e8f0ff"/><rect x="60" y="70" width="80" height="38" rx="8" fill="#16345c"/><rect x="48" y="118" width="104" height="14" fill="#2a6df4"/><circle cx="68" cy="141" r="7" fill="#ffd23f"/><circle cx="132" cy="141" r="7" fill="#ffd23f"/><path d="M60 160L46 192M140 160L154 192M66 172H134M60 184H140" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".8"/><path d="M166 36l22 40h-44z" fill="#ffd23f"/><rect x="164" y="50" width="4" height="14" rx="2" fill="#16123f"/><circle cx="166" cy="69" r="2.6" fill="#16123f"/>`),
+  'tetris': () => S(bl(48,48,'#3dd9ff')+bl(76,48,'#3dd9ff')+bl(104,48,'#3dd9ff')+bl(76,76,'#3dd9ff')+bl(160,20,'#4cf08a')+bl(160,48,'#4cf08a')+bl(160,76,'#4cf08a')+bl(160,104,'#4cf08a')+bl(20,132,'#ffd23f')+bl(48,132,'#ffd23f')+bl(20,160,'#ffd23f')+bl(48,160,'#ffd23f')+bl(104,132,'#ff6b9a')+bl(132,132,'#ff6b9a')+bl(76,160,'#ff6b9a')+bl(104,160,'#ff6b9a')),
+  'bunker-boy': () => S(`<rect x="56" y="22" width="88" height="156" rx="14" fill="#cfd2e6"/><rect x="65" y="33" width="70" height="60" rx="7" fill="#12142b"/><rect x="71" y="39" width="58" height="48" rx="3" fill="#9bbc0f"/><path d="M88 52h6v6h-6zM106 52h6v6h-6zM82 58h6v6h-6zM112 58h6v6h-6zM88 64h24v6H88zM88 76h6v6h-6zM106 76h6v6h-6z" fill="#0f380f"/><rect x="72" y="124" width="26" height="9" rx="2" fill="#12142b"/><rect x="80.5" y="115.5" width="9" height="26" rx="2" fill="#12142b"/><circle cx="122" cy="122" r="9" fill="#ff3d6b"/><circle cx="108" cy="134" r="9" fill="#ff3d6b"/><rect x="76" y="156" width="20" height="6" rx="3" fill="#8a8fb0"/><rect x="104" y="156" width="20" height="6" rx="3" fill="#8a8fb0"/>`),
+  'uno-maison': () => S(`<g transform="rotate(-26 100 175)"><rect x="70" y="52" width="60" height="92" rx="10" fill="#ffd23f" stroke="#fff" stroke-width="4"/></g><g transform="rotate(26 100 175)"><rect x="70" y="52" width="60" height="92" rx="10" fill="#4cf08a" stroke="#fff" stroke-width="4"/></g><rect x="70" y="52" width="60" height="92" rx="10" fill="#3d7bff" stroke="#fff" stroke-width="4"/>`+T(100,108,32,'+4','','#fff')),
+  'pokebunker': () => S(`<g transform="rotate(-14 100 170)"><rect x="64" y="44" width="58" height="86" rx="9" fill="#fff"/>${T(93,92,36,'A','','#16123f')}${T(93,116,26,'♠','','#16123f')}</g><g transform="rotate(12 100 170)"><rect x="84" y="48" width="58" height="86" rx="9" fill="#fff"/>${T(113,96,36,'K','','#e63946')}${T(113,120,26,'♥','','#e63946')}</g><circle cx="150" cy="156" r="26" fill="#e63946"/><circle cx="150" cy="156" r="26" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="10 9"/><circle cx="150" cy="156" r="14" fill="none" stroke="#fff" stroke-width="2"/><circle cx="52" cy="164" r="22" fill="#3d7bff"/><circle cx="52" cy="164" r="22" fill="none" stroke="#fff" stroke-width="5" stroke-dasharray="9 8"/><circle cx="52" cy="164" r="12" fill="none" stroke="#fff" stroke-width="2"/>`),
+  'echecs': () => {
+    let b=''; for(let r=0;r<2;r++) for(let c=0;c<8;c++) if((r+c)%2===0) b+=`<rect x="${c*25}" y="${150+r*25}" width="25" height="25" fill="#16123f" opacity=".3"/>`;
+    return S(b+`<circle cx="100" cy="68" r="19" fill="#16123f"/><rect x="82" y="88" width="36" height="9" rx="4.5" fill="#16123f"/><path d="M82 142Q86 104 100 100Q114 104 118 142Z" fill="#16123f"/><rect x="68" y="138" width="64" height="15" rx="6" fill="#16123f"/>`);
+  },
+  'neromath': () => S(`<path d="M100 72V50" stroke="#fff" stroke-width="5" stroke-linecap="round"/><circle cx="100" cy="44" r="7" fill="#ffd23f"/><rect x="46" y="96" width="10" height="26" rx="4" fill="#fff"/><rect x="144" y="96" width="10" height="26" rx="4" fill="#fff"/><rect x="56" y="72" width="88" height="78" rx="20" fill="#fff"/><circle cx="80" cy="104" r="11" fill="#16123f"/><circle cx="120" cy="104" r="11" fill="#16123f"/><circle cx="83" cy="101" r="3.5" fill="#fff"/><circle cx="123" cy="101" r="3.5" fill="#fff"/><rect x="82" y="126" width="36" height="9" rx="4.5" fill="#16123f"/><g stroke="#ffd23f" stroke-width="6" stroke-linecap="round"><path d="M30 36v20M20 46h20"/><path d="M160 40l20 20M180 40l-20 20"/><path d="M152 168h24M152 180h24"/><path d="M22 164h26"/></g>`),
+  'nero-anglais-espace': () => S(`<g fill="#fff"><circle cx="28" cy="34" r="2.5"/><circle cx="60" cy="20" r="1.8"/><circle cx="176" cy="108" r="2.5"/><circle cx="22" cy="96" r="1.8"/><circle cx="168" cy="168" r="2"/><circle cx="40" cy="176" r="2.4"/></g><circle cx="96" cy="128" r="40" fill="#ff8a5b"/><path d="M70 112q26-12 52 0M64 132q32-12 64 0" stroke="#ffb08f" stroke-width="6" fill="none" stroke-linecap="round"/><ellipse cx="96" cy="128" rx="72" ry="14" fill="none" stroke="#ffd23f" stroke-width="6" transform="rotate(-18 96 128)"/><path d="M62 154a40 40 0 0 0 68 0" fill="#ff8a5b"/><rect x="92" y="22" width="88" height="40" rx="16" fill="#fff"/><path d="M112 62l-6 14 20-14z" fill="#fff"/>`+T(136,50,24,'Hello','','#16123f')),
+  'mission-multiplication': () => S(`<circle cx="168" cy="46" r="16" fill="#ffd23f"/><rect x="166" y="36" width="4" height="20" rx="2" fill="#ff9a3d"/>`+T(100,112,58,'7×8','','#fff')+`<rect x="24" y="142" width="44" height="46" rx="4" fill="#2fbf71"/><rect x="18" y="132" width="56" height="16" rx="5" fill="#23a05d"/><rect x="30" y="152" width="6" height="30" rx="3" fill="#fff" opacity=".3"/><path d="M120 190h60" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".6"/>`),
+  'brickstudio': () => S(`<rect x="20" y="156" width="160" height="10" rx="5" fill="#16123f" opacity=".3"/><rect x="30" y="116" width="140" height="42" rx="5" fill="#e4334c"/><rect x="50" y="76" width="100" height="42" rx="5" fill="#2f6bff"/><rect x="70" y="36" width="60" height="42" rx="5" fill="#2fbf71"/><rect x="76" y="26" width="20" height="12" rx="5" fill="#2fbf71"/><rect x="104" y="26" width="20" height="12" rx="5" fill="#2fbf71"/><g fill="#fff" opacity=".3"><rect x="36" y="121" width="128" height="5" rx="2.5"/><rect x="56" y="81" width="88" height="5" rx="2.5"/><rect x="76" y="41" width="48" height="5" rx="2.5"/></g>`),
+  'village-de-nolan': () => S(`<ellipse cx="168" cy="32" rx="22" ry="9" fill="#fff" opacity=".85"/><ellipse cx="28" cy="46" rx="18" ry="7" fill="#fff" opacity=".7"/><ellipse cx="100" cy="176" rx="60" ry="11" fill="#f2d49b"/><rect x="142" y="112" width="8" height="34" rx="3" fill="#8a5a2b"/><circle cx="146" cy="100" r="26" fill="#1f9d55"/><rect x="34" y="100" width="62" height="46" rx="4" fill="#fff7e0"/><path d="M26 102L65 62L104 102Z" fill="#e63946"/><rect x="56" y="116" width="18" height="30" rx="3" fill="#8a5a2b"/><rect x="40" y="110" width="12" height="12" rx="2" fill="#6ec5ff"/><rect x="80" y="110" width="12" height="12" rx="2" fill="#6ec5ff"/>`)
+};
+
+const fond = g => `--a:${g.a};--b:${g.b}${g.bg ? ';background:' + g.bg : ''}`;
+const carte = g => `<a class="carte" href="${url(g.id)}" aria-label="Jouer à ${g.nom}"><div class="jaquette" style="${fond(g)}">${ART[g.id]()}${g.badge ? `<span class="pastille">${g.badge}</span>` : ''}</div><h3>${g.nom}</h3><p>${g.sous}</p><span class="jouer">Jouer</span></a>`;
+const banniere = g => `<a class="banniere" href="${url(g.id)}" aria-label="Jouer à ${g.nom}" style="--a:${g.a};--b:${g.b}"><div><h2>${g.nom}</h2><p>${g.sous}</p><span class="jouer">Jouer</span></div><div class="art">${ART[g.id]()}</div></a>`;
+
+let choix = 'Tous';
+const $ = s => document.querySelector(s);
+
+function dessinerRayons(){
+  $('#rayons').innerHTML = ['Tous', ...RAYONS].map(r => `<button type="button" class="rayon" aria-pressed="${r === choix}" data-r="${r}">${r}</button>`).join('');
+}
+function dessiner(){
+  let h = '';
+  if (choix === 'Tous') {
+    h += `<section class="une" aria-label="À la une">${UNE.map(id => banniere(G.find(g => g.id === id))).join('')}</section>`;
+  }
+  RAYONS.filter(r => choix === 'Tous' || r === choix).forEach(r => {
+    const l = G.filter(g => g.cat === r);
+    if (l.length) h += `<section class="rang"><h2>${r}</h2><div class="grille">${l.map(carte).join('')}</div></section>`;
+  });
+  $('#contenu').innerHTML = h;
+}
+$('#rayons').addEventListener('click', e => {
+  const b = e.target.closest('.rayon'); if (!b) return;
+  choix = b.dataset.r; dessinerRayons(); dessiner(); window.scrollTo({top:0});
+});
+dessinerRayons(); dessiner();
+
+/* Installation : bouton sur Android, petite astuce sur iPhone et iPad. */
+let inst = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); inst = e; $('#installer').hidden = false; });
+$('#installer').addEventListener('click', async () => {
+  if (!inst) return; inst.prompt(); await inst.userChoice; inst = null; $('#installer').hidden = true;
+});
+window.addEventListener('appinstalled', () => { $('#installer').hidden = true; });
+
+const ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const installe = navigator.standalone || matchMedia('(display-mode: standalone)').matches;
+let vu = false; try { vu = localStorage.getItem('nolangame-astuce') === '1'; } catch (e) {}
+if (ios && !installe && !vu) $('#astuce').hidden = false;
+$('#astuce-fermer').addEventListener('click', () => {
+  $('#astuce').hidden = true; try { localStorage.setItem('nolangame-astuce', '1'); } catch (e) {}
+});
+
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>
