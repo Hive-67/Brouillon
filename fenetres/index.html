@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fenêtres · en-têtes futuristes</title>
+<style>
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+*{box-sizing:border-box}
+:root{--a:#ff8a3d;--a2:#ffc27a;--fond:#120b0a}
+body[data-el="cryo"]{--a:#35d6c9;--a2:#94f3ec;--fond:#061218}
+body[data-el="abyssal"]{--a:#a371ff;--a2:#d2b8ff;--fond:#0d0818}
+body[data-el="stase"]{--a:#5f86ff;--a2:#a9bfff;--fond:#070b1a}
+body[data-el="filobscur"]{--a:#4fc27f;--a2:#a6f0c4;--fond:#07130d}
+body[data-el="prismatique"]{--a:#c27bff;--a2:#5ee6ff;--fond:#0e0a1a}
+body[data-el="sans"]{--a:#9aa4b8;--a2:#d5dbe8;--fond:#0c0d12}
+body{margin:0;min-height:100vh;color:#e9e7f0;font:15px/1.45 system-ui,-apple-system,"SF Pro Text",sans-serif;
+  background:radial-gradient(60% 50% at 15% 0%,color-mix(in srgb,var(--a) 24%,transparent),transparent 70%),
+             radial-gradient(50% 45% at 95% 100%,color-mix(in srgb,var(--a2) 14%,transparent),transparent 70%),var(--fond);
+  background-attachment:fixed;transition:background .4s}
+.bar{position:sticky;top:0;z-index:5;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;padding:10px 16px;background:rgba(8,7,12,.74);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.vs,.ds{display:flex;gap:6px;align-items:center}
+.vs button{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font:inherit;font-size:14px;cursor:pointer}
+.vs button[aria-pressed="true"]{background:var(--a);border-color:var(--a);color:#150c05;font-weight:650}
+.ds button{position:relative;width:28px;height:28px;margin:0 3px;border-radius:50%;border:2px solid transparent;background:var(--c);cursor:pointer;padding:0}
+.ds button::after{content:"";position:absolute;inset:-8px}
+.ds button[aria-pressed="true"]{border-color:#fff}
+.note{max-width:980px;margin:14px auto 0;padding:0 16px;color:#b4afc2;font-size:13.5px}
+.note b{color:#fff}
+.scene{max-width:980px;margin:16px auto 70px;padding:0 16px;display:grid;gap:22px}
+
+/* ---------- ce que toutes les variantes partagent ---------- */
+.win{position:relative}
+.hd{position:relative;display:flex;align-items:center;gap:14px;padding:16px 20px}
+.hd h2{margin:0;font-size:24px;font-weight:650;letter-spacing:-.01em;line-height:1.1}
+.hd small{display:block;margin-top:3px;color:#b9b4c6;font-size:14px}
+.hd-etat{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--a2);text-align:right}
+.hd-etat i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--a2);box-shadow:0 0 10px var(--a2);animation:puls 2.4s infinite}
+.hd-plier{position:relative;flex:none;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;padding:0}
+.hd-plier::after{content:"";position:absolute;inset:-4px}
+.hd-plier svg{transition:transform .3s}
+.replie .hd-plier svg{transform:rotate(-90deg)}
+.hd-orbe,.hd-ticks{display:none}
+.bd{padding:6px 20px 22px}
+.replie .bd{display:none}
+.lab{margin:10px 0;font-size:13px;letter-spacing:.06em;color:var(--a)}
+.cartes{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.carte{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1)}
+.carte h3{margin:0 0 6px;font-size:15px}
+.carte p{margin:0;font-size:14px;color:#cfcbd9}
+.build{margin-top:14px;padding:14px 16px;border-radius:16px;background:rgba(0,0,0,.25);border:1px solid color-mix(in srgb,var(--a) 40%,transparent)}
+.build-t{display:flex;justify-content:space-between;font-weight:600}
+.build-t span{font-weight:400;color:#b9b4c6}
+.barre{height:4px;border-radius:2px;background:rgba(255,255,255,.12);margin:10px 0 12px}
+.barre i{display:block;height:100%;width:66%;border-radius:2px;background:linear-gradient(90deg,var(--a),var(--a2));box-shadow:0 0 10px var(--a)}
+.stats{display:flex;flex-wrap:wrap;gap:8px}
+.stats span{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.07);font-size:13.5px;font-variant-numeric:tabular-nums}
+.stats .prio{box-shadow:inset 0 0 0 1.5px var(--a)}
+.vide{margin:6px 0 0;font-size:14px;color:#b9b4c6}
+
+@keyframes monte{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes trace{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes puls{50%{opacity:.35}}
+@keyframes tourne{to{--ang:360deg}}
+@keyframes balai{from{transform:translateX(-120%)}to{transform:translateX(340%)}}
+@keyframes orbe{to{transform:rotate(360deg)}}
+@keyframes defile{to{background-position:12px 50%}}
+.win.entre{animation:monte .6s cubic-bezier(.2,.8,.2,1) both}
+
+/* ---------- 1 · Verre lumineux ---------- */
+body[data-v="1"] .win{border-radius:26px;background:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.03));
+  box-shadow:0 30px 80px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.14),inset 0 -40px 60px -50px var(--a)}
+body[data-v="1"] .win-in{border-radius:inherit;overflow:hidden;background:linear-gradient(180deg,color-mix(in srgb,var(--a) 14%,#0d0b14),#0d0b14 65%);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+body[data-v="1"] .hd{background:linear-gradient(90deg,color-mix(in srgb,var(--a) 30%,transparent),transparent 75%)}
+body[data-v="1"] .hd::after{content:"";position:absolute;left:20px;right:20px;bottom:0;height:2px;background:linear-gradient(90deg,var(--a),transparent);box-shadow:0 0 12px var(--a);transform-origin:left;animation:trace 1s .2s ease-out both}
+
+/* ---------- 2 · Cockpit ---------- */
+body[data-v="2"]{--cut:30px}
+body[data-v="2"] .win{padding:1px;background:linear-gradient(135deg,var(--a),rgba(255,255,255,.14) 40%,rgba(255,255,255,.14) 62%,var(--a2));
+  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+body[data-v="2"] .win-in{background:linear-gradient(180deg,#171224,#0a0910);
+  clip-path:polygon(0 0,calc(100% - var(--cut)) 0,100% var(--cut),100% 100%,var(--cut) 100%,0 calc(100% - var(--cut)))}
+body[data-v="2"] .hd{padding-left:30px;border-bottom:1px solid color-mix(in srgb,var(--a) 35%,transparent);background:linear-gradient(90deg,color-mix(in srgb,var(--a) 18%,transparent),transparent 60%)}
+body[data-v="2"] .hd::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:4px;background:var(--a);box-shadow:0 0 14px var(--a)}
+body[data-v="2"] .hd-ticks{display:block;flex:none;width:84px;height:6px;background:radial-gradient(circle,var(--a) 1.6px,transparent 2.2px) 0 50%/12px 6px repeat-x;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);mask:linear-gradient(90deg,transparent,#000 30%,#000 70%,transparent);animation:defile 3s linear infinite}
+body[data-v="2"] .hd-etat{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+body[data-v="2"] .hd-plier{border:0;border-radius:0;background:color-mix(in srgb,var(--a) 30%,#171224);
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+body[data-v="2"] .carte,body[data-v="2"] .build{border:0;border-left:2px solid var(--a);border-radius:2px;background:rgba(255,255,255,.05);
+  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+
+/* ---------- 3 · Hologramme ---------- */
+body[data-v="3"] .win{padding:1.5px;border-radius:22px;
+  background:conic-gradient(from var(--ang),transparent 0 52%,var(--a) 74%,var(--a2) 86%,transparent 96%),linear-gradient(rgba(255,255,255,.1),rgba(255,255,255,.1));animation:tourne 7s linear infinite}
+body[data-v="3"] .win.entre{animation:monte .6s cubic-bezier(.2,.8,.2,1) both,tourne 7s linear infinite}
+body[data-v="3"] .win-in{position:relative;overflow:hidden;border-radius:20.5px;background:linear-gradient(180deg,rgba(15,12,26,.96),rgba(8,7,14,.98))}
+body[data-v="3"] .win-in::after{content:"";position:absolute;top:0;bottom:0;left:0;width:30%;pointer-events:none;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--a) 24%,transparent),transparent);transform:translateX(-120%);animation:balai 1.8s .3s ease-out 1 both}
+body[data-v="3"] .hd{align-items:flex-end;padding:14px 20px 0;border-bottom:1px solid color-mix(in srgb,var(--a) 55%,transparent)}
+body[data-v="3"] .hd-titre{padding:12px 36px 12px 22px;border-bottom:2px solid var(--a);margin-bottom:-1px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--a) 30%,transparent),transparent);
+  clip-path:polygon(0 100%,0 14px,14px 0,calc(100% - 26px) 0,100% 100%)}
+body[data-v="3"] .hd-etat,body[data-v="3"] .hd-plier{margin-bottom:10px}
+body[data-v="3"] .carte{border-radius:14px;background:linear-gradient(180deg,color-mix(in srgb,var(--a) 10%,transparent),rgba(255,255,255,.02));border-color:color-mix(in srgb,var(--a) 28%,transparent)}
+
+/* ---------- 4 · Capsule ---------- */
+body[data-v="4"] .hd{padding:12px 14px 12px 12px;margin-bottom:10px;border-radius:999px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--a) 34%,#17121f),#14101c 62%);border:1px solid color-mix(in srgb,var(--a) 55%,transparent);box-shadow:0 12px 40px -12px var(--a)}
+body[data-v="4"] .replie .hd{margin-bottom:0}
+body[data-v="4"] .hd h2{font-size:22px}
+body[data-v="4"] .hd-orbe{display:block;position:relative;flex:none;width:44px;height:44px;margin:0 4px 0 2px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--a2),var(--a) 55%,transparent 74%)}
+body[data-v="4"] .hd-orbe::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid transparent;border-top-color:var(--a2);border-right-color:var(--a);animation:orbe 4s linear infinite}
+body[data-v="4"] .bd{padding:18px 20px 22px;border-radius:30px;background:linear-gradient(180deg,color-mix(in srgb,var(--a) 12%,#110e1a),#0b0a12);
+  border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 30px 70px rgba(0,0,0,.5)}
+body[data-v="4"] .carte{border-radius:22px}
+body[data-v="4"] .build{border-radius:22px}
+
+@media (max-width:640px){
+  .hd{flex-wrap:wrap}.hd h2{font-size:21px}.hd-etat{font-size:12.5px}
+  body[data-v="3"] .hd{padding-top:12px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-v="1" data-el="solaire">
+<div class="bar">
+  <div class="vs" id="vs"></div>
+  <div class="ds" id="ds">
+    <button data-el="sans" style="--c:#9aa4b8" aria-label="Sans doctrine" title="Sans doctrine"></button>
+    <button data-el="solaire" style="--c:#ff8a3d" aria-label="Solaire" title="Solaire"></button>
+    <button data-el="cryo" style="--c:#35d6c9" aria-label="Cryo-électrique" title="Cryo-électrique"></button>
+    <button data-el="abyssal" style="--c:#a371ff" aria-label="Abyssal" title="Abyssal"></button>
+    <button data-el="stase" style="--c:#5f86ff" aria-label="Stase" title="Stase"></button>
+    <button data-el="filobscur" style="--c:#4fc27f" aria-label="Filobscur" title="Filobscur"></button>
+    <button data-el="prismatique" style="--c:#c27bff" aria-label="Prismatique" title="Prismatique"></button>
+  </div>
+</div>
+<p class="note" id="note"></p>
+<main class="scene" id="scene"></main>
+<script>
+const VARIANTES=[
+ ["Verre lumineux","Arrondi et translucide, un fil de lumière qui se trace sous l'en-tête."],
+ ["Cockpit","Coins coupés en diagonale, barre lumineuse à gauche, voyants qui défilent."],
+ ["Hologramme","Cadre dont la lumière tourne, titre en onglet flottant, balayage de lumière à l'ouverture."],
+ ["Capsule","L'en-tête se détache de la fenêtre : une capsule avec un orbe qui tourne."]
+];
+const FENETRES=[
+ {t:"Mes builds",s:"Sur cet appareil et dans ton espace",e:"Synchronisé à 14:53",ouvert:true},
+ {t:"Tenues du jeu",s:"Celles enregistrées sur ton personnage",e:"4 tenues"},
+ {t:"Builds de l'Arsenal",s:"Ceux de ton espace",e:"7 builds"}
+];
+const CHEV='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 6l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CORPS='<p class="lab">Comment ça marche</p><div class="cartes">'+
+ '<div class="carte"><h3>Tous tes builds, ici</h3><p>Ceux qui sont dans le jeu (tes tenues) et ceux de ton espace dans l\'Arsenal.</p></div>'+
+ '<div class="carte"><h3>En envoyer plusieurs d\'un coup</h3><p>Coche les builds, appuie sur Envoyer : un seul lien et une seule image portent le paquet.</p></div>'+
+ '<div class="carte"><h3>Un build, en exemple</h3><p>La carte de la Construction, remplie avec ce que porte ton personnage.</p></div></div>'+
+ '<div class="build"><div class="build-t">Ton build actuel<span>2 sur 3</span></div><div class="barre"><i></i></div>'+
+ '<div class="stats"><span class="prio">Résilience 140</span><span class="prio">Discipline 99</span><span class="prio">Force 89</span><span>Santé 20</span><span>Récupération 65</span><span>Intellect 76</span></div></div>';
+function fen(f){
+ return '<section class="win entre'+(f.ouvert?'':' replie')+'"><div class="win-in"><header class="hd">'+
+  '<span class="hd-orbe"></span><div class="hd-titre"><h2>'+f.t+'</h2><small>'+f.s+'</small></div><span class="hd-ticks"></span>'+
+  '<div class="hd-etat"><i></i>'+f.e+'</div><button class="hd-plier" aria-label="Plier ou déplier">'+CHEV+'</button></header>'+
+  '<div class="bd">'+(f.ouvert?CORPS:'<p class="vide">Replié : un appui sur l\'en-tête l\'ouvre.</p>')+'</div></div></section>';
+}
+const scene=document.getElementById('scene');
+scene.innerHTML=FENETRES.map(fen).join('');
+scene.addEventListener('click',e=>{const h=e.target.closest('.hd');if(h)h.closest('.win').classList.toggle('replie')});
+function rejoue(){scene.querySelectorAll('.win').forEach((w,i)=>{w.classList.remove('entre');void w.offsetWidth;w.style.animationDelay=(i*.09)+'s';w.classList.add('entre')})}
+const vs=document.getElementById('vs');
+vs.innerHTML=VARIANTES.map((v,i)=>'<button data-v="'+(i+1)+'" aria-pressed="false">'+(i+1)+' · '+v[0]+'</button>').join('');
+function setV(n,r){document.body.dataset.v=n;vs.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v==n));
+ document.getElementById('note').innerHTML='<b>'+VARIANTES[n-1][0]+'</b> : '+VARIANTES[n-1][1]+' Touche l\'en-tête pour plier ou déplier. Touches 1 à 4 du clavier.';
+ if(r)rejoue();save()}
+function setE(el){document.body.dataset.el=el;document.querySelectorAll('#ds button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.el===el));save()}
+function save(){history.replaceState(null,'','?v='+document.body.dataset.v+'#'+document.body.dataset.el)}
+vs.addEventListener('click',e=>{const b=e.target.closest('button');if(b)setV(+b.dataset.v,true)});
+document.getElementById('ds').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setE(b.dataset.el)});
+addEventListener('keydown',e=>{if('1234'.includes(e.key)&&e.key)setV(+e.key,true)});
+const q=new URLSearchParams(location.search).get('v');
+setE((location.hash||'#solaire').slice(1)||'solaire');
+setV(['1','2','3','4'].includes(q)?+q:1,false);
+</script>
+</body>
+</html>
