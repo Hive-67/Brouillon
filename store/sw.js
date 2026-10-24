@@ -1,5 +1,5 @@
 /* NolanGame — mode hors ligne du store (les jeux, eux, s'ouvrent en ligne). */
-const C = 'nolangame-v1';
+const C = 'nolangame-v2';
 const F = ['./', 'index.html', 'manifest.webmanifest', 'icon.svg'];
 
 self.addEventListener('install', e => {
