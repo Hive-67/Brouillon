@@ -1,0 +1,187 @@
+/* ==========================================================================
+   lanceur.css — le seuil et le lanceur du Bunker, repris de BunkerWeb.
+
+   Source : dépôt BunkerWeb, branche BunkerLabs, `assets/css/bornes-seuil.css`
+   et la section « LE LANCEUR » d'`assets/css/arcade.css`. Les règles sont
+   recopiées telles quelles ; seules les valeurs des jetons du site, dont
+   elles ont besoin, sont posées ici en tête, avec les valeurs du site.
+   Elles sont posées sur le seuil et le lanceur, pas sur :root : le jeu a
+   ses propres couleurs sous les mêmes noms, et chacun garde les siennes.
+   Ce fichier ne contient que ce que le seuil et le lanceur utilisent.
+   ========================================================================== */
+
+.bornes-seuil,
+.arcade-lanceur {
+  --fond: #07070a;
+  --bordure: #232733;
+  --texte: #f0f1f4;
+  --texte-2: #868b98;
+  --accent: #f59433;
+  --accent-rgb: 245, 148, 51;
+  --accent-2: #ff5a2b;
+  --mono: "Share Tech Mono", ui-monospace, monospace;
+  --tracking-mono: 0.22em;
+  --tracking-mono-large: 0.3em;
+  --taille-titre-3: clamp(1.125rem, 4vw, 1.5rem);
+  --taille-petit: 0.875rem;
+  --taille-surtitre: 0.75rem;
+  --espace-2xs: 0.5rem;
+  --espace-s: 1rem;
+  --espace-m: 1.5rem;
+  --espace-l: 2rem;
+  --espace-xl: 3rem;
+  --trait: 1px;
+  --trait-epais: 2px;
+  --voile-image: rgba(7, 7, 10, 0.55);
+  --noir-image: #000000;
+  --arcade-lueur-logo: 0 0 40px rgba(var(--accent-rgb), 0.3);
+  --plan-seuil-borne: 75;
+  --arcade-plan-lanceur: 80;
+}
+
+/* --- Le seuil (bornes-seuil.css) ----------------------------------------- */
+.bornes-seuil {
+  position: fixed;
+  inset: 0;
+  z-index: var(--plan-seuil-borne);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--noir-image);
+}
+.bornes-seuil--muet { pointer-events: none; }
+.bornes-seuil__fond {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.bornes-seuil__fond--flou {
+  object-fit: cover;
+  filter: blur(28px) saturate(1.1);
+  transform: scale(1.12);
+  opacity: 0.7;
+}
+.bornes-seuil__voile {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(180deg, var(--voile-image) 0%, transparent 32%, transparent 68%, var(--voile-image) 100%);
+}
+.bornes-seuil__invite {
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: var(--espace-m);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--texte-2);
+  font-family: var(--mono);
+  font-size: var(--taille-petit);
+  letter-spacing: var(--tracking-mono-large);
+  text-transform: uppercase;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  z-index: 1;
+}
+.bornes-seuil__invite:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; }
+.bornes-seuil--image .bornes-seuil__invite { align-items: flex-end; padding-bottom: var(--espace-xl); }
+.bornes-seuil--image .bornes-seuil__mot {
+  padding: var(--espace-2xs) var(--espace-s);
+  background-color: var(--fond);
+  border: var(--trait) solid var(--bordure);
+  color: var(--texte);
+  animation-name: bornes-seuil-respire-texte;
+}
+@keyframes bornes-seuil-respire-texte { 0%, 100% { color: var(--texte-2); } 50% { color: var(--texte); } }
+@media (prefers-reduced-motion: reduce) {
+  .bornes-seuil--image .bornes-seuil__mot { animation: none; color: var(--texte); }
+}
+.bornes-seuil__mot { animation: bornes-seuil-respire 2600ms ease-in-out infinite; }
+@keyframes bornes-seuil-respire { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .bornes-seuil__mot { animation: none; opacity: 1; } }
+
+/* --- Le lanceur (arcade.css, « LE LANCEUR ») ------------------------------ */
+.arcade-lanceur {
+  position: fixed;
+  inset: 0;
+  z-index: var(--arcade-plan-lanceur);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--espace-m);
+  padding: var(--espace-l);
+  background-color: var(--noir-image);
+  color: var(--texte);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.arcade-lanceur[hidden] { display: none; }
+.arcade-lanceur__logo {
+  width: 7rem;
+  height: auto;
+  opacity: 0;
+  transform: scale(0.92);
+  filter: drop-shadow(var(--arcade-lueur-logo));
+}
+.arcade-lanceur__barres { position: absolute; left: 0; right: 0; top: 50%; height: var(--trait-epais); pointer-events: none; }
+.arcade-lanceur__barre {
+  position: absolute;
+  top: 0;
+  width: calc(50% - 4.5rem);
+  height: 100%;
+  background-color: var(--accent-2);
+  transform: scaleX(0);
+}
+.arcade-lanceur__barre--gauche { left: 0; transform-origin: left center; }
+.arcade-lanceur__barre--droite { right: 0; transform-origin: right center; }
+.arcade-lanceur__titre {
+  margin-top: var(--espace-l);
+  font-family: var(--mono);
+  font-size: var(--taille-titre-3);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mono-large);
+  text-align: center;
+}
+.arcade-lanceur__lettre { opacity: 0; }
+.arcade-lanceur__pret {
+  font-family: var(--mono);
+  font-size: var(--taille-surtitre);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-mono);
+  color: var(--accent-2);
+  opacity: 0;
+}
+.arcade-lanceur__pret::before { content: "// "; }
+.arcade-lanceur--actif .arcade-lanceur__logo { animation: lanceur-logo 320ms ease-out forwards; }
+.arcade-lanceur--actif .arcade-lanceur__barre { animation: lanceur-barre 260ms ease-out 320ms forwards; }
+.arcade-lanceur--actif .arcade-lanceur__lettre { animation: lanceur-lettre 28ms linear forwards; }
+.arcade-lanceur--actif .arcade-lanceur__pret { animation: lanceur-lettre 120ms linear 980ms forwards; }
+.arcade-lanceur--actif { animation: lanceur-sortie 320ms ease-in 1200ms forwards; }
+.arcade-lanceur--repris .arcade-lanceur__logo { animation: none; opacity: 1; transform: scale(1); }
+.arcade-lanceur--statique .arcade-lanceur__logo,
+.arcade-lanceur--statique .arcade-lanceur__lettre,
+.arcade-lanceur--statique .arcade-lanceur__pret { opacity: 1; transform: none; }
+.arcade-lanceur--statique .arcade-lanceur__barre { transform: scaleX(1); }
+@keyframes lanceur-logo { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+@keyframes lanceur-barre { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes lanceur-lettre { from { opacity: 0; } to { opacity: 1; } }
+@keyframes lanceur-sortie { from { opacity: 1; } to { opacity: 0; } }
+@media (min-width: 900px) {
+  .arcade-lanceur__logo { width: 10rem; }
+  .arcade-lanceur__barre { width: calc(50% - 6rem); }
+}
