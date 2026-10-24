@@ -162,7 +162,7 @@ main{max-width:1200px;margin:0 auto}
 <script>
 /* Lancement : l'aperçu de la branche du jeu (jamais le lien de publication). */
 const base = id => `https://jeux-${id}--hiveostools.netlify.app/jeux/${id}/`;
-const img = (id, f) => base(id) + f;
+const img = (id, f) => `img/${id}/${f.split('/').pop()}`;
 
 /* icon = vraie icône du jeu, hero = vraie image large. Sans image : jaquette dessinée (ART). */
 const G = [
