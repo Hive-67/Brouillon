@@ -14,6 +14,11 @@ Page à ouvrir : https://hive-67.github.io/Brouillon/coque-jeu/
 - `assets/son/terminal-ouverture.m4a` : depuis Rancune (HiveTools, branche `jeux/uno-maison`).
 - `assets/js/son.js` : depuis HiveSkills, `skills/sons-bunker/`. Chargé avant le lanceur : c'est lui qui joue le bruit d'ouverture.
 
+## Le rond du joueur (25/10/2026)
+
+- La poignée de main du Bunker est reprise de Rancune (lot 18) : dans le Store du Bunker, le rond prend la photo Discord du joueur (ou son initiale), et le pseudo remplit le Profil des réglages. Ouverte ici, sur github.io, la page reste en « pas connecté ».
+- Dans le coin du rond, la pastille du Bunker comme sur BunkerWeb (lots 394, 395) : en couleur et cerclée d'orange pour un membre, grise sinon, absente quand il n'est pas connecté. Elle remplace la petite marque Discord prévue par le skill : décision de Hive du 25/10/2026, à recopier dans `SKILL.md` avec la coque.
+
 ## Règle
 
 Ce dossier est un brouillon : les règles de la coque restent dans `SKILL.md` de HiveSkills. Ce qui est validé ici se recopie dans le skill (`modele.html`), pas l'inverse.

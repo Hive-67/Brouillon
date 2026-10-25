@@ -192,9 +192,17 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 .avatar { position: relative; width: 36px; height: 36px; flex: none; padding: 0; border-radius: 50%; border: 2px solid var(--bord); background: transparent; color: var(--gris); display: grid; place-items: center; }
 .avatar svg { width: 18px; height: 18px; }
 .avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
-.avatar.connecte { border-color: var(--discord); }
-.avatar-marque { position: absolute; right: -3px; bottom: -3px; width: 16px; height: 16px; border-radius: 50%; background: var(--discord); color: #ffffff; display: grid; place-items: center; border: 2px solid var(--fond); }
-.avatar-marque svg { width: 9px; height: 9px; }
+.avatar-initiale { font: 700 16px/1 var(--titre); text-transform: uppercase; color: #ffffff; }
+.avatar > [data-etat-joueur] { display: none; }
+.avatar[data-etat="dehors"] > [data-etat-joueur~="dehors"],
+.avatar[data-etat="invite"] > [data-etat-joueur~="invite"],
+.avatar[data-etat="membre"] > [data-etat-joueur~="membre"] { display: grid; }
+.avatar[data-etat="membre"] { border-color: var(--discord); background: var(--discord); }
+/* La pastille du Bunker dans le coin, comme sur le site du Bunker (lots 394, 395) :
+   en couleur et cerclée d'orange pour un membre du serveur, grise sinon. Rien quand il n'est pas connecté. */
+.avatar .avatar-bunker { position: absolute; right: -4px; bottom: -4px; z-index: 2; width: 17px; height: 17px; padding: 1px; border-radius: 50%; background: #1d1c17; border: 2px solid var(--fond); box-shadow: 0 0 0 1px var(--bord); object-fit: contain; filter: grayscale(1) brightness(0.8); opacity: 0.85; }
+.avatar[data-etat="dehors"] .avatar-bunker { display: none; }
+.avatar[data-etat="membre"] .avatar-bunker { box-shadow: 0 0 0 1px #f59433, 0 0 6px rgba(245,148,51,0.6); filter: none; opacity: 1; }
 .discord-btn { flex: none; min-height: 36px; padding: 0 10px; border: 0; border-radius: 8px; background: var(--discord); color: #ffffff; font: 600 12px/1.2 var(--texte-ui); }
 .discord-grand { display: grid; place-items: center; text-align: center; text-decoration: none; border: 0; background: var(--discord); color: #ffffff; font-size: 18px; }
 .haut-droite { display: flex; align-items: center; gap: 10px; }
@@ -273,7 +281,13 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
       </span>
       <!-- LE JOUEUR, toujours en haut à droite : un petit rond, sa photo Discord quand il est connecté -->
       <span class="coin-haut">
-      <button class="avatar" data-tiroir="discord" aria-label="Se connecter avec Discord"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.7a16.7 16.7 0 0 0 5 2.6l1.1-1.7a10.8 10.8 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 11 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.7 16.7 0 0 0 5-2.6c.4-4.3-.7-8.1-3-11.4zM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"></path></svg></button>
+      <button class="avatar" id="joueur" data-etat="dehors" aria-label="Se connecter avec Discord">
+        <span data-etat-joueur="dehors"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.7a16.7 16.7 0 0 0 5 2.6l1.1-1.7a10.8 10.8 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 11 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.7 16.7 0 0 0 5-2.6c.4-4.3-.7-8.1-3-11.4zM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"></path></svg></span>
+        <span data-etat-joueur="invite"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9zm0 2c-4.4 0-8 2.4-8 5.3V21h16v-1.7c0-2.9-3.6-5.3-8-5.3z"></path></svg></span>
+        <img data-etat-joueur="membre" id="joueur-photo" alt="" hidden>
+        <span data-etat-joueur="membre" class="avatar-initiale" id="joueur-initiale"></span>
+        <img class="avatar-bunker" src="assets/img/logo-bunker.webp" alt="">
+      </button>
       <button class="rond rond--petit" data-tiroir="installer" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 9 4 4 9 4"></polyline><polyline points="20 9 20 4 15 4"></polyline><polyline points="4 15 4 20 9 20"></polyline><polyline points="20 15 20 20 15 20"></polyline></svg></button>
       </span>
     </div>
@@ -452,7 +466,7 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 
     <span class="etiq">4 · Profil</span>
     <div class="lignes">
-      <div class="ligne"><span>Compte Discord<small>Ton pseudo Discord, et ton score au classement du Bunker</small></span><button class="discord-btn" data-tiroir="discord">Se connecter avec Discord</button></div>
+      <div class="ligne"><span>Compte Discord<small>Ton pseudo Discord, et ton score au classement du Bunker</small></span><button class="discord-btn" id="profil-discord" data-tiroir="discord">Se connecter avec Discord</button></div>
       <div class="ligne"><label for="pseudo">Pseudo<small>Le même dans tous les jeux</small></label><input class="champ" id="pseudo" type="text" value="Joueur" maxlength="16" autocomplete="off"></div>
     </div>
 
@@ -651,6 +665,7 @@ document.addEventListener('click', function (ev) {
     return;
   }
   if (b.id === 'c-oui') return;
+  if (b.id === 'joueur') { toucherJoueur(b); return; }
   if (b.hasAttribute('data-vider')) pile.length = 0;
   if (b.dataset.onglet) onglet(b.dataset.onglet);
   if (b.dataset.aller) aller(b.dataset.aller);
@@ -673,6 +688,60 @@ document.addEventListener('click', function (ev) {
   }
 });
 document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && ouvert) fermerTout(); });
+
+// ===== Le rond du joueur et le Bunker (repris de Rancune, lot 18) =====
+// La poignée de main de PONT (classement.js, lot 148) : dans une fenêtre du site du Bunker,
+// le jeu dit bonjour à la page qui le contient, SEULEMENT aux deux adresses du Bunker,
+// et n'écoute que leurs réponses : { type: 'accueil', pseudo, membre, avatar }.
+// Pas de réponse, ou pas de fenêtre : pas connecté. Aucune clé, aucun appel à Discord ici.
+const BUNKER = ['https://bunkerwebb.netlify.app', 'https://chantier--bunkerwebb.netlify.app'];
+const BUNKER_CANAL = 'bunker-classement';
+const BUNKER_INVITATION = 'https://discord.gg/4tNUFBUH3G';
+let bunker = null;                 // { origine, pseudo, membre, avatar } une fois l'accueil reçu
+function nettoyerPseudo(p) { return String(p).replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 32); }
+function ecouterBunker(ev) {
+  if (BUNKER.indexOf(ev.origin) === -1 || ev.source !== window.parent) return;
+  const m = ev.data;
+  if (!m || m.canal !== BUNKER_CANAL || m.type !== 'accueil') return;
+  const avatar = typeof m.avatar === 'string' && /^https:\/\//.test(m.avatar) ? m.avatar : '';
+  bunker = { origine: ev.origin, pseudo: nettoyerPseudo(m.pseudo || '') || 'Membre', membre: m.membre === true, avatar: avatar };
+  majJoueur();
+}
+if (window.parent && window.parent !== window) {
+  window.addEventListener('message', ecouterBunker);
+  BUNKER.forEach(function (o) { try { window.parent.postMessage({ canal: BUNKER_CANAL, type: 'bonjour' }, o); } catch (e) {} });
+}
+function etatJoueur() { return !bunker ? 'dehors' : bunker.membre ? 'membre' : 'invite'; }
+function majJoueur() {
+  const b = document.getElementById('joueur'), e = etatJoueur(), photo = document.getElementById('joueur-photo');
+  b.dataset.etat = e;
+  document.getElementById('joueur-initiale').textContent = e === 'membre' && !bunker.avatar ? bunker.pseudo.charAt(0) : '';
+  if (e === 'membre' && bunker.avatar) {
+    if (photo.getAttribute('src') !== bunker.avatar) photo.src = bunker.avatar;
+    photo.hidden = false;
+  } else photo.hidden = true;
+  b.setAttribute('aria-label', e === 'membre' ? 'Ton profil : ' + bunker.pseudo
+    : e === 'invite' ? 'Rejoindre le Bunker sur Discord' : 'Se connecter avec Discord');
+  // Le profil des réglages : le pseudo Discord à la place du bouton de connexion.
+  const profil = document.getElementById('profil-discord');
+  if (bunker) {
+    profil.textContent = 'Connecté : ' + bunker.pseudo;
+    profil.disabled = true;
+    document.getElementById('pseudo').value = bunker.pseudo.slice(0, 16);
+  }
+}
+// La photo qui ne vient pas : l'initiale la remplace.
+document.getElementById('joueur-photo').addEventListener('error', function () {
+  if (!bunker) return;
+  bunker.avatar = '';
+  majJoueur();
+});
+function toucherJoueur(bouton) {
+  const e = etatJoueur();
+  if (e === 'membre') ouvrirTiroir('reglages', bouton);
+  else if (e === 'invite') window.open(BUNKER_INVITATION, '_blank', 'noopener');
+  else ouvrirTiroir('discord', bouton);
+}
 
 // ===== Le seuil du Bunker : noir, puis le logo avec son bruitage, puis le jeu =====
 BornesSeuil.ouvrir({ racine: '', titre: APP.nom });
