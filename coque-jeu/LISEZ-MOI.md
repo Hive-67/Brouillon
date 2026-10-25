@@ -8,15 +8,11 @@ Page à ouvrir : https://hive-67.github.io/Brouillon/coque-jeu/
 - `lanceur/` : le seuil et le lanceur du Bunker, repris de Rancune (HiveTools, branche `jeux/uno-maison`) sans rien changer : `lanceur.css`, `bornes-seuil.js`, `arcade-lanceur.js`.
 - On ne remplit que le bloc `APP` et `CHANGELOG` en bas de `index.html`, plus `--jeu` et `--sur-jeu` en haut.
 
-## Ce qui manque ici (fichiers que cet outil ne sait pas envoyer)
+## Les fichiers de `assets/` (copiés tels quels le 25/10/2026)
 
-Dans `assets/img/` (à créer à côté de `index.html`) :
-- `logo-bunker.webp` : le logo du lanceur.
-- `duel-ordi.webp` et `duel-pote.webp` : les deux têtes du bouton Duel.
-
-Pour le bruit d'ouverture : `terminal-ouverture.m4a`, plus le moteur de son `son.js` de `sons-bunker`. Sans eux, le lanceur marche en silence.
-
-Sans le logo, la séquence attend au plus 1,2 seconde, puis continue sans lui.
+- `assets/img/logo-bunker.webp`, `duel-ordi.webp`, `duel-pote.webp` : depuis HiveSkills, `skills/store-jeu-bunker/`.
+- `assets/son/terminal-ouverture.m4a` : depuis Rancune (HiveTools, branche `jeux/uno-maison`).
+- `assets/js/son.js` : depuis HiveSkills, `skills/sons-bunker/`. Chargé avant le lanceur : c'est lui qui joue le bruit d'ouverture.
 
 ## Règle
 
