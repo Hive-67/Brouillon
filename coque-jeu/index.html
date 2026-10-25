@@ -1,19 +1,18 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" data-theme="bunker">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#14130f">
-<title>Coque des jeux</title>
-<meta name="description" content="Modèle de la coque commune des jeux de l'Atelier, sur la base de Rancune : seuil, accueil, partie, pause, réglages, fin, bouton Duel.">
+<title>Jeu du Bunker</title>
+<meta name="description" content="Un jeu du Store Jeu Bunker.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Share+Tech+Mono&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Oswald:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Share+Tech+Mono&family=Bungee&family=DM+Sans:wght@500;700&family=Anton&family=Special+Elite&display=swap">
 <link rel="preload" as="image" href="assets/img/logo-bunker.webp">
 <link rel="stylesheet" href="lanceur/lanceur.css">
 <style>
-/* Coque des jeux, base Rancune. Une colonne de 430 px, un écran visible à la fois,
+/* Store Jeu Bunker, le kit. Coque des jeux, base Rancune. Une colonne de 430 px, un écran visible à la fois,
    les réglages et la pause en tiroir qui monte du bas.
    Ne changent d'un jeu à l'autre que --jeu, --sur-jeu, le motif des bandes et l'image de l'accueil. */
 :root {
@@ -256,16 +255,41 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   .tiroir { animation: fondu 0.2s ease; }
 }
 @keyframes fondu { from { opacity: 0; } }
+/* ===== Le kit : ce que la coque ajoute pour tourner toute seule ===== */
+
+/* Les trois thèmes communs (Bunker, Néon, Papier). Ils habillent la zone du jeu, jamais la coque.
+   Le jeu peint ses éléments avec ces jetons : --t-1 à --t-4 pour les couleurs, --t-trait pour les contours. */
+html[data-theme="bunker"] { --t-fond: #14130f; --t-surface: #1d1c18; --t-bord: #3a3830; --t-texte: #ece7dc; --t-doux: #a8a396; --t-1: #c8101b; --t-2: #2a62bd; --t-3: #d9a441; --t-4: #ece7dc; --t-trait: #d9a441; --t-titre: Oswald, "Arial Narrow", sans-serif; --t-corps: "IBM Plex Mono", ui-monospace, monospace; }
+html[data-theme="neon"] { --t-fond: #0b0710; --t-surface: #170f1f; --t-bord: #3a2350; --t-texte: #f3e9ff; --t-doux: #a99bc0; --t-1: #ff2e88; --t-2: #3ee6c9; --t-3: #ffd84a; --t-4: #6f8cff; --t-trait: #ff2e88; --t-titre: Bungee, Impact, sans-serif; --t-corps: "DM Sans", system-ui, sans-serif; }
+html[data-theme="papier"] { --t-fond: #e9e2d0; --t-surface: #f6f1e3; --t-bord: #b9b09a; --t-texte: #17161a; --t-doux: #5a554a; --t-1: #c8281e; --t-2: #17161a; --t-3: #c8281e; --t-4: #5a554a; --t-trait: #17161a; --t-titre: Anton, Impact, sans-serif; --t-corps: "Special Elite", "Courier New", monospace; }
+
+.zone-jeu { position: relative; overflow: hidden; display: block; padding: 0; border: 1px solid var(--t-bord); border-style: solid; background: var(--t-fond); color: var(--t-texte); font-family: var(--t-corps); touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+html[data-soleil="oui"] .zone-jeu { filter: brightness(1.18) contrast(1.12); }
+.hud { grid-template-columns: 44px repeat(var(--cpts, 3), minmax(0, 1fr)) 44px; }
+.image-cadre--jeu { border-style: solid; padding: 0; overflow: hidden; background: var(--t-fond); }
+.image-cadre img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+.btn .sous small:empty { display: none; }
+.ligne .valeur { font: 600 12px/1.2 var(--mono); color: var(--doux); text-transform: uppercase; letter-spacing: 0.08em; }
+.ligne input:disabled { opacity: 0.7; }
+.info-classement { margin: 0; font: 500 13px/1.5 var(--texte-ui); color: var(--doux); }
+.info-classement:empty { display: none; }
+.classement:empty { display: none; }
+.classement-etat { margin: 16px 0 0; color: var(--doux); font: 400 14px/1.55 var(--texte-ui); }
+.discord-connecte { font: 600 13px/1.2 var(--texte-ui); color: var(--texte); }
+
+/* Réduire les animations : réglage du joueur, activé d'office quand le téléphone demande moins de mouvement. */
+html[data-calme="oui"] .bande { animation: none; }
+html[data-calme="oui"] .tiroir { animation: fondu 0.2s ease; }
 </style>
 </head>
 <body>
 
-<!-- LE SEUIL, écrit dans la page comme dans Rancune : le logo du Bunker et le nom du jeu (à remplacer avec APP.nom),
-     « Appuyer pour entrer ». Au geste, BornesSeuil.ouvrir(), en bas : le logo avec son bruitage, les barres, « Système prêt ». -->
+<!-- LE SEUIL, écrit dans la page : le logo du Bunker et le nom du jeu, « Appuyer pour entrer ».
+     Au geste, BornesSeuil.ouvrir() (en bas) : le logo avec son bruitage, les barres, « Système prêt ». -->
 <div class="bornes-seuil seuil-texte">
   <div class="seuil-nom" aria-hidden="true">
     <img src="assets/img/logo-bunker.webp" alt="" draggable="false">
-    <span>Ton jeu</span>
+    <span data-app="nom"></span>
   </div>
   <button class="bornes-seuil__invite" type="button"><span class="bornes-seuil__mot">Appuyer pour entrer</span></button>
 </div>
@@ -276,10 +300,10 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   <div class="corps">
     <div class="haut">
       <span class="haut-gauche">
-        <a class="retour" href="../../" aria-label="Retour à l'Atelier">&#8592;</a>
-        <button class="version" data-tiroir="apropos" data-onglet="journal" aria-label="Version et journal des mises à jour"><span data-app="version-lot">v1.0 · lot 1</span></button>
+        <a class="retour" id="sortir" href="../../" aria-label="Retour à l'Atelier">&#8592;</a>
+        <button class="version" data-tiroir="apropos" data-onglet="journal" aria-label="Version et journal des mises à jour"><span data-app="version-lot"></span></button>
       </span>
-      <!-- LE JOUEUR, toujours en haut à droite : un petit rond, sa photo Discord quand il est connecté -->
+      <!-- LE JOUEUR, toujours en haut à droite : un petit rond, sa photo Discord et la pastille du Bunker quand il est connecté -->
       <span class="coin-haut">
       <button class="avatar" id="joueur" data-etat="dehors" aria-label="Se connecter avec Discord">
         <span data-etat-joueur="dehors"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.3 5.3A16.6 16.6 0 0 0 15.2 4l-.5 1a15.4 15.4 0 0 0-5.4 0l-.5-1a16.6 16.6 0 0 0-4.1 1.3C2.1 9.2 1.4 13 1.7 16.7a16.7 16.7 0 0 0 5 2.6l1.1-1.7a10.8 10.8 0 0 1-1.7-.8l.4-.3a11.9 11.9 0 0 0 11 0l.4.3c-.5.3-1.1.6-1.7.8l1.1 1.7a16.7 16.7 0 0 0 5-2.6c.4-4.3-.7-8.1-3-11.4zM8.7 14.5c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"></path></svg></span>
@@ -288,30 +312,30 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
         <span data-etat-joueur="membre" class="avatar-initiale" id="joueur-initiale"></span>
         <img class="avatar-bunker" src="assets/img/logo-bunker.webp" alt="">
       </button>
-      <button class="rond rond--petit" data-tiroir="installer" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 9 4 4 9 4"></polyline><polyline points="20 9 20 4 15 4"></polyline><polyline points="4 15 4 20 9 20"></polyline><polyline points="20 15 20 20 15 20"></polyline></svg></button>
+      <button class="rond rond--petit" data-plein aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 9 4 4 9 4"></polyline><polyline points="20 9 20 4 15 4"></polyline><polyline points="4 15 4 20 9 20"></polyline><polyline points="20 15 20 20 15 20"></polyline></svg></button>
       </span>
     </div>
-    <h1 class="titre" data-app="nom">Ton jeu</h1>
+    <h1 class="titre" data-app="nom"></h1>
     <div class="trait" aria-hidden="true"></div>
     <div class="image-jeu">
-      <div class="image-cadre">L'image du jeu : ses cartes, ses pièces, son héros…
-        <span class="pastille">Ton mot !</span>
+      <div class="image-cadre image-cadre--jeu" id="image-jeu">
+        <span class="pastille" id="pastille" hidden></span>
       </div>
     </div>
     <div class="records">
-      <div class="record"><span>Record</span><span>12 480</span></div>
-      <div class="record"><span>Parties</span><span>37</span></div>
+      <div class="record"><span>Record</span><span id="rec-record">0</span></div>
+      <div class="record"><span>Parties</span><span id="rec-parties">0</span></div>
     </div>
     <nav class="boutons" aria-label="Menu principal">
-      <button class="btn plein" data-aller="jeu"><span class="sous">Jouer<small>Contre l'ordi</small></span></button>
-      <div class="duel4" role="group" aria-label="Duel">
-            <button class="duel4-cote duel4-ordi" data-aller="jeu" aria-label="Duel contre l'ordinateur"><span class="duel4-txt"><small>Duel solo</small><b>Contre</b><b>l'ordi</b></span></button>
-            <button class="duel4-cote duel4-pote" data-tiroir="duel" aria-label="Duel en ligne avec un pote"><span class="duel4-txt"><small>Duel en ligne</small><b>Avec</b><b>un pote</b></span></button>
-            <span class="duel4-vs" aria-hidden="true">VS</span>
-          </div>
+      <button class="btn plein" data-jouer="solo"><span class="sous">Jouer<small id="jouer-sous"></small></span></button>
+      <div class="duel4" id="duel" role="group" aria-label="Duel" hidden>
+        <button class="duel4-cote duel4-ordi" data-jouer="duel-ordi" aria-label="Duel contre l'ordinateur"><span class="duel4-txt"><small>Duel solo</small><b>Contre</b><b>l'ordi</b></span></button>
+        <button class="duel4-cote duel4-pote" data-tiroir="duel" aria-label="Duel en ligne avec un pote"><span class="duel4-txt"><small>Duel en ligne</small><b>Avec</b><b>un pote</b></span></button>
+        <span class="duel4-vs" aria-hidden="true">VS</span>
+      </div>
       <div class="duo">
         <button class="btn doux" data-aller="aide">Comment jouer</button>
-        <button class="btn doux" data-aller="classement">Classement</button>
+        <button class="btn doux" data-aller="classement" data-si-classement>Classement</button>
       </div>
     </nav>
     <div class="bas">
@@ -321,42 +345,36 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   <div class="bande" aria-hidden="true"></div>
 </section>
 
-<!-- EN JEU -->
+<!-- EN JEU : la barre (Pause, les compteurs du jeu, Plein écran), puis la zone que remplit jeu.js -->
 <section class="ecran" data-ecran="jeu" aria-label="Partie en cours" hidden>
   <div class="bande" aria-hidden="true"></div>
-  <div class="hud">
-    <button class="rond" data-tiroir="pause" aria-label="Pause"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="9" y1="5" x2="9" y2="19"></line><line x1="15" y1="5" x2="15" y2="19"></line></svg></button>
-    <div class="cpt"><span>SCORE</span><span>4 720</span></div>
-    <div class="cpt"><span>NIVEAU</span><span>3</span></div>
-    <div class="cpt"><span>TEMPS</span><span>2:14</span></div>
-    <button class="rond" data-tiroir="installer" aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 9 4 4 9 4"></polyline><polyline points="20 9 20 4 15 4"></polyline><polyline points="4 15 4 20 9 20"></polyline><polyline points="20 15 20 20 15 20"></polyline></svg></button>
+  <div class="hud" id="hud">
+    <button class="rond" data-pause aria-label="Pause"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><line x1="9" y1="5" x2="9" y2="19"></line><line x1="15" y1="5" x2="15" y2="19"></line></svg></button>
+    <button class="rond" data-plein aria-label="Plein écran"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 9 4 4 9 4"></polyline><polyline points="20 9 20 4 15 4"></polyline><polyline points="4 15 4 20 9 20"></polyline><polyline points="20 15 20 20 15 20"></polyline></svg></button>
   </div>
-  <div class="zone-jeu">Ici, le jeu.<br>La coque ne touche pas à cette zone.<br><button class="btn doux" data-aller="fin" style="margin-top: 16px; font-size: 15px">Voir la fin de partie (aperçu)</button></div>
+  <div class="zone-jeu" id="zone"></div>
 </section>
 
 <!-- FIN DE PARTIE -->
 <section class="ecran" data-ecran="fin" aria-label="Fin de partie" hidden>
   <div class="bande" aria-hidden="true"></div>
   <div class="corps">
-    <div class="haut"><span></span><span class="version">Mode classique</span></div>
+    <div class="haut"><span></span><span class="version" id="fin-mode"></span></div>
     <h1 class="titre titre--moyen">Partie<br>terminée</h1>
     <div class="trait" aria-hidden="true"></div>
     <div class="espace"></div>
     <div style="display: flex; flex-direction: column; gap: 10px">
       <span class="etiq">Ton score</span>
-      <span class="grosscore">13 050</span>
-      <span class="badge">Nouveau record</span>
+      <span class="grosscore" id="fin-score">0</span>
+      <span class="badge" id="fin-badge" hidden>Nouveau record</span>
+      <p class="info-classement" id="fin-classement" aria-live="polite"></p>
     </div>
     <div class="espace"></div>
-    <div class="stats">
-      <div class="stat"><span>Niveau</span><span>5</span></div>
-      <div class="stat"><span>Temps</span><span>4:02</span></div>
-      <div class="stat"><span>Ancien</span><span>12 480</span></div>
-    </div>
+    <div class="stats" id="fin-stats"></div>
     <div class="boutons">
-      <button class="btn plein" data-aller="jeu" data-vider>Rejouer</button>
+      <button class="btn plein" data-rejouer>Rejouer</button>
       <div class="duo">
-        <button class="btn doux" data-aller="classement">Classement</button>
+        <button class="btn doux" data-aller="classement" data-si-classement>Classement</button>
         <button class="btn doux" data-accueil>Menu</button>
       </div>
     </div>
@@ -364,43 +382,29 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   <div class="bande" aria-hidden="true"></div>
 </section>
 
-<!-- COMMENT JOUER -->
+<!-- COMMENT JOUER : les étapes viennent de JEU.regles -->
 <section class="ecran" data-ecran="aide" aria-label="Comment jouer" hidden>
   <div class="bande" aria-hidden="true"></div>
   <div class="corps">
     <div class="haut"><button class="retour" data-retour aria-label="Retour">&#8592;</button><span></span></div>
     <h1 class="titre titre--moyen">Comment<br>jouer</h1>
     <div class="trait" aria-hidden="true"></div>
-    <ol class="etapes">
-      <li>[Le but du jeu, en une phrase.]</li>
-      <li>[Le geste principal : toucher, glisser, appuyer…]</li>
-      <li>[Comment on marque des points.]</li>
-      <li>[Comment la partie se termine.]</li>
-    </ol>
+    <ol class="etapes" id="etapes"></ol>
     <div class="espace"></div>
-    <button class="btn plein" data-aller="jeu">Jouer</button>
+    <button class="btn plein" data-jouer="solo">Jouer</button>
   </div>
   <div class="bande" aria-hidden="true"></div>
 </section>
 
-<!-- CLASSEMENT -->
+<!-- CLASSEMENT : au Bunker, celui des membres ; ailleurs, celui entre amis (Firebase) -->
 <section class="ecran" data-ecran="classement" aria-label="Classement" hidden>
   <div class="bande" aria-hidden="true"></div>
   <div class="corps">
-    <div class="haut"><button class="retour" data-retour aria-label="Retour">&#8592;</button><span class="version">Exemples</span></div>
+    <div class="haut"><button class="retour" data-retour aria-label="Retour">&#8592;</button><span class="version" id="classement-source"></span></div>
     <h1 class="titre titre--moyen">Classement</h1>
     <div class="trait" aria-hidden="true"></div>
-    <div class="onglets" role="tablist" aria-label="Période" style="margin-top: 18px">
-      <button role="tab" aria-selected="true">Cette semaine</button>
-      <button role="tab" aria-selected="false">Tout le temps</button>
-    </div>
-    <ol class="classement">
-      <li><span class="rang">1</span><span class="pseudo">Joueur A</span><span>18 200</span></li>
-      <li><span class="rang">2</span><span class="pseudo">Joueur B</span><span>15 940</span></li>
-      <li class="moi"><span class="rang">3</span><span class="pseudo">Toi</span><span>13 050</span></li>
-      <li><span class="rang">4</span><span class="pseudo">Joueur C</span><span>11 300</span></li>
-      <li><span class="rang">5</span><span class="pseudo">Joueur D</span><span>9 870</span></li>
-    </ol>
+    <p class="classement-etat" id="classement-etat" aria-live="polite"></p>
+    <ol class="classement" id="liste-classement"></ol>
   </div>
   <div class="bande" aria-hidden="true"></div>
 </section>
@@ -412,13 +416,14 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
     <button class="btn plein" data-fermer>Reprendre</button>
     <span class="etiq">Son</span>
     <div class="lignes">
-      <button class="ligne"><span>Musique<small>Le morceau en cours, ou « Aucune »</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
-      <div class="ligne"><label for="p-vol-musique">Volume de la musique</label><input class="curseur" id="p-vol-musique" type="range" min="0" max="100" value="60"></div>
-      <div class="ligne"><label for="p-vol-bruitages">Volume des bruitages</label><input class="curseur" id="p-vol-bruitages" type="range" min="0" max="100" value="80"></div>
+      <button class="ligne" data-musique><span>Musique<small data-musique-nom>Aucune</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
+      <div class="ligne"><label for="p-vol-musique">Volume de la musique</label><input class="curseur" id="p-vol-musique" data-volume="musique" type="range" min="0" max="100"></div>
+      <div class="ligne"><label for="p-vol-bruitages">Volume des bruitages</label><input class="curseur" id="p-vol-bruitages" data-volume="bruitages" type="range" min="0" max="100"></div>
+      <div class="ligne" data-si-volume-jeu><label for="p-vol-jeu" data-volume-jeu-nom></label><input class="curseur" id="p-vol-jeu" data-volume="jeu" type="range" min="0" max="100"></div>
     </div>
     <span class="etiq">Le jeu</span>
     <div class="lignes lignes--jeu">
-      <button class="ligne" data-tiroir="reglages"><span>Thème<small>Bunker</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
+      <button class="ligne" data-tiroir="reglages"><span>Thème<small data-theme-nom>Bunker</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
     </div>
     <div class="lignes">
       <button class="ligne" data-tiroir="reglages"><span>Tous les réglages</span><span class="fleche" aria-hidden="true">&#8250;</span></button>
@@ -431,43 +436,42 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 </div>
 
 <!-- TIROIR : RÉGLAGES (« Plus »). Règle stricte : ces cinq sections, dans cet ordre, avec ces mots, dans tous les jeux.
-     Seul le contenu de « 3 · Le jeu » après le Thème change d'un jeu à l'autre. -->
+     Seul le contenu de « 3 · Le jeu » après le Thème change d'un jeu à l'autre (JEU.reglages). -->
 <div class="voile" data-voile="reglages" hidden>
   <div class="tiroir" tabindex="-1" role="dialog" aria-modal="true" aria-label="Réglages">
     <div class="tiroir-tete"><h2>Réglages</h2><button class="fermer" data-fermer aria-label="Fermer">&#215;</button></div>
 
     <span class="etiq">1 · Son</span>
     <div class="lignes">
-      <button class="ligne"><span>Musique<small>Le morceau en cours, ou « Aucune »</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
-      <div class="ligne"><label for="vol-musique">Volume de la musique</label><input class="curseur" id="vol-musique" type="range" min="0" max="100" value="60"></div>
-      <div class="ligne"><label for="vol-bruitages">Volume des bruitages</label><input class="curseur" id="vol-bruitages" type="range" min="0" max="100" value="80"></div>
-      <div class="ligne"><label for="vol-jeu">[Volume propre au jeu]<small>Seulement si le jeu l'a déjà (PONT : le tir)</small></label><input class="curseur" id="vol-jeu" type="range" min="0" max="100" value="50"></div>
-      <button class="ligne" data-bascule><span>Vibrations<small>Chaque geste, chaque fin de partie</small></span><span class="etat oui">Activées</span></button>
+      <button class="ligne" data-musique><span>Musique<small data-musique-nom>Aucune</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
+      <div class="ligne"><label for="vol-musique">Volume de la musique</label><input class="curseur" id="vol-musique" data-volume="musique" type="range" min="0" max="100"></div>
+      <div class="ligne"><label for="vol-bruitages">Volume des bruitages</label><input class="curseur" id="vol-bruitages" data-volume="bruitages" type="range" min="0" max="100"></div>
+      <div class="ligne" data-si-volume-jeu><label for="vol-jeu" data-volume-jeu-nom></label><input class="curseur" id="vol-jeu" data-volume="jeu" type="range" min="0" max="100"></div>
+      <button class="ligne" id="r-vibrations"><span>Vibrations<small>Chaque geste, chaque fin de partie</small></span><span class="etat" data-oui="Activées" data-non="Coupées"></span></button>
     </div>
 
     <span class="etiq">2 · Affichage</span>
     <div class="lignes">
-      <button class="ligne" data-bascule><span>Plein écran<small>Le jeu prend tout l'écran</small></span><span class="etat">Coupé</span></button>
-      <button class="ligne" data-bascule><span>Plein soleil<small>Éclaircit le jeu pour jouer dehors</small></span><span class="etat">Coupé</span></button>
-      <button class="ligne" data-bascule><span>Réduire les animations<small>Des fondus à la place des mouvements</small></span><span class="etat">Coupé</span></button>
+      <button class="ligne" id="r-plein"><span>Plein écran<small>Le jeu prend tout l'écran</small></span><span class="etat" data-oui="Activé" data-non="Coupé"></span></button>
+      <button class="ligne" id="r-soleil"><span>Plein soleil<small>Éclaircit le jeu pour jouer dehors</small></span><span class="etat" data-oui="Activé" data-non="Coupé"></span></button>
+      <button class="ligne" id="r-calme"><span>Réduire les animations<small>Des fondus à la place des mouvements</small></span><span class="etat" data-oui="Activé" data-non="Coupé"></span></button>
     </div>
 
     <span class="etiq">3 · Le jeu</span>
     <span class="etiq-mini">Thème</span>
     <div class="choix choix--theme" role="group" aria-label="Thème">
-      <button aria-pressed="true"><span class="mini-theme" style="--a: #c8101b; --b: #2a62bd; --c: #d9a441; --f: #14130f"></span>Bunker</button>
-      <button aria-pressed="false"><span class="mini-theme mini-theme--neon" style="--a: #ff2e88; --b: #3ee6c9; --c: #6f8cff; --f: #0b0710"></span>Néon</button>
-      <button aria-pressed="false"><span class="mini-theme mini-theme--papier" style="--a: #f6f1e3; --b: #f6f1e3; --c: #17161a; --f: #e9e2d0"></span>Papier</button>
+      <button data-theme="bunker" aria-pressed="true"><span class="mini-theme" style="--a: #c8101b; --b: #2a62bd; --c: #d9a441; --f: #14130f"></span>Bunker</button>
+      <button data-theme="neon" aria-pressed="false"><span class="mini-theme mini-theme--neon" style="--a: #ff2e88; --b: #3ee6c9; --c: #6f8cff; --f: #0b0710"></span>Néon</button>
+      <button data-theme="papier" aria-pressed="false"><span class="mini-theme mini-theme--papier" style="--a: #f6f1e3; --b: #f6f1e3; --c: #17161a; --f: #e9e2d0"></span>Papier</button>
     </div>
-    <div class="lignes lignes--jeu">
-      <button class="ligne" data-bascule><span>[Réglage propre au jeu]<small>[Ce qu'il fait, en une phrase]</small></span><span class="etat oui">Activé</span></button>
+    <div class="lignes lignes--jeu" id="reglages-jeu">
       <button class="ligne" data-aller="aide"><span>Règles du jeu<small>Comment on joue</small></span><span class="fleche" aria-hidden="true">&#8250;</span></button>
     </div>
 
     <span class="etiq">4 · Profil</span>
     <div class="lignes">
-      <div class="ligne"><span>Compte Discord<small>Ton pseudo Discord, et ton score au classement du Bunker</small></span><button class="discord-btn" id="profil-discord" data-tiroir="discord">Se connecter avec Discord</button></div>
-      <div class="ligne"><label for="pseudo">Pseudo<small>Le même dans tous les jeux</small></label><input class="champ" id="pseudo" type="text" value="Joueur" maxlength="16" autocomplete="off"></div>
+      <div class="ligne"><span>Compte Discord<small>Ton pseudo Discord, et ton score au classement du Bunker</small></span><span id="profil-discord"><button class="discord-btn" data-tiroir="discord">Se connecter avec Discord</button></span></div>
+      <div class="ligne"><label for="pseudo">Pseudo<small>Le même dans tous les jeux</small></label><input class="champ" id="pseudo" type="text" maxlength="16" autocomplete="off" placeholder="Ton pseudo"></div>
     </div>
 
     <span class="etiq">5 · L'application</span>
@@ -483,16 +487,16 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 <!-- TIROIR : INSTALLER SUR TON TÉLÉPHONE (repris de Rancune). Le bouton direct n'apparaît que si le navigateur le permet. -->
 <div class="voile" data-voile="installer" hidden>
   <div class="tiroir" tabindex="-1" role="dialog" aria-modal="true" aria-label="Installer sur ton téléphone">
-    <div class="tiroir-tete"><h2>Installer <span data-app="nom">Ton jeu</span></h2><button class="fermer" data-fermer aria-label="Fermer">&#215;</button></div>
+    <div class="tiroir-tete"><h2>Installer <span data-app="nom"></span></h2><button class="fermer" data-fermer aria-label="Fermer">&#215;</button></div>
     <p class="texte">Pose le jeu sur l'écran d'accueil de ton téléphone : il s'ouvre ensuite comme une application, en plein écran, sans la barre du navigateur. À faire une seule fois.</p>
-    <button class="btn plein" style="font-size: 20px">Installer maintenant</button>
-    <p class="appareil">iPhone (Safari) <span class="ici">Ton téléphone</span></p>
+    <button class="btn plein" id="installer-direct" style="font-size: 20px" hidden>Installer maintenant</button>
+    <p class="appareil">iPhone (Safari) <span class="ici" data-appareil="ios" hidden>Ton téléphone</span></p>
     <ol class="gestes">
       <li><span>Touche le bouton <b>Partager</b> : le carré avec une flèche vers le haut, en bas de Safari.</span></li>
       <li><span>Descends et choisis <b>« Sur l'écran d'accueil »</b>, puis <b>Ajouter</b>.</span></li>
       <li><span>Ouvre le jeu depuis sa nouvelle icône.</span></li>
     </ol>
-    <p class="appareil">Android (Chrome)</p>
+    <p class="appareil">Android (Chrome) <span class="ici" data-appareil="android" hidden>Ton téléphone</span></p>
     <ol class="gestes">
       <li><span>Ouvre le menu du navigateur : les trois points <b>&#8942;</b> en haut à droite.</span></li>
       <li><span>Choisis <b>« Ajouter à l'écran d'accueil »</b> ou <b>« Installer l'application »</b>.</span></li>
@@ -501,13 +505,17 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
   </div>
 </div>
 
-<!-- TIROIR : SE CONNECTER AVEC DISCORD. La connexion se fait dans le Store du Bunker : le jeu n'appelle jamais Discord. -->
+<!-- TIROIR : DISCORD. La connexion se fait dans le Store du Bunker : le jeu n'appelle jamais Discord. -->
 <div class="voile" data-voile="discord" hidden>
-  <div class="tiroir" tabindex="-1" role="dialog" aria-modal="true" aria-label="Se connecter avec Discord">
+  <div class="tiroir" tabindex="-1" role="dialog" aria-modal="true" aria-label="Discord">
     <div class="tiroir-tete"><h2>Discord</h2><button class="fermer" data-fermer aria-label="Fermer">&#215;</button></div>
-    <p class="texte">Connecte-toi avec ton compte Discord dans le Store du Bunker : ton pseudo s'affiche tout seul, et tes scores entrent au classement des membres.</p>
-    <a class="btn discord-grand" href="https://bunkerwebb.netlify.app/" target="_blank" rel="noopener">Ouvrir le jeu dans le Store du Bunker</a>
-    <p class="texte">Pas encore membre ? Tu peux jouer en invité, ton score ne sera pas classé.</p>
+    <div data-discord="dehors">
+      <p class="texte">Connecte-toi avec ton compte Discord dans le Store du Bunker : ton pseudo s'affiche tout seul, et tes scores entrent au classement des membres.</p>
+    </div>
+    <a class="btn discord-grand" data-discord="dehors" id="lien-store" href="https://bunkerwebb.netlify.app/" target="_blank" rel="noopener">Ouvrir le jeu dans le Store du Bunker</a>
+    <p class="texte" data-discord="dehors">Pas encore membre ? Tu peux jouer en invité, ton score ne sera pas classé.</p>
+    <p class="texte" data-discord="invite" hidden>Tu joues en invité : ton score n'est pas classé. Connecte-toi avec Discord dans la barre du Bunker, ou rejoins le serveur pour entrer au classement des membres.</p>
+    <a class="btn discord-grand" data-discord="invite" href="https://discord.gg/4tNUFBUH3G" target="_blank" rel="noopener" hidden>Rejoindre le Bunker sur Discord</a>
   </div>
 </div>
 
@@ -520,231 +528,44 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
       <button role="tab" id="t-journal" aria-selected="false">Journal des mises à jour</button>
     </div>
     <div id="p-infos" class="lignes">
-      <div class="ligne"><span>Jeu</span><span class="etat" data-app="nom">Ton jeu</span></div>
-      <div class="ligne"><span>Version</span><span class="etat" data-app="version-lot">v1.0 · lot 1</span></div>
-      <div class="ligne"><span>Créé par</span><span class="etat" data-app="auteur">Hive</span></div>
-      <p class="texte" data-app="description" style="padding: 12px 2px">Ce que fait le jeu, en une phrase.</p>
+      <div class="ligne"><span>Jeu</span><span class="etat" data-app="nom"></span></div>
+      <div class="ligne"><span>Version</span><span class="etat" data-app="version-lot"></span></div>
+      <div class="ligne"><span>Créé par</span><span class="etat" data-app="auteur"></span></div>
+      <p class="texte" data-app="description" style="padding: 12px 2px"></p>
     </div>
     <ul class="journal" id="p-journal" hidden></ul>
   </div>
 </div>
 
-<!-- TIROIR : DUEL -->
+<!-- TIROIR : DUEL EN LIGNE (seulement si le jeu a JEU.duel.enLigne) -->
 <div class="voile" data-voile="duel" hidden>
   <div class="tiroir" tabindex="-1" role="dialog" aria-modal="true" aria-label="Duel">
     <div class="tiroir-tete"><h2>Duel</h2><button class="fermer" data-fermer aria-label="Fermer">&#215;</button></div>
-    <button class="btn plein">Créer un duel</button>
-    <div class="ligne" style="padding: 0"><label for="code">Code d'un ami</label><input class="champ" id="code" type="text" placeholder="ABCD" maxlength="4" autocomplete="off" style="text-transform: uppercase"></div>
-    <button class="btn">Rejoindre</button>
+    <button class="btn plein" id="duel-creer">Créer un duel</button>
+    <div class="ligne" style="padding: 0"><label for="duel-code">Code d'un ami</label><input class="champ" id="duel-code" type="text" placeholder="ABCD" maxlength="4" autocomplete="off" style="text-transform: uppercase"></div>
+    <button class="btn" id="duel-rejoindre">Rejoindre</button>
+    <p class="texte" id="duel-etat" aria-live="polite"></p>
   </div>
 </div>
 
 <!-- TIROIR : CONFIRMATION -->
 <div class="voile" data-voile="confirmer" hidden>
   <div class="tiroir" tabindex="-1" role="alertdialog" aria-modal="true" aria-labelledby="c-titre">
-    <div class="tiroir-tete"><h2 id="c-titre">Titre</h2></div>
-    <p class="texte" id="c-texte">Texte</p>
+    <div class="tiroir-tete"><h2 id="c-titre"></h2></div>
+    <p class="texte" id="c-texte"></p>
     <div class="duo">
       <button class="btn doux" data-fermer>Annuler</button>
-      <button class="btn plein" id="c-oui" style="font-size: 21px">Oui</button>
+      <button class="btn plein" id="c-oui" style="font-size: 21px"></button>
     </div>
   </div>
 </div>
 
-<!-- Le lanceur du Bunker, repris de Rancune tel quel (voir lanceur/) -->
+<!-- Le son, le classement et le lanceur du Bunker (tels quels), puis le jeu, puis la coque -->
 <script src="assets/js/son.js"></script>
+<script src="classement.js"></script>
 <script src="lanceur/arcade-lanceur.js"></script>
 <script src="lanceur/bornes-seuil.js"></script>
-<script>
-// ===== Identité du jeu : la seule partie à remplir pour un nouveau jeu =====
-const APP = {
-  nom: 'Ton jeu',
-  version: '1.0',
-  lot: 1,
-  description: 'Ce que fait le jeu, en une phrase.',
-  auteur: 'Hive',
-  url: ''
-};
-
-// Du plus récent au plus ancien, écrit pour Hive, sans nom de fichier ni de fonction
-const CHANGELOG = [
-  { version: '1.0', lot: 1, date: '21/10/2026', changes: ['Le jeu reçoit la coque de la famille : accueil, bouton Duel, pause, réglages et fin de partie.'] }
-];
-
-// ===== En-tête, À propos, journal =====
-const remplir = {
-  'nom': APP.nom,
-  'version-lot': 'v' + APP.version + ' · lot ' + APP.lot,
-  'description': APP.description,
-  'auteur': APP.auteur
-};
-document.querySelectorAll('[data-app]').forEach(function (el) { el.textContent = remplir[el.dataset.app]; });
-document.title = APP.nom;
-
-const journal = document.getElementById('p-journal');
-CHANGELOG.forEach(function (e) {
-  const li = document.createElement('li');
-  const tete = document.createElement('div');
-  tete.className = 'tete';
-  const v = document.createElement('strong');
-  v.textContent = 'v' + e.version;
-  const info = document.createElement('span');
-  info.textContent = 'LOT ' + e.lot + ' · ' + e.date;
-  tete.append(v, info);
-  const ul = document.createElement('ul');
-  e.changes.forEach(function (c) { const item = document.createElement('li'); item.textContent = c; ul.append(item); });
-  li.append(tete, ul);
-  journal.append(li);
-});
-
-// Les mots des interrupteurs : celui écrit dans la page, et l'autre
-document.querySelectorAll('[data-bascule] .etat').forEach(function (e) {
-  const oui = e.classList.contains('oui');
-  e.dataset.oui = oui ? e.textContent : 'Activé';
-  e.dataset.non = oui ? 'Coupé' : e.textContent;
-});
-
-// ===== Écrans =====
-const pile = [];
-let courant = 'accueil';
-function montrer(nom) {
-  courant = nom;
-  document.querySelectorAll('[data-ecran]').forEach(function (e) { e.hidden = e.dataset.ecran !== nom; });
-  window.scrollTo(0, 0);
-}
-function aller(nom) { fermerTout(); pile.push(courant); montrer(nom); }
-function retour() { montrer(pile.pop() || 'accueil'); }
-function accueil() { fermerTout(); pile.length = 0; montrer('accueil'); }
-
-// ===== Tiroirs =====
-let ouvert = null;
-let origine = null;
-function ouvrirTiroir(nom, bouton) {
-  if (ouvert) document.querySelector('[data-voile="' + ouvert + '"]').hidden = true;
-  else origine = bouton;
-  ouvert = nom;
-  const v = document.querySelector('[data-voile="' + nom + '"]');
-  v.hidden = false;
-  v.querySelector('.tiroir').focus({ preventScroll: true });
-}
-function fermerTout() {
-  document.querySelectorAll('[data-voile]').forEach(function (v) { v.hidden = true; });
-  if (ouvert && origine) origine.focus();
-  ouvert = null;
-}
-function onglet(nom) {
-  const j = nom === 'journal';
-  document.getElementById('t-infos').setAttribute('aria-selected', j ? 'false' : 'true');
-  document.getElementById('t-journal').setAttribute('aria-selected', j ? 'true' : 'false');
-  document.getElementById('p-infos').hidden = j;
-  document.getElementById('p-journal').hidden = !j;
-}
-
-// ===== Confirmations =====
-const CONFIRMATIONS = {
-  recommencer: { titre: 'Recommencer ?', texte: 'La partie en cours sera perdue.', oui: 'Recommencer', puis: function () { fermerTout(); pile.length = 0; pile.push('accueil'); montrer('jeu'); } },
-  quitter: { titre: 'Quitter ?', texte: 'Tu reviens à l\'accueil. La partie en cours sera perdue.', oui: 'Quitter', puis: accueil },
-  effacer: { titre: 'Effacer tes records ?', texte: 'Tous tes records sur ce téléphone seront supprimés. Ça ne se rattrape pas.', oui: 'Effacer', puis: fermerTout }
-};
-let action = null;
-function confirmer(cle, bouton) {
-  const c = CONFIRMATIONS[cle];
-  document.getElementById('c-titre').textContent = c.titre;
-  document.getElementById('c-texte').textContent = c.texte;
-  document.getElementById('c-oui').textContent = c.oui;
-  action = c.puis;
-  ouvrirTiroir('confirmer', bouton);
-}
-document.getElementById('c-oui').addEventListener('click', function () { if (action) action(); });
-
-// ===== Un seul écouteur pour tous les boutons =====
-document.addEventListener('click', function (ev) {
-  const b = ev.target.closest('button');
-  if (!b) {
-    if (ev.target.matches('[data-voile]')) fermerTout();
-    return;
-  }
-  if (b.id === 'c-oui') return;
-  if (b.id === 'joueur') { toucherJoueur(b); return; }
-  if (b.hasAttribute('data-vider')) pile.length = 0;
-  if (b.dataset.onglet) onglet(b.dataset.onglet);
-  if (b.dataset.aller) aller(b.dataset.aller);
-  else if (b.dataset.tiroir) ouvrirTiroir(b.dataset.tiroir, b);
-  else if (b.hasAttribute('data-fermer')) fermerTout();
-  else if (b.hasAttribute('data-retour')) retour();
-  else if (b.hasAttribute('data-accueil')) accueil();
-  else if (b.dataset.confirmer) confirmer(b.dataset.confirmer, b);
-  else if (b.hasAttribute('data-bascule')) {
-    const e = b.querySelector('.etat');
-    const oui = !e.classList.contains('oui');
-    e.classList.toggle('oui', oui);
-    e.textContent = oui ? e.dataset.oui : e.dataset.non;
-  } else if (b.hasAttribute('aria-pressed')) {
-    b.parentElement.querySelectorAll('[aria-pressed]').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-  } else if (b.getAttribute('role') === 'tab') {
-    if (b.id === 't-infos') onglet('infos');
-    else if (b.id === 't-journal') onglet('journal');
-    else b.parentElement.querySelectorAll('[role=tab]').forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
-  }
-});
-document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && ouvert) fermerTout(); });
-
-// ===== Le rond du joueur et le Bunker (repris de Rancune, lot 18) =====
-// La poignée de main de PONT (classement.js, lot 148) : dans une fenêtre du site du Bunker,
-// le jeu dit bonjour à la page qui le contient, SEULEMENT aux deux adresses du Bunker,
-// et n'écoute que leurs réponses : { type: 'accueil', pseudo, membre, avatar }.
-// Pas de réponse, ou pas de fenêtre : pas connecté. Aucune clé, aucun appel à Discord ici.
-const BUNKER = ['https://bunkerwebb.netlify.app', 'https://chantier--bunkerwebb.netlify.app'];
-const BUNKER_CANAL = 'bunker-classement';
-const BUNKER_INVITATION = 'https://discord.gg/4tNUFBUH3G';
-let bunker = null;                 // { origine, pseudo, membre, avatar } une fois l'accueil reçu
-function nettoyerPseudo(p) { return String(p).replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, 32); }
-function ecouterBunker(ev) {
-  if (BUNKER.indexOf(ev.origin) === -1 || ev.source !== window.parent) return;
-  const m = ev.data;
-  if (!m || m.canal !== BUNKER_CANAL || m.type !== 'accueil') return;
-  const avatar = typeof m.avatar === 'string' && /^https:\/\//.test(m.avatar) ? m.avatar : '';
-  bunker = { origine: ev.origin, pseudo: nettoyerPseudo(m.pseudo || '') || 'Membre', membre: m.membre === true, avatar: avatar };
-  majJoueur();
-}
-if (window.parent && window.parent !== window) {
-  window.addEventListener('message', ecouterBunker);
-  BUNKER.forEach(function (o) { try { window.parent.postMessage({ canal: BUNKER_CANAL, type: 'bonjour' }, o); } catch (e) {} });
-}
-function etatJoueur() { return !bunker ? 'dehors' : bunker.membre ? 'membre' : 'invite'; }
-function majJoueur() {
-  const b = document.getElementById('joueur'), e = etatJoueur(), photo = document.getElementById('joueur-photo');
-  b.dataset.etat = e;
-  document.getElementById('joueur-initiale').textContent = e === 'membre' && !bunker.avatar ? bunker.pseudo.charAt(0) : '';
-  if (e === 'membre' && bunker.avatar) {
-    if (photo.getAttribute('src') !== bunker.avatar) photo.src = bunker.avatar;
-    photo.hidden = false;
-  } else photo.hidden = true;
-  b.setAttribute('aria-label', e === 'membre' ? 'Ton profil : ' + bunker.pseudo
-    : e === 'invite' ? 'Rejoindre le Bunker sur Discord' : 'Se connecter avec Discord');
-  // Le profil des réglages : le pseudo Discord à la place du bouton de connexion.
-  const profil = document.getElementById('profil-discord');
-  if (bunker) {
-    profil.textContent = 'Connecté : ' + bunker.pseudo;
-    profil.disabled = true;
-    document.getElementById('pseudo').value = bunker.pseudo.slice(0, 16);
-  }
-}
-// La photo qui ne vient pas : l'initiale la remplace.
-document.getElementById('joueur-photo').addEventListener('error', function () {
-  if (!bunker) return;
-  bunker.avatar = '';
-  majJoueur();
-});
-function toucherJoueur(bouton) {
-  const e = etatJoueur();
-  if (e === 'membre') ouvrirTiroir('reglages', bouton);
-  else if (e === 'invite') window.open(BUNKER_INVITATION, '_blank', 'noopener');
-  else ouvrirTiroir('discord', bouton);
-}
-
-// ===== Le seuil du Bunker : noir, puis le logo avec son bruitage, puis le jeu =====
-BornesSeuil.ouvrir({ racine: '', titre: APP.nom });
-</script>
+<script src="jeu.js"></script>
+<script src="coque.js"></script>
 </body>
 </html>
