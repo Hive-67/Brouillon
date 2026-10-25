@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06080b">
+<title>Hive · Atelier de nuit (maquette)</title>
+<style>
+:root{--bg:#06080b;--ink:#eaf0f4;--mut:#8996a3;--acc:#b8ff3d}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 25%,var(--bg) 88%)}
+main{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:calc(70px + env(safe-area-inset-top)) 22px calc(48px + env(safe-area-inset-bottom));max-width:980px;margin:0 auto}
+.brand{position:absolute;top:calc(20px + env(safe-area-inset-top));left:22px;display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.18em;font-size:.78rem;color:var(--mut)}
+.brand svg{width:22px;height:22px;stroke:var(--acc);fill:none;stroke-width:1.6}
+.kicker{color:var(--acc);font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;margin-bottom:14px;animation:fade .8s .2s backwards}
+h1{font-size:clamp(4.6rem,22vw,11rem);line-height:.92;font-weight:800;letter-spacing:-.05em;display:flex;overflow:hidden;padding:.06em 0 .08em}
+h1 span{display:inline-block;animation:rise .9s cubic-bezier(.2,.9,.2,1) backwards;animation-delay:calc(.35s + var(--i)*.09s)}
+h1 .dot{color:var(--acc)}
+.rule{height:2px;width:min(220px,50vw);background:var(--acc);box-shadow:0 0 18px var(--acc);margin:18px 0 20px;animation:grow 1.1s .95s cubic-bezier(.2,.9,.2,1) backwards}
+.lead{font-size:clamp(1.25rem,4.6vw,2rem);line-height:1.25;font-weight:600;max-width:20ch;animation:up .8s 1.15s backwards}
+.lead em{font-style:normal;color:var(--acc)}
+.tags{margin-top:12px;color:var(--mut);font-size:.95rem;animation:fade .8s 1.35s backwards}
+.doors{display:grid;gap:12px;margin-top:30px;grid-template-columns:1fr}
+@media(min-width:720px){.doors{grid-template-columns:1fr 1fr;max-width:760px}}
+.door{position:relative;display:block;text-decoration:none;color:var(--ink);padding:18px 44px 18px 20px;border:1px solid rgba(184,255,61,.28);border-radius:14px;background:rgba(10,14,18,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:border-color .25s,box-shadow .25s,transform .25s}
+.door:nth-child(1){animation:up .8s 1.55s backwards}
+.door:nth-child(2){animation:up .8s 1.7s backwards}
+.door:hover,.door:focus-visible{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc),0 12px 40px -12px rgba(184,255,61,.45);transform:translateY(-3px);outline:none}
+.door b{display:block;font-size:1.08rem;margin-bottom:5px;line-height:1.25}
+.door small{display:block;color:var(--mut);font-size:.9rem;line-height:1.35}
+.door i{position:absolute;right:18px;top:18px;font-style:normal;color:var(--acc);transition:transform .25s}
+.door:hover i{transform:translateX(4px)}
+.back{position:fixed;left:16px;bottom:calc(12px + env(safe-area-inset-bottom));font-size:.78rem;color:var(--mut);text-decoration:none;z-index:3}
+.back:hover{color:var(--ink)}
+@keyframes rise{from{transform:translateY(110%)}}
+@keyframes grow{from{width:0}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+@keyframes fade{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="vignette"></div>
+<main>
+<div class="brand"><svg viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>HIVE</div>
+<p class="kicker">Atelier numérique sur mesure</p>
+<h1 aria-label="Hive"><span style="--i:0">H</span><span style="--i:1">i</span><span style="--i:2">v</span><span style="--i:3">e</span><span class="dot" style="--i:4">.</span></h1>
+<div class="rule"></div>
+<p class="lead">Je fabrique des <em>outils numériques</em> sur mesure.</p>
+<p class="tags">Sites, logiciels, jeux, bots Discord, motion design.</p>
+<nav class="doors">
+<a class="door" href="#commerce"><i>→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
+<a class="door" href="#communaute"><i>→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
+</nav>
+</main>
+<a class="back" href="./">← les trois directions</a>
+<script>
+(function(){
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+var dpr=Math.min(window.devicePixelRatio||1,2),W=0,H=0,S=40,maxD=1,hexes=[];
+var px=-999,py=-999,tx=-999,ty=-999,touched=false,t0=performance.now(),raf=0;
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function build(){
+  W=window.innerWidth;H=window.innerHeight;
+  cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  S=Math.max(30,Math.min(52,W/13));
+  var w=Math.sqrt(3)*S,h=1.5*S,cols=Math.ceil(W/w)+2,rows=Math.ceil(H/h)+2;
+  var cx=W/2,cy=H*.45;
+  maxD=Math.hypot(W,H)/2;
+  hexes=[];
+  for(var r=-1;r<rows;r++){
+    for(var c=-1;c<cols;c++){
+      var x=c*w+((r&1)?w/2:0),y=r*h;
+      hexes.push({x:x,y:y,d:Math.hypot(x-cx,y-cy)});
+    }
+  }
+}
+function hexPath(x,y,s){
+  ctx.beginPath();
+  for(var k=0;k<6;k++){
+    var a=Math.PI/180*(60*k-30);
+    var X=x+s*Math.cos(a),Y=y+s*Math.sin(a);
+    if(k){ctx.lineTo(X,Y);}else{ctx.moveTo(X,Y);}
+  }
+  ctx.closePath();
+}
+function frame(now){
+  var t=reduce?99:(now-t0)/1000;
+  if(!touched&&!reduce){
+    tx=W/2+Math.cos(t*.7)*W*.3;
+    ty=H*.45+Math.sin(t*.9)*H*.2;
+  }
+  if(px===-999&&tx!==-999){px=tx;py=ty;}
+  px+=(tx-px)*.14;py+=(ty-py)*.14;
+  ctx.clearRect(0,0,W,H);
+  var wave=((t*.55)%1.8)*maxD*1.15;
+  ctx.lineWidth=1;
+  for(var i=0;i<hexes.length;i++){
+    var h=hexes[i];
+    var rev=Math.min(1,Math.max(0,(t*1.15-h.d/maxD*1.4-.25)*1.6));
+    if(rev<=0){continue;}
+    var a=.07*rev;
+    var dm=Math.hypot(h.x-px,h.y-py);
+    var g=Math.max(0,1-dm/170);
+    a+=g*g*.75;
+    if(!reduce){
+      var dw=Math.abs(h.d-wave);
+      if(dw<60){a+=(1-dw/60)*.35;}
+    }
+    if(a<.01){continue;}
+    ctx.strokeStyle='rgba(184,255,61,'+Math.min(a,.95).toFixed(3)+')';
+    hexPath(h.x,h.y,S*.94*(.9+.1*rev)+g*2);
+    ctx.stroke();
+    if(g>.5){
+      ctx.fillStyle='rgba(184,255,61,'+(g*g*.06).toFixed(3)+')';
+      ctx.fill();
+    }
+  }
+  raf=requestAnimationFrame(frame);
+}
+window.addEventListener('pointermove',function(e){touched=true;tx=e.clientX;ty=e.clientY;},{passive:true});
+window.addEventListener('resize',build);
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);}
+  else{raf=requestAnimationFrame(frame);}
+});
+build();
+raf=requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

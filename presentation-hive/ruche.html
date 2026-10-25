@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f0df">
+<title>Hive · Ruche vivante (maquette)</title>
+<style>
+:root{--bg:#f7f0df;--ink:#2b1d06;--mut:#7a6a4b;--honey:#f4b21c;--deep:#b07600}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.veil{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 62% at 30% 48%,rgba(247,240,223,.95) 0,rgba(247,240,223,.8) 45%,rgba(247,240,223,0) 100%)}
+main{position:relative;min-height:100%;display:flex;flex-direction:column;justify-content:center;padding:calc(70px + env(safe-area-inset-top)) 22px calc(48px + env(safe-area-inset-bottom));max-width:980px;margin:0 auto}
+.brand{position:absolute;top:calc(20px + env(safe-area-inset-top));left:22px;display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.16em;font-size:.8rem;color:var(--ink)}
+.brand svg{width:24px;height:24px;stroke:var(--ink);fill:var(--honey);stroke-width:1.8;stroke-linejoin:round}
+.kicker{color:var(--deep);font-size:.82rem;letter-spacing:.24em;text-transform:uppercase;font-weight:700;margin-bottom:12px;animation:fade .8s .2s backwards}
+h1{font-size:clamp(4.6rem,22vw,11rem);line-height:.95;font-weight:900;letter-spacing:-.04em}
+.hl{position:relative;display:inline-block;isolation:isolate}
+.hl::after{content:"";position:absolute;z-index:-1;left:-.03em;right:-.03em;bottom:.08em;height:.28em;background:var(--honey);border-radius:.06em;transform-origin:left;animation:bar .9s 1.25s cubic-bezier(.2,.9,.2,1) backwards}
+h1 span{display:inline-block;animation:drop .8s cubic-bezier(.3,1.5,.5,1) backwards;animation-delay:calc(.5s + var(--i)*.1s)}
+.lead{margin-top:18px;font-size:clamp(1.25rem,4.6vw,2rem);line-height:1.25;font-weight:700;max-width:20ch;animation:up .8s 1.3s backwards}
+.lead em{font-style:normal;background:linear-gradient(transparent 60%,rgba(244,178,28,.55) 60%)}
+.tags{margin-top:12px;color:var(--mut);font-size:.98rem;animation:fade .8s 1.5s backwards}
+.doors{display:grid;gap:14px;margin-top:30px;grid-template-columns:1fr}
+@media(min-width:720px){.doors{grid-template-columns:1fr 1fr;max-width:780px}}
+.door{position:relative;display:block;text-decoration:none;color:var(--ink);padding:18px 44px 18px 20px;border-radius:18px;background:#fffaf0;border:2px solid var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .2s,box-shadow .2s,background .2s}
+.door:nth-child(1){animation:up .8s 1.7s backwards}
+.door:nth-child(2){animation:up .8s 1.85s backwards}
+.door:hover,.door:focus-visible{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink);background:var(--honey);outline:none}
+.door b{display:block;font-size:1.08rem;margin-bottom:5px;line-height:1.25}
+.door small{display:block;color:var(--mut);font-size:.92rem;line-height:1.35}
+.door:hover small{color:var(--ink)}
+.door i{position:absolute;right:18px;top:16px;font-style:normal;font-weight:800;transition:transform .2s}
+.door:hover i{transform:translateX(4px)}
+.back{position:fixed;left:16px;bottom:calc(12px + env(safe-area-inset-bottom));font-size:.78rem;color:var(--mut);text-decoration:none;z-index:3}
+.back:hover{color:var(--ink)}
+@keyframes drop{from{opacity:0;transform:translateY(-44px) rotate(-8deg) scale(.7)}}
+@keyframes bar{from{transform:scaleX(0)}}
+@keyframes up{from{opacity:0;transform:translateY(18px)}}
+@keyframes fade{from{opacity:0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div class="veil"></div>
+<main>
+<div class="brand"><svg viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>HIVE</div>
+<p class="kicker">Atelier numérique sur mesure</p>
+<h1 aria-label="Hive"><span class="hl"><span style="--i:0">H</span><span style="--i:1">i</span><span style="--i:2">v</span><span style="--i:3">e</span></span></h1>
+<p class="lead">Je fabrique des <em>outils numériques</em> sur mesure.</p>
+<p class="tags">Sites, logiciels, jeux, bots Discord, motion design.</p>
+<nav class="doors">
+<a class="door" href="#commerce"><i>→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
+<a class="door" href="#communaute"><i>→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
+</nav>
+</main>
+<a class="back" href="./">← les trois directions</a>
+<script>
+(function(){
+var cv=document.getElementById('c'),ctx=cv.getContext('2d');
+var dpr=Math.min(window.devicePixelRatio||1,2),W=0,H=0,S=40,maxD=1,hexes=[];
+var px=-999,py=-999,tx=-999,ty=-999,touched=false,t0=performance.now(),raf=0;
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function build(){
+  W=window.innerWidth;H=window.innerHeight;
+  cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  S=Math.max(30,Math.min(50,W/12));
+  var w=Math.sqrt(3)*S,h=1.5*S,cols=Math.ceil(W/w)+2,rows=Math.ceil(H/h)+2;
+  var cx=W/2,cy=H*.45;
+  maxD=Math.hypot(W,H)/2;
+  hexes=[];
+  for(var r=-1;r<rows;r++){
+    for(var c=-1;c<cols;c++){
+      var x=c*w+((r&1)?w/2:0),y=r*h,d=Math.hypot(x-cx,y-cy),rnd=Math.random();
+      hexes.push({
+        x:x,y:y,d:d,rnd:rnd,
+        fill:Math.random()<.17?(.5+Math.random()*.45):0,
+        fx:(Math.random()-.5)*520,fy:(Math.random()-.5)*520,
+        rot:(Math.random()-.5)*2.6,
+        delay:d/maxD*1.5+rnd*.35
+      });
+    }
+  }
+}
+function hexPath(s){
+  ctx.beginPath();
+  for(var k=0;k<6;k++){
+    var a=Math.PI/180*(60*k-30);
+    var X=s*Math.cos(a),Y=s*Math.sin(a);
+    if(k){ctx.lineTo(X,Y);}else{ctx.moveTo(X,Y);}
+  }
+  ctx.closePath();
+}
+function frame(now){
+  var t=reduce?99:(now-t0)/1000;
+  if(!touched&&!reduce){
+    tx=W*.62+Math.cos(t*.6)*W*.28;
+    ty=H*.45+Math.sin(t*.8)*H*.22;
+  }
+  if(px===-999&&tx!==-999){px=tx;py=ty;}
+  px+=(tx-px)*.12;py+=(ty-py)*.12;
+  ctx.clearRect(0,0,W,H);
+  ctx.lineWidth=1.3;
+  for(var i=0;i<hexes.length;i++){
+    var h=hexes[i];
+    var p=Math.min(1,Math.max(0,(t-h.delay)/1.1));
+    if(p<=0){continue;}
+    var e=1-Math.pow(1-p,3);
+    var bob=reduce?0:Math.sin(t*1.2+h.rnd*6.28)*1.4*e;
+    var x=h.x+(1-e)*h.fx,y=h.y+(1-e)*h.fy+bob;
+    var dm=Math.hypot(h.x-px,h.y-py);
+    var g=Math.max(0,1-dm/150);
+    var sc=.92*e*(1+g*.14);
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate((1-e)*h.rot);
+    hexPath(S*sc);
+    var fa=Math.min(.95,h.fill*e+g*.55);
+    if(fa>.02){
+      ctx.fillStyle='rgba(244,178,28,'+fa.toFixed(3)+')';
+      ctx.fill();
+    }
+    ctx.strokeStyle='rgba(176,118,0,'+((.28+g*.5)*e).toFixed(3)+')';
+    ctx.stroke();
+    ctx.restore();
+  }
+  raf=requestAnimationFrame(frame);
+}
+window.addEventListener('pointermove',function(e){touched=true;tx=e.clientX;ty=e.clientY;},{passive:true});
+window.addEventListener('resize',build);
+document.addEventListener('visibilitychange',function(){
+  if(document.hidden){cancelAnimationFrame(raf);}
+  else{raf=requestAnimationFrame(frame);}
+});
+build();
+raf=requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
