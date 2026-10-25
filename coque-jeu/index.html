@@ -67,6 +67,17 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 @keyframes chantier { to { background-position: 56px 0; } }
 
 /* Le seuil et le lanceur : lanceur/lanceur.css (repris de Rancune, tel quel) */
+/* Le seuil, comme Rancune : le logo du Bunker et le nom du jeu au-dessus de « Appuyer pour entrer ». */
+.seuil-nom {
+  position: absolute; left: 0; right: 0; top: 42%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px; pointer-events: none;
+}
+.seuil-nom img { width: min(46vw, 200px); filter: drop-shadow(0 0 34px rgba(245,148,51,.3)); }
+.seuil-nom span {
+  font: 900 clamp(34px, 11vw, 52px)/1 Cinzel, Georgia, serif; letter-spacing: .08em; text-transform: uppercase; text-align: center;
+  background: linear-gradient(#ffe7a3, #e8c15a 45%, #9c6f22); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.bornes-seuil.seuil-texte .bornes-seuil__invite { align-items: flex-end; padding-bottom: 14vh; }
 
 /* Accueil */
 .haut { display: flex; align-items: center; justify-content: space-between; min-height: 40px; }
@@ -241,8 +252,15 @@ button { cursor: pointer; touch-action: manipulation; -webkit-user-select: none;
 </head>
 <body>
 
-<!-- LE SEUIL n'est plus dans cette page : BornesSeuil.ouvrir(), en bas, le pose par-dessus l'accueil.
-     Noir, « Appuyer pour entrer » ; au geste, le logo du Bunker avec son bruitage, les barres, le nom du jeu, « Système prêt ». -->
+<!-- LE SEUIL, écrit dans la page comme dans Rancune : le logo du Bunker et le nom du jeu (à remplacer avec APP.nom),
+     « Appuyer pour entrer ». Au geste, BornesSeuil.ouvrir(), en bas : le logo avec son bruitage, les barres, « Système prêt ». -->
+<div class="bornes-seuil seuil-texte">
+  <div class="seuil-nom" aria-hidden="true">
+    <img src="assets/img/logo-bunker.webp" alt="" draggable="false">
+    <span>Ton jeu</span>
+  </div>
+  <button class="bornes-seuil__invite" type="button"><span class="bornes-seuil__mot">Appuyer pour entrer</span></button>
+</div>
 
 <!-- ACCUEIL -->
 <section class="ecran" data-ecran="accueil" aria-label="Accueil">
