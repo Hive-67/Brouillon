@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Plan de Workflow Dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:wght@400;600;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Plan d'architecte : une colonne lisible au téléphone, des blocs comme des pièces reliées par des flèches */
+:root {
+  --bg: #f3f5f7;
+  --surface: #ffffff;
+  --ink: #17202a;
+  --muted: #5b6876;
+  --line: #c9d2dc;
+  --accent: #1f6feb;
+  --accent-soft: #e3edfd;
+  --cc: #7a3fd1;
+  --cc-soft: #efe6fb;
+  --exe: #0f8a5f;
+  --exe-soft: #e1f4ec;
+  --warn: #b54708;
+  --warn-soft: #fdeedc;
+  --display: "Chivo", "Segoe UI", system-ui, sans-serif;
+  --body: "Chivo", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f141a; --surface: #161d25; --ink: #e6ebf0; --muted: #98a4b1; --line: #2c3742;
+    --accent: #6ea8ff; --accent-soft: #1a2a42; --cc: #b48cf2; --cc-soft: #2a2140;
+    --exe: #45c595; --exe-soft: #14302a; --warn: #f0a35e; --warn-soft: #3a2614;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f141a; --surface: #161d25; --ink: #e6ebf0; --muted: #98a4b1; --line: #2c3742;
+  --accent: #6ea8ff; --accent-soft: #1a2a42; --cc: #b48cf2; --cc-soft: #2a2140;
+  --exe: #45c595; --exe-soft: #14302a; --warn: #f0a35e; --warn-soft: #3a2614;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 56px;
+}
+main { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+header h1 { font-family: var(--display); font-weight: 800; font-size: clamp(28px, 7vw, 40px); line-height: 1.1; margin: 0 0 8px; text-wrap: balance; }
+header p { margin: 0; color: var(--muted); max-width: 60ch; }
+.tag { display: inline-block; font-family: var(--mono); font-size: 12px; letter-spacing: .04em; padding: 3px 8px; border-radius: 4px; background: var(--warn-soft); color: var(--warn); margin-bottom: 12px; }
+section { display: flex; flex-direction: column; gap: 14px; }
+h2 { font-family: var(--display); font-weight: 800; font-size: 21px; margin: 0; text-wrap: balance; }
+h2 small { display: block; font-family: var(--mono); font-weight: 400; font-size: 12px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 4px; }
+.lead { margin: 0; color: var(--muted); max-width: 62ch; }
+
+/* Les rôles */
+.roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.role { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.role .who { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.role h3 { margin: 0; font-size: 17px; font-weight: 800; }
+.role p { margin: 0; font-size: 14px; color: var(--muted); }
+.role.hive { border-left: 4px solid var(--warn); }
+.role.hive .who { color: var(--warn); }
+.role.cc { border-left: 4px solid var(--cc); }
+.role.cc .who { color: var(--cc); }
+.role.ch { border-left: 4px solid var(--accent); }
+.role.ch .who { color: var(--accent); }
+.role.exe { border-left: 4px solid var(--exe); }
+.role.exe .who { color: var(--exe); }
+
+/* Le circuit */
+.flow { display: flex; flex-direction: column; align-items: stretch; }
+.step { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; }
+.step .ico { font-size: 20px; line-height: 1.3; text-align: center; }
+.step b { display: block; }
+.step span { color: var(--muted); font-size: 14px; }
+.step.cc { background: var(--cc-soft); border-color: transparent; }
+.step.exe { background: var(--exe-soft); border-color: transparent; }
+.step.hive { background: var(--warn-soft); border-color: transparent; }
+.arrow { text-align: center; color: var(--muted); font-family: var(--mono); font-size: 13px; padding: 4px 0; }
+.fork { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.branch { display: flex; flex-direction: column; min-width: 0; }
+.branch h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+@media (max-width: 560px) { .fork { grid-template-columns: 1fr; } }
+
+/* Les arbres de fichiers */
+.trees { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.tree { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; min-width: 0; }
+.tree .head { padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
+.tree .head b { font-family: var(--mono); font-size: 15px; }
+.tree .head span { color: var(--muted); font-size: 13px; }
+.tree ul { list-style: none; margin: 0; padding: 10px 14px 12px; }
+.tree li { display: grid; grid-template-columns: minmax(0, 15ch) 1fr; gap: 12px; padding: 5px 0; border-bottom: 1px dashed var(--line); font-size: 14px; }
+.tree li:last-child { border-bottom: 0; }
+.tree li code { font-family: var(--mono); font-size: 13px; color: var(--accent); overflow-wrap: anywhere; }
+.tree li.sub code { padding-left: 2ch; }
+.tree li span { color: var(--muted); min-width: 0; }
+.tree li.key code { color: var(--cc); font-weight: 600; }
+@media (max-width: 480px) { .tree li { grid-template-columns: 1fr; gap: 0; } }
+
+.sync { display: flex; align-items: center; gap: 10px; justify-content: center; font-family: var(--mono); font-size: 13px; color: var(--muted); text-align: center; }
+
+/* Les panneaux */
+.signs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.sign { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 14px; }
+.sign b { font-size: 18px; margin-right: 6px; }
+
+.words { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.word { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-size: 14px; }
+.word code { font-family: var(--mono); font-weight: 600; font-size: 14px; display: block; margin-bottom: 4px; color: var(--ink); }
+.word span { color: var(--muted); }
+
+.outside { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+.out { border: 1px dashed var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14px; }
+.out b { display: block; font-size: 15px; margin-bottom: 2px; }
+.out span { color: var(--muted); }
+
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); padding-top: 14px; }
+</style>
+</head>
+<body>
+
+<main>
+  <header>
+    <div class="tag">VERSION 23 · EN ATTENTE DE TON OUI</div>
+    <h1>Plan de Workflow Dev</h1>
+    <p>Qui fait quoi, où vit chaque fichier, et le trajet d'une demande, de ta bouche jusqu'au site en ligne. Tout ce qui compte vit sur GitHub : une conversation peut se perdre, le travail non.</p>
+  </header>
+
+  <section>
+    <h2><small>Les acteurs</small>Toi et les trois rôles</h2>
+    <div class="roles">
+      <div class="role hive"><div class="who">Toi, Hive</div><h3>Tu décides</h3><p>Tu parles, tu regardes l'aperçu, et tu tapes trois mots : GO, PUBLIE, « branche-toi sur le CC ».</p></div>
+      <div class="role cc"><div class="who">🧠 Le CC</div><h3>Le Cerveau central</h3><p>Ta conversation de tous les jours. Il voit tous tes dépôts, fait les petits changements lui-même et écrit les ordres pour le reste.</p></div>
+      <div class="role ch"><div class="who">🧠 Cerveau d'un chantier</div><h3>Le temps d'un gros chantier</h3><p>Ouvert par le CC pour une longue réflexion sur un seul projet. Fini, il te renvoie au CC et se ferme.</p></div>
+      <div class="role exe"><div class="who">🔧 L'Exécutant</div><h3>Claude Code</h3><p>Un par dépôt. Il code, teste et envoie. Celui de WorkflowDev livre en plus les règles à tous les projets.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>Le trajet</small>D'une demande au site en ligne</h2>
+    <div class="flow">
+      <div class="step hive"><div class="ico">🗣️</div><div><b>Tu parles au CC</b><span>« Branche-toi sur le CC », puis ta demande, au clavier ou dictée.</span></div></div>
+      <div class="arrow">↓ il lit le CLAUDE.md du projet concerné</div>
+      <div class="fork">
+        <div class="branch">
+          <h4>Petit changement</h4>
+          <div class="step cc"><div class="ico">✏️</div><div><b>Le CC le fait lui-même</b><span>Des notes, ou quelques lignes de code dans un fichier de 20 Ko au plus, sans rien à tester. Puis il relit le fichier.</span></div></div>
+        </div>
+        <div class="branch">
+          <h4>Gros changement</h4>
+          <div class="step cc"><div class="ico">📝</div><div><b>Le CC écrit un ordre ⏳</b><span>Dans le dossier ordres/ du bon dépôt, et il te dit dans quel Exécutant taper GO.</span></div></div>
+          <div class="arrow">↓</div>
+          <div class="step hive"><div class="ico">▶️</div><div><b>Tu tapes GO</b><span>Dans l'Exécutant de ce projet.</span></div></div>
+          <div class="arrow">↓</div>
+          <div class="step exe"><div class="ico">🔧</div><div><b>L'Exécutant travaille</b><span>L'ordre passe 🔧, il code, il contrôle, il fait un commit « lot N ».</span></div></div>
+          <div class="arrow">↓</div>
+          <div class="step exe"><div class="ico">✅</div><div><b>Le retour, puis l'archive</b><span>Il écrit le retour à la fin de l'ordre, passe ✅, et range l'ordre dans ordres/archive/.</span></div></div>
+        </div>
+      </div>
+      <div class="arrow">↓ tu regardes l'aperçu de la branche de travail (gratuit)</div>
+      <div class="step hive"><div class="ico">🚀</div><div><b>Tu écris PUBLIE</b><span>Toi seul. La branche de travail part dans main, en ligne. 15 crédits Netlify à chaque fois.</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>Les fichiers</small>La source et ses copies</h2>
+    <p class="lead">Les règles n'existent qu'à un seul endroit, dans WorkflowDev. Chaque projet en reçoit une copie exacte, livrée par l'Exécutant de WorkflowDev à chaque nouvelle version.</p>
+    <div class="trees">
+      <div class="tree">
+        <div class="head"><b>WorkflowDev</b><span>branche v5 · la source du système</span></div>
+        <ul>
+          <li class="key"><code>regles-communes.md</code><span>L'original des règles. On ne le change qu'ici.</span></li>
+          <li class="key"><code>VERSION</code><span>Le numéro des règles. Il monte à chaque changement.</span></li>
+          <li><code>CHANGEMENTS.md</code><span>Ce qui change, version par version.</span></li>
+          <li><code>CLAUDE.md</code><span>Les règles propres à ce dépôt.</span></li>
+          <li><code>projet/</code><span>La mémoire du système, avec la ligne de reprise du CC.</span></li>
+          <li class="sub"><code>demarrer-le-cerveau.md</code><span>Ce que lit une conversation quand tu dis « branche-toi sur le CC ».</span></li>
+          <li class="sub"><code>fiche-vocale.md</code><span>Le résumé à joindre à une conversation vocale.</span></li>
+          <li><code>modeles/</code><span>Ce qu'on copie dans un projet neuf, et la marche à suivre.</span></li>
+          <li><code>outils/</code><span>Les scripts : livrer les règles, contrôler tous les projets, faire la fiche vocale.</span></li>
+          <li><code>contexte-hive/</code><span>Ce que le système sait de toi et de tes projets. Jamais copié ailleurs.</span></li>
+          <li><code>archive/</code><span>L'ancien système, gardé pour mémoire.</span></li>
+        </ul>
+      </div>
+      <div class="sync">⇣ copie exacte de regles-communes.md et VERSION ⇣</div>
+      <div class="tree">
+        <div class="head"><b>Chaque projet</b><span>BunkerWeb, BunkerArsenal, HiveTools, BunkerMotion, digihive-site, d3mand, DiscordBots</span></div>
+        <ul>
+          <li class="key"><code>CLAUDE.md</code><span>Ce qui est propre au projet : branche, adresses, interdits. Il prime pour ce projet.</span></li>
+          <li><code>regles-communes.md</code><span>La copie des règles. Personne ne la modifie ici.</span></li>
+          <li><code>VERSION</code><span>La copie du numéro.</span></li>
+          <li><code>projet/</code><span>La mémoire du projet, cinq fichiers :</span></li>
+          <li class="sub"><code>vision.md</code><span>L'âme du projet : ce que tu ressens, aimes, détestes.</span></li>
+          <li class="sub"><code>journal.md</code><span>Ce qui est fait et décidé, le plus récent en haut.</span></li>
+          <li class="sub"><code>a-faire.md</code><span>Ce qui reste, avec des numéros qui ne changent jamais.</span></li>
+          <li class="sub"><code>reglages.md</code><span>Comptes, adresses, échéances. Jamais de clé.</span></li>
+          <li class="sub"><code>reprise.md</code><span>Une ligne par conversation ouverte, pour reprendre où on en était.</span></li>
+          <li><code>ordres/</code><span>Les ordres en attente (⏳) ou en cours (🔧).</span></li>
+          <li class="sub"><code>archive/</code><span>Les ordres finis, chacun avec son retour.</span></li>
+          <li><code>outils/</code><span>Le contrôle avant envoi, et le réglage qui évite les constructions Netlify inutiles.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>Les panneaux</small>La première ligne d'un ordre</h2>
+    <div class="signs">
+      <div class="sign"><b>⏳</b>à faire</div>
+      <div class="sign"><b>🔧</b>en cours</div>
+      <div class="sign"><b>✅</b>fait, puis archivé</div>
+      <div class="sign"><b>❌</b>échec, avec la raison</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>Tes mots</small>Ce qui déclenche quelque chose</h2>
+    <div class="words">
+      <div class="word"><code>branche-toi sur le CC</code><span>Une conversation neuve devient le CC. Ça marche aussi avec « sur le Cerveau de BunkerWeb ».</span></div>
+      <div class="word"><code>GO</code><span>Dans un Exécutant : il lance tous les ordres ⏳ de son dépôt, un commit chacun.</span></div>
+      <div class="word"><code>PUBLIE</code><span>En majuscules, toi seul : met la branche de travail en ligne.</span></div>
+      <div class="word"><code>note-le</code><span>C'est écrit dans GitHub tout de suite, toujours.</span></div>
+      <div class="word"><code>la fiche vocale</code><span>L'Exécutant de WorkflowDev te refait le fichier à joindre pour parler en vocal.</span></div>
+      <div class="word"><code>/guide /audit /point</code><span>Et /explique, /expert : les cinq modes.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><small>À côté</small>Hors du système</h2>
+    <div class="outside">
+      <div class="out"><b>Le Brouillon</b><span>Dépôt public pour les essais vite faits, en ligne sur hive-67.github.io/Brouillon. Pas de règles, pas d'ordres.</span></div>
+      <div class="out"><b>HiveSkills</b><span>Tes skills. On écrit directement sur main.</span></div>
+      <div class="out"><b>Le Drive</b><span>Pour les projets marqués « Drive : oui » : un document par projet et une boîte DEPOSE-ICI. GitHub fait foi.</span></div>
+    </div>
+  </section>
+
+  <footer>Plan tiré de la version 23 des règles (projet/refonte/ dans WorkflowDev, branche v5), 27 octobre 2026. Les fichiers ordres/direct.md et ordres/retour.md disparaissent avec cette version.</footer>
+</main>
+</body>
+</html>
