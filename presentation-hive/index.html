@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#06080b">
 <title>Hive · outils numériques sur mesure</title>
-<meta name="description" content="Hive fabrique des outils numériques sur mesure : sites internet, logiciels, mini-jeux, motion design, serveurs et bots Discord. Devis gratuit.">
+<meta name="description" content="Hive fabrique des outils numériques sur mesure : sites internet, logiciels, mini-jeux, motion design, serveurs et bots Discord, systèmes d'IA. Devis gratuit.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="fr_FR">
 <meta property="og:title" content="Hive · outils numériques sur mesure">
-<meta property="og:description" content="Ce que tu imagines, je le construis. Pour de vrai. Devis gratuit.">
+<meta property="og:description" content="Ce qui n'existe pas encore, je le construis. Devis gratuit.">
 <meta property="og:url" content="https://hive-67.github.io/Brouillon/presentation-hive/">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2306080b'/%3E%3Cpath d='M12 3.5l7.4 4.25v8.5L12 20.5l-7.4-4.25v-8.5z' fill='none' stroke='%23b8ff3d' stroke-width='2'/%3E%3C/svg%3E">
 <style>
@@ -84,9 +84,11 @@ h2 em{font-style:normal;color:var(--acc)}
 /* Preuves et savoir-faire */
 .pivot{font-size:clamp(1.6rem,6vw,2.9rem)}
 .alveoles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:30px;list-style:none}
-@media(min-width:720px){.alveoles{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+@media(min-width:720px){.alveoles{grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}}
 .alveole{position:relative;display:flex;align-items:center;gap:12px;padding:16px 14px;border:1px solid var(--line);border-radius:14px;background:var(--card);font-weight:600;font-size:.98rem;line-height:1.25;overflow:hidden}
 .alveole svg{width:34px;height:34px;flex:none}
+.alveole{min-width:0;-webkit-hyphens:auto;hyphens:auto;overflow-wrap:break-word}
+@media(max-width:420px){.alveole{gap:9px;padding:14px 10px;font-size:.92rem}.alveole svg{width:28px;height:28px}}
 .alveole svg .hx{fill:none;stroke:var(--acc);stroke-width:1.4;opacity:.55}
 .alveole svg .ic{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .js .alveole svg .hx{stroke-dasharray:110;stroke-dashoffset:110}
@@ -235,6 +237,41 @@ h2 em{font-style:normal;color:var(--acc)}
 @keyframes video-saut{from{left:-40px}to{left:100%}}
 @keyframes video-bond{from{transform:translateY(0) scale(1)}to{transform:translateY(-10px) scale(1.06)}}
 
+
+/* Grandes cartes : la méthode, l'IA locale */
+.carte.large{margin-top:28px}
+@media(min-width:760px){.carte.large{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}.carte.large .scene{height:auto;min-height:200px;border-bottom:0;border-right:1px solid var(--line)}.carte.large .ecran{top:50%;transform:translate(-50%,-50%)}.carte.large .ia-murs{top:50%;transform:translate(-50%,-38%)}}
+
+/* Workflow Dev : l'ordre, le GO, la page */
+.wf .wf-ordre{position:absolute;left:12px;top:26px;width:52%;display:grid;gap:7px}
+.wf .wf-l{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.4);transform-origin:left;animation:wf-ecrit 7s infinite}
+.wf .wf-l:nth-child(2){animation-delay:.25s}.wf .wf-l:nth-child(3){animation-delay:.5s}
+.wf .wf-go{position:absolute;left:12px;top:66px;font-weight:900;font-size:.8rem;letter-spacing:.12em;padding:3px 10px;border-radius:6px;border:1.5px solid var(--acc);color:var(--acc);animation:wf-go 7s infinite}
+.wf .wf-page{position:absolute;right:12px;top:26px;width:38%;display:grid;gap:5px}
+.wf .wf-page i{display:block;height:16px;border-radius:4px;background:rgba(184,255,61,.18);border:1px solid rgba(184,255,61,.35);transform-origin:top;animation:wf-bloc 7s infinite}
+.wf .wf-page i:nth-child(2){animation-delay:.2s}.wf .wf-page i:nth-child(3){animation-delay:.4s}.wf .wf-page i:nth-child(4){animation-delay:.6s}
+.wf .wf-ok{position:absolute;right:16px;bottom:12px;width:22px;height:22px;border-radius:50%;background:var(--acc);animation:wf-ok 7s infinite}
+.wf .wf-ok::after{content:"";position:absolute;left:8px;top:4px;width:5px;height:10px;border:solid #0b1004;border-width:0 2.4px 2.4px 0;transform:rotate(45deg)}
+@keyframes wf-ecrit{0%{transform:scaleX(0)}12%,88%{transform:scaleX(1)}96%,100%{transform:scaleX(0)}}
+@keyframes wf-go{0%,22%{opacity:.25;background:transparent;color:var(--acc)}28%,34%{opacity:1;background:var(--acc);color:#0b1004;box-shadow:0 0 18px var(--acc)}40%,88%{opacity:1;background:transparent;color:var(--acc);box-shadow:none}96%,100%{opacity:.25}}
+@keyframes wf-bloc{0%,36%{opacity:0;transform:scaleY(0)}44%,88%{opacity:1;transform:none}96%,100%{opacity:0}}
+@keyframes wf-ok{0%,58%{transform:scale(0)}64%{transform:scale(1.2)}68%,88%{transform:scale(1)}96%,100%{transform:scale(0)}}
+
+/* IA locale : tout reste dans les murs */
+.ia .ia-nuage{position:absolute;right:14px;top:12px;width:44px;height:30px;opacity:.75}
+.ia .ia-nuage svg{width:100%;height:100%;fill:none;stroke:var(--mut);stroke-width:2;stroke-linejoin:round}
+.ia .ia-nuage .barre-n{stroke:#ff5f4f;stroke-width:2.6;stroke-linecap:round}
+.ia .ia-murs{position:absolute;left:50%;top:46px;transform:translateX(-50%);width:min(230px,78%);height:120px;border:1.5px dashed rgba(184,255,61,.45);border-radius:14px}
+.ia .ia-fils{position:absolute;inset:0;width:100%;height:100%}
+.ia .ia-fils path{fill:none;stroke:rgba(184,255,61,.35);stroke-width:1.5;vector-effect:non-scaling-stroke}
+.ia .ia-srv{position:absolute;left:50%;top:50%;width:30px;height:38px;margin:-19px 0 0 -15px;border-radius:5px;background:#10161b;border:1.5px solid rgba(234,240,244,.4);display:grid;align-content:center;gap:4px;padding:0 5px;z-index:1}
+.ia .ia-srv i{display:block;height:4px;border-radius:2px;background:var(--acc);animation:clignote 1.2s infinite}
+.ia .ia-srv i:nth-child(2){animation-delay:.4s}.ia .ia-srv i:nth-child(3){animation-delay:.8s}
+.ia .ia-n{position:absolute;width:14px;height:14px;border-radius:4px;background:#0e1318;border:1.5px solid var(--acc);margin:-7px 0 0 -7px;z-index:1}
+.ia .n1{left:22%;top:50%}.ia .n2{left:50%;top:22%}.ia .n3{left:78%;top:50%}
+.ia .ia-pulse{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:#fff;box-shadow:0 0 10px var(--acc),0 0 4px #fff;animation:ia-tour 4s linear infinite;z-index:2}
+@keyframes ia-tour{0%{left:22%;top:50%}25%{left:50%;top:22%}50%{left:78%;top:50%}75%{left:50%;top:80%}100%{left:22%;top:50%}}
+
 /* Animations générales */
 @keyframes monte{from{transform:translateY(110%)}}
 @keyframes pousse{from{width:0}}
@@ -256,6 +293,7 @@ h2 em{font-style:normal;color:var(--acc)}
   .bunker .msgs{transform:none}
   .video .spectre{left:35%}.video .spectre.g{left:55%}
   .video .frise i{height:60%}
+  .wf .wf-l,.wf .wf-page i{transform:none;opacity:1}.wf .wf-ok{transform:none}.ia .ia-pulse{left:50%;top:22%}
 }
 </style>
 </head>
@@ -271,9 +309,9 @@ h2 em{font-style:normal;color:var(--acc)}
   <p class="kicker">Atelier numérique sur mesure</p>
   <h1 aria-label="Hive."><span style="--i:0" aria-hidden="true">H</span><span style="--i:1" aria-hidden="true">i</span><span style="--i:2" aria-hidden="true">v</span><span style="--i:3" aria-hidden="true">e</span><span class="point" style="--i:4" aria-hidden="true">.</span></h1>
   <div class="trait" aria-hidden="true"></div>
-  <p class="lead">Je fabrique des <em>outils numériques</em> sur mesure.</p>
-  <p class="sous">Ce que tu imagines, je le construis. Pour de vrai.</p>
-  <p class="tags">Sites, logiciels, jeux, bots Discord, motion design.</p>
+  <p class="lead">Ce qui n'existe pas encore, <em>je le construis.</em></p>
+  <p class="sous">Tu as une idée. Je la fais tourner.</p>
+  <p class="tags">Sites, logiciels, jeux, bots Discord, motion design, systèmes d'IA.</p>
   <nav class="portes" aria-label="Choisir son chemin">
     <a class="porte lueur mag" href="#commerce" data-porte><i aria-hidden="true">→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
     <a class="porte lueur mag" href="#communaute" data-porte><i aria-hidden="true">→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
@@ -285,22 +323,41 @@ h2 em{font-style:normal;color:var(--acc)}
 <section id="savoir" aria-labelledby="t-savoir">
   <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>Les preuves</p>
   <h2 id="t-savoir" class="pivot rv" style="--d:1">Je ne montre pas un diplôme. <em>Je montre ce qui tourne.</em></h2>
-  <p class="intro rv" style="--d:2">J'ai appris en construisant, sans école. Tout ce qui est sur cette page existe et tourne pour de vrai. <strong>Ce que je sais faire :</strong></p>
+  <p class="intro rv" style="--d:2">J'ai appris en construisant, sans école. Je travaille avec l'IA, avec ma propre méthode, et tout ce qui est sur cette page existe et tourne pour de vrai. <strong>Ce que je sais faire :</strong></p>
   <ul class="alveoles">
     <li class="alveole rv lueur" style="--d:0"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M12 14h16v12H12zM12 18h16"/></svg>Sites internet</li>
     <li class="alveole rv lueur" style="--d:1"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M15 16l-4 4 4 4M25 16l4 4-4 4M22 14l-4 12"/></svg>Logiciels</li>
     <li class="alveole rv lueur" style="--d:2"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M14 14h12v12H14zM17 11v3M23 11v3M17 26v3M23 26v3M11 17h3M11 23h3M26 17h3M26 23h3"/></svg>Micrologiciels</li>
     <li class="alveole rv lueur" style="--d:3"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M12 17h16a3 3 0 0 1 3 3v2a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3v-2a3 3 0 0 1 3-3zM14 21h4M16 19v4M24 20h.01M27 22h.01"/></svg>Mini-jeux</li>
     <li class="alveole rv lueur" style="--d:4"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M11 14h14v12H11zM25 18l5-3v10l-5-3"/></svg>Motion design</li>
-    <li class="alveole rv lueur" style="--d:5"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M13 15c4-2 10-2 14 0l2 10c-2 2-5 3-5 3l-1-2c-2 .6-4 .6-6 0l-1 2s-3-1-5-3zM17 21h.01M23 21h.01"/></svg>Serveurs et bots Discord</li>
+    <li class="alveole rv lueur" style="--d:5"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M13 15c4-2 10-2 14 0l2 10c-2 2-5 3-5 3l-1-2c-2 .6-4 .6-6 0l-1 2s-3-1-5-3zM17 21h.01M23 21h.01"/></svg>Serveurs Discord</li>
+    <li class="alveole rv lueur" style="--d:6"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M14 15h12v10H14zM20 12v3M17 19h.01M23 19h.01M17 22h6M11 19v2M29 19v2"/></svg>Bots Discord</li>
+    <li class="alveole rv lueur" style="--d:7"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M12 14a3 3 0 1 0 6 0 3 3 0 1 0-6 0M22 26a3 3 0 1 0 6 0 3 3 0 1 0-6 0M18 15l5 9M25 14h4M27 12v4"/></svg>IA et automatisations</li>
   </ul>
+  <article class="carte large rv lueur" style="--d:1">
+    <div class="scene wf" role="img" aria-label="Animation : un ordre s'écrit, le mot GO s'allume, puis une page se construit bloc par bloc et se valide.">
+      <div class="ecran">
+        <div class="barre"><i></i><i></i><i></i></div>
+        <div class="wf-ordre"><span class="wf-l" style="width:72%"></span><span class="wf-l" style="width:54%"></span><span class="wf-l" style="width:63%"></span></div>
+        <span class="wf-go">GO</span>
+        <div class="wf-page"><i></i><i></i><i></i><i></i></div>
+        <span class="wf-ok" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="carte-corps">
+      <span class="genre">Ma méthode</span>
+      <h3>Workflow Dev</h3>
+      <p>Ma façon de construire avec l'IA. Une conversation décide et écrit les ordres, une autre les exécute au mot GO, et tout reste écrit dans le projet, règles comprises. Si une conversation saute, on repart sans rien perdre. C'est elle qui fait tourner tous les projets de cette page.</p>
+      <div class="liens"><span class="note">Expliquée sur demande.</span></div>
+    </div>
+  </article>
 </section>
 
 <section id="commerce" class="monde" aria-labelledby="t-commerce">
   <div class="monde-tete">
     <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>Commerces et associations</p>
-    <h2 id="t-commerce" class="rv" style="--d:1">Votre activité mérite mieux qu'un <em>site de modèle.</em></h2>
-    <p class="intro rv" style="--d:2">Un site qui vous ressemble, un outil qui vous fait gagner du temps. Vous m'expliquez votre quotidien, je construis ce qu'il vous faut, et je vous l'explique simplement. <strong>Devis gratuit.</strong></p>
+    <h2 id="t-commerce" class="rv" style="--d:1">Vous connaissez votre métier. <em>Je fabrique l'outil qui va avec.</em></h2>
+    <p class="intro rv" style="--d:2">Un site qui vous ressemble plutôt qu'un site de modèle, un outil qui vous fait gagner du temps. Vous m'expliquez votre quotidien, je construis ce qu'il vous faut, et je vous l'explique simplement. <strong>Devis gratuit.</strong></p>
   </div>
   <div class="cartes">
     <article class="carte rv lueur" style="--d:0">
@@ -358,6 +415,23 @@ h2 em{font-style:normal;color:var(--acc)}
       </div>
     </article>
   </div>
+  <article class="carte large offre rv lueur">
+    <div class="scene ia" role="img" aria-label="Animation : dans les murs de l'entreprise, un serveur relie des étapes automatiques entre elles ; le nuage d'Internet reste barré, dehors.">
+      <span class="ia-nuage" aria-hidden="true"><svg viewBox="0 0 48 32"><path d="M12 28h26a8 8 0 0 0 0-16 11 11 0 0 0-21-2A9 9 0 0 0 12 28z"/><path class="barre-n" d="M6 30L42 2"/></svg></span>
+      <div class="ia-murs">
+        <span class="ia-srv"><i></i><i></i><i></i></span>
+        <span class="ia-n n1"></span><span class="ia-n n2"></span><span class="ia-n n3"></span>
+        <svg class="ia-fils" viewBox="0 0 200 110" preserveAspectRatio="none" aria-hidden="true"><path d="M44 55L100 24L156 55L100 88Z"/></svg>
+        <span class="ia-pulse"></span>
+      </div>
+    </div>
+    <div class="carte-corps">
+      <span class="genre">Systèmes d'IA</span>
+      <h3>Une IA chez vous, pas dans le cloud</h3>
+      <p>Un assistant et des automatisations installés sur votre propre serveur, avec des outils comme n8n. Les tâches qui reviennent tous les jours se font toutes seules, et vos données ne partent pas sur Internet : elles restent chez vous.</p>
+      <div class="liens"><span class="note">On en parle selon votre besoin.</span></div>
+    </div>
+  </article>
   <div class="appel rv">
     <a class="bouton lueur mag" data-contact="mail" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Parlons de votre projet</a>
     <span class="devis">Par mail. <b>Devis gratuit.</b></span>
@@ -367,8 +441,8 @@ h2 em{font-style:normal;color:var(--acc)}
 <section id="communaute" class="monde" aria-labelledby="t-communaute">
   <div class="monde-tete">
     <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>Communautés et créateurs</p>
-    <h2 id="t-communaute" class="rv" style="--d:1">Ta communauté mérite mieux que <em>les réglages par défaut.</em></h2>
-    <p class="intro rv" style="--d:2">Serveur, bots, jeux, vidéo : je construis ce qui fait revenir les gens. Pas de modèle tout fait, des outils à ton image. <strong>Devis gratuit.</strong></p>
+    <h2 id="t-communaute" class="rv" style="--d:1">Il y a les serveurs où on passe, <em>et ceux où on reste.</em></h2>
+    <p class="intro rv" style="--d:2">Serveur, bots, jeux, vidéo : je construis ce qui fait revenir les gens. Pas les réglages par défaut, des outils à ton image. <strong>Devis gratuit.</strong></p>
   </div>
   <div class="cartes">
     <article class="carte rv lueur" style="--d:0">
@@ -433,8 +507,8 @@ h2 em{font-style:normal;color:var(--acc)}
 
 <section id="contact" class="fin" aria-labelledby="t-contact">
   <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>Contact</p>
-  <h2 id="t-contact" class="rv" style="--d:1">Une idée ? <em>Écris-moi.</em></h2>
-  <p class="intro rv" style="--d:2">Le devis est gratuit. Dis-moi ce que tu veux construire, même en deux lignes, même si ce n'est pas encore clair.</p>
+  <h2 id="t-contact" class="rv" style="--d:1">Ton idée tient en deux lignes ? <em>Ça suffit pour commencer.</em></h2>
+  <p class="intro rv" style="--d:2">Écris-moi, même si ce n'est pas encore clair dans ta tête. Le devis est gratuit.</p>
   <div class="contacts">
     <a class="bouton lueur mag rv" style="--d:2" data-contact="mail" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Écrire un mail</a>
     <a class="bouton creux lueur mag rv" style="--d:3" data-contact="discord" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7c3-1.4 7-1.4 10 0l2 9c-1.6 1.6-4 2.4-4 2.4l-1-1.6c-1.4.4-2.6.4-4 0l-1 1.6S6.6 17.6 5 16z"/><path d="M9.5 12.5h.01M14.5 12.5h.01"/></svg>Me parler sur Discord</a>
