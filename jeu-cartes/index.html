@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette du plateau · jeu de cartes du Bunker</title>
+<style>
+:root{
+  --nuit:#0c1424;
+  --table:#14213a;
+  --table2:#0f1a30;
+  --trait:rgba(190,210,255,.16);
+  --a:#34d3c0;
+  --b:#ff6f61;
+  --or:#f3c969;
+  --texte:#e8eefc;
+  --doux:#9fb0d0;
+  --titre:Impact,"Arial Narrow Bold","Franklin Gothic Medium",sans-serif;
+  --corps:"Trebuchet MS","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--nuit);color:var(--texte);font-family:var(--corps)}
+body{padding:2vw 0 6vw}
+.page{width:min(100vw,177vh);margin:0 auto;padding:0 1.5vw}
+h1{font-family:var(--titre);font-weight:400;font-size:clamp(20px,3.2vw,40px);letter-spacing:.02em;margin:.2em 0 .1em}
+.sous{color:var(--doux);margin:0 0 1.2em;font-size:clamp(13px,1.5vw,17px)}
+
+/* ===== La télé ===== */
+.tele{border:.9vw solid #05080f;border-radius:1.4vw;background:#05080f;box-shadow:0 1.5vw 4vw rgba(0,0,0,.55)}
+.stage{position:relative;width:100%;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;border-radius:.6vw;
+  background:
+   radial-gradient(120% 90% at 50% 50%,var(--table) 0%,var(--table2) 70%,#0a1222 100%);}
+.stage::before{content:"";position:absolute;inset:0;opacity:.5;
+  background-image:linear-gradient(30deg,transparent 48%,rgba(150,180,255,.05) 49%,rgba(150,180,255,.05) 51%,transparent 52%),
+                   linear-gradient(150deg,transparent 48%,rgba(150,180,255,.05) 49%,rgba(150,180,255,.05) 51%,transparent 52%);
+  background-size:4cqw 7cqw}
+
+/* haut : ordre de jeu */
+.haut{position:absolute;top:1cqw;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:.8cqw;z-index:3}
+.puce{font-family:var(--titre);font-size:1.5cqw;padding:.35cqw 1.1cqw;border-radius:99cqw;border:.2cqw solid var(--trait);color:var(--doux);background:rgba(5,8,15,.55);transition:all .35s}
+.puce.eqa{--c:var(--a)}
+.puce.eqb{--c:var(--b)}
+.puce.actif{color:#06101c;background:var(--c);border-color:var(--c);transform:scale(1.18);box-shadow:0 0 1.6cqw var(--c)}
+.etat{position:absolute;top:4.2cqw;left:0;right:0;text-align:center;font-size:1.1cqw;color:var(--doux);z-index:3}
+
+/* panneaux côtés */
+.cote{position:absolute;width:15cqw;z-index:2;display:flex;flex-direction:column;gap:.8cqw}
+.cote.g{left:1.6cqw}
+.cote.d{right:1.6cqw;align-items:flex-end;text-align:right}
+.cote.hautc{top:8.5cqw}
+.cote.basc{bottom:2cqw}
+.eq{font-family:var(--titre);font-size:2cqw;letter-spacing:.03em}
+.eq.a{color:var(--a)}
+.eq.b{color:var(--b)}
+.pv{width:100%;font-size:1cqw;color:var(--doux)}
+.pv .nb{font-family:var(--titre);font-size:2.6cqw;color:var(--texte);display:block;line-height:1}
+.barre{height:.8cqw;border-radius:9cqw;background:rgba(255,255,255,.1);overflow:hidden;margin-top:.5cqw}
+.barre i{display:block;height:100%;border-radius:9cqw}
+.a .barre i,.barre.a i{background:var(--a);width:78%}
+.barre.b i{background:var(--b);width:62%}
+.pile{display:flex;gap:.8cqw}
+.mini{width:4.2cqw;height:5.6cqw;border-radius:.5cqw;border:.2cqw solid var(--trait);display:flex;align-items:center;justify-content:center;font-size:1cqw;color:var(--doux);text-align:center;line-height:1.15;background:rgba(5,8,15,.4)}
+.mini.deck{background:repeating-linear-gradient(135deg,#1b2d52 0 .5cqw,#15233f .5cqw 1cqw);color:var(--texte)}
+
+/* plateau */
+.plateau{position:absolute;left:19cqw;right:19cqw;top:8.5cqw;display:grid;grid-template-rows:repeat(4,10.8cqw);row-gap:1.3cqw;z-index:2}
+.rang{display:flex;justify-content:center;gap:1.6cqw;align-items:center}
+.rang.monstres{gap:3cqw}
+.slot{position:relative;width:9cqw;height:10.8cqw;border-radius:.8cqw;border:.2cqw dashed var(--trait);background:rgba(5,10,20,.28)}
+.rang.sorts .slot{width:7.4cqw;height:9.4cqw}
+.rang.sorts{height:10.8cqw}
+.ligne{position:absolute;left:19cqw;right:19cqw;top:calc(8.5cqw + 10.8cqw*2 + 1.3cqw*1.5);height:.25cqw;background:linear-gradient(90deg,transparent,var(--or),transparent);opacity:.55;z-index:1}
+
+/* cartes */
+.card{position:absolute;inset:0;border-radius:.8cqw;padding:.45cqw .55cqw;display:flex;flex-direction:column;gap:.3cqw;
+  border:.22cqw solid var(--c);background:linear-gradient(160deg,#24365c,#142038);font-size:1cqw;
+  animation:pose .7s cubic-bezier(.2,.9,.3,1.2) both}
+.eqa-zone .card{--c:var(--a)}
+.eqb-zone .card{--c:var(--b)}
+.card .nom{font-size:.95cqw;font-weight:bold;line-height:1.1;min-height:2.1cqw}
+.card .art{flex:1;border-radius:.4cqw;display:flex;align-items:center;justify-content:center;font-size:3cqw;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 30% 25%,color-mix(in srgb,var(--c) 55%,#fff 0%) 0,transparent 70%),#0d1730}
+.card .art::after{content:"image IA";position:absolute;bottom:.15cqw;right:.3cqw;font-size:.6cqw;color:rgba(255,255,255,.55)}
+.card .stat{font-family:var(--titre);font-size:1.1cqw;text-align:center;color:var(--or)}
+.card.sort{background:linear-gradient(160deg,#1f4b4a,#10282c)}
+.card.piege{background:linear-gradient(160deg,#5a2447,#2a1022)}
+.def{transform:rotate(90deg) scale(.8)}
+.dos{position:absolute;inset:0;border-radius:.6cqw;z-index:3;cursor:pointer;
+  background:repeating-linear-gradient(135deg,#1d2f55 0 .6cqw,#152342 .6cqw 1.2cqw);
+  border:.22cqw solid var(--c);display:flex;align-items:center;justify-content:center;font-family:var(--titre);font-size:3.2cqw;color:var(--or);text-shadow:0 0 1cqw rgba(243,201,105,.5)}
+.dos::before{content:"B"}
+.revealed .dos{display:none}
+.vide{display:none}
+
+@keyframes pose{from{transform:translateY(-3cqw) scale(1.25);opacity:0}to{opacity:1}}
+.def{animation-name:poseDef}
+@keyframes poseDef{from{transform:rotate(90deg) scale(1.1) translateY(-3cqw);opacity:0}to{transform:rotate(90deg) scale(.8);opacity:1}}
+
+/* l'attaque de démonstration */
+.go .attaquant .card{animation:elan 2.4s ease-in-out both;z-index:6}
+@keyframes elan{
+  0%{transform:none}
+  35%{transform:translateY(-4.5cqw) scale(1.12);box-shadow:0 0 2cqw var(--c)}
+  55%{transform:translateY(-13.8cqw) scale(1.12);box-shadow:0 0 3cqw var(--c)}
+  70%{transform:translateY(-13.8cqw) scale(1.12)}
+  100%{transform:none}}
+.go .cible .card{animation:touche 2.4s ease-in both}
+@keyframes touche{
+  0%,54%{transform:none;filter:none;opacity:1}
+  58%{transform:translateX(-.8cqw);filter:brightness(2.2)}
+  62%{transform:translateX(.8cqw);filter:brightness(2.2)}
+  66%{transform:translateX(-.5cqw);filter:brightness(1.6)}
+  80%{transform:scale(.9);opacity:.2;filter:grayscale(1)}
+  100%{transform:scale(.8);opacity:0}}
+.degats{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--titre);font-size:1.8cqw;color:#fff;text-shadow:0 0 1cqw var(--b);opacity:0;z-index:7;pointer-events:none}
+.go .cible .degats{animation:chiffre 2.4s ease-out both}
+@keyframes chiffre{0%,58%{opacity:0;transform:translate(-50%,-30%)}66%{opacity:1;transform:translate(-50%,-90%) scale(1.25)}90%{opacity:1;transform:translate(-50%,-150%)}100%{opacity:0}}
+
+/* bas : bouton */
+.rejouer{position:absolute;left:1.6cqw;bottom:.9cqw;z-index:4;font:inherit;font-size:1cqw;border:.2cqw solid var(--or);background:rgba(5,8,15,.75);color:var(--or);padding:.5cqw 1.2cqw;border-radius:99cqw;cursor:pointer}
+.rejouer:focus-visible,.dos:focus-visible,.main .carte:focus-visible{outline:.3cqw solid #fff;outline-offset:.2cqw}
+
+/* ===== Légende et téléphone ===== */
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:3vw;margin-top:3vw;align-items:start}
+@media (max-width:760px){.deux{grid-template-columns:1fr}}
+h2{font-family:var(--titre);font-weight:400;font-size:clamp(18px,2.2vw,28px);margin:0 0 .5em;letter-spacing:.02em}
+.legende p{margin:.4em 0;color:var(--doux);font-size:clamp(13px,1.35vw,16px);line-height:1.45}
+.legende b{color:var(--texte)}
+.regles{margin:1em 0 0;padding:0;list-style:none}
+.regles li{padding:.45em 0;border-top:1px solid var(--trait);font-size:clamp(13px,1.35vw,16px);color:var(--doux)}
+.regles li b{color:var(--texte)}
+
+.tel{width:min(300px,100%);margin:0 auto;border:10px solid #05080f;border-radius:34px;background:linear-gradient(180deg,#14213a,#0c1424);padding:14px 10px 18px;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.tel .haut2{display:flex;justify-content:space-between;font-size:12px;color:var(--doux);margin:0 4px 10px}
+.tel .haut2 b{color:var(--a)}
+.main{display:flex;justify-content:center;padding-top:34px;height:190px}
+.carte{width:70px;height:98px;margin:0 -9px;border-radius:9px;border:2px solid var(--a);padding:4px;display:flex;flex-direction:column;gap:3px;font-size:9px;
+  background:linear-gradient(160deg,#24365c,#142038);cursor:pointer;transform-origin:50% 130%;transition:transform .2s;transform:rotate(var(--r)) translateY(var(--y,0))}
+.carte .n{font-weight:bold;line-height:1.1;min-height:20px}
+.carte .i{flex:1;border-radius:4px;background:#0d1730;display:flex;align-items:center;justify-content:center;font-size:22px}
+.carte .t{text-align:center;color:var(--or);font-size:9px}
+.carte.sort{background:linear-gradient(160deg,#1f4b4a,#10282c)}
+.carte.piege{background:linear-gradient(160deg,#5a2447,#2a1022)}
+.carte.bonus{background:linear-gradient(160deg,#5a4a1a,#2a2410)}
+.carte.evo{background:linear-gradient(160deg,#47306b,#201438)}
+.carte.choisie{--y:-26px;box-shadow:0 0 16px var(--a);z-index:5}
+.tel .bas{margin-top:8px;text-align:center;font-size:12px;color:var(--doux);min-height:2.6em}
+
+@media (prefers-reduced-motion:reduce){
+  .card,.def{animation:none!important}
+  .go .attaquant .card,.go .cible .card,.go .cible .degats{animation:none!important}
+  .puce{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Le plateau, vu sur la télé</h1>
+  <p class="sous">Exemple d’un 3 contre 3. Les cartes, les points de vie et les noms sont là pour montrer la forme, rien n’est final. Mets ton téléphone à l’horizontale.</p>
+
+  <div class="tele">
+    <div class="stage" id="stage">
+
+      <div class="haut" id="ordre">
+        <span class="puce eqa actif">A1</span><span class="puce eqb">B1</span>
+        <span class="puce eqa">A2</span><span class="puce eqb">B2</span>
+        <span class="puce eqa">A3</span><span class="puce eqb">B3</span>
+      </div>
+      <div class="etat" id="etat">Tour de A1 : pose, attaque ou joue une carte.</div>
+
+      <!-- Équipe B (en haut) -->
+      <div class="cote g hautc">
+        <div class="eq b">ÉQUIPE B</div>
+        <div class="pv">Points de vie<span class="nb">6200</span><div class="barre b"><i></i></div></div>
+        <div class="pile"><div class="mini deck">Deck<br>18</div><div class="mini">Cime-<br>tière 4</div></div>
+      </div>
+
+      <!-- Équipe A (en bas) -->
+      <div class="cote d basc">
+        <div class="eq a">ÉQUIPE A</div>
+        <div class="pv a">Points de vie<span class="nb">8000</span><div class="barre a"><i></i></div></div>
+        <div class="pile"><div class="mini">Cime-<br>tière 2</div><div class="mini deck">Deck<br>21</div></div>
+      </div>
+
+      <div class="ligne"></div>
+
+      <div class="plateau" id="plateau">
+
+        <!-- sorts et pièges de B -->
+        <div class="rang sorts eqb-zone">
+          <div class="slot"></div>
+          <div class="slot"><div class="card piege"><div class="dos" tabindex="0" role="button" aria-label="Carte face cachée, appuie pour la révéler"></div><span class="nom">Piège</span><div class="art">🪤</div><span class="stat">Piège</span></div></div>
+          <div class="slot"></div>
+          <div class="slot"><div class="card piege"><div class="dos" tabindex="0" role="button" aria-label="Carte face cachée, appuie pour la révéler"></div><span class="nom">Contre-attaque</span><div class="art">⚡</div><span class="stat">Piège</span></div></div>
+          <div class="slot"></div>
+        </div>
+
+        <!-- monstres de B -->
+        <div class="rang monstres eqb-zone">
+          <div class="slot cible">
+            <div class="card"><span class="nom">Rôdeur des ruines</span><div class="art">🐺</div><span class="stat">ATK 1500</span></div>
+            <span class="degats">Détruit</span>
+          </div>
+          <div class="slot"><div class="card def"><div class="dos" tabindex="0" role="button" aria-label="Monstre face cachée en défense, appuie pour le révéler"></div><span class="nom">Gardien muet</span><div class="art">🗿</div><span class="stat">DEF 1700</span></div></div>
+          <div class="slot"></div>
+          <div class="slot"><div class="card"><span class="nom">Colosse rouillé</span><div class="art">🤖</div><span class="stat">ATK 2200</span></div></div>
+        </div>
+
+        <!-- monstres de A -->
+        <div class="rang monstres eqa-zone">
+          <div class="slot attaquant"><div class="card"><span class="nom">Sentinelle du Bunker</span><div class="art">🛡️</div><span class="stat">ATK 1800</span></div></div>
+          <div class="slot"><div class="card def"><span class="nom">Mur de béton</span><div class="art">🧱</div><span class="stat">DEF 2000</span></div></div>
+          <div class="slot"><div class="card def"><div class="dos" tabindex="0" role="button" aria-label="Monstre face cachée en défense, appuie pour le révéler"></div><span class="nom">Éclaireuse</span><div class="art">🦉</div><span class="stat">DEF 1200</span></div></div>
+          <div class="slot"></div>
+        </div>
+
+        <!-- sorts et pièges de A -->
+        <div class="rang sorts eqa-zone">
+          <div class="slot"><div class="card piege"><div class="dos" tabindex="0" role="button" aria-label="Carte face cachée, appuie pour la révéler"></div><span class="nom">Mine d’alerte</span><div class="art">💥</div><span class="stat">Piège</span></div></div>
+          <div class="slot"><div class="card sort"><span class="nom">Renfort</span><div class="art">✨</div><span class="stat">Sort</span></div></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+          <div class="slot"></div>
+        </div>
+      </div>
+
+      <button class="rejouer" id="rejouer" type="button">Rejouer l’attaque</button>
+    </div>
+  </div>
+
+  <div class="deux">
+    <div class="legende">
+      <h2>Ce que tu vois sur le plateau</h2>
+      <p><b>Une rangée de 4 monstres et une rangée de 5 sorts et pièges</b>, par équipe. En 2 contre 2 et 3 contre 3, toute l’équipe joue sur le même côté.</p>
+      <ul class="regles">
+        <li><b>Debout, face visible :</b> le monstre est en attaque (Sentinelle du Bunker).</li>
+        <li><b>Couché, face visible :</b> le monstre est en défense (Mur de béton).</li>
+        <li><b>Couché, face cachée :</b> défense, et la carte se dévoile quand on l’attaque. Appuie sur un dos de carte pour tester.</li>
+        <li><b>Pour toucher les points de vie</b>, il faut d’abord avoir vidé les monstres du camp d’en face.</li>
+        <li><b>L’ordre de jeu</b> tourne comme en haut : A1, B1, A2, B2, A3, B3.</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>Ce que tu vois sur ton téléphone</h2>
+      <div class="tel">
+        <div class="haut2"><span>Tu es <b>A2</b></span><span>Main : 5 cartes</span></div>
+        <div class="main" id="main">
+          <div class="carte" style="--r:-14deg" tabindex="0" role="button"><span class="n">Archère de l’aube</span><div class="i">🏹</div><span class="t">ATK 1400</span></div>
+          <div class="carte evo" style="--r:-7deg" tabindex="0" role="button"><span class="n">Évolution : Sentinelle d’élite</span><div class="i">🌟</div><span class="t">Évolution</span></div>
+          <div class="carte sort" style="--r:0deg" tabindex="0" role="button"><span class="n">Soin du camp</span><div class="i">💚</div><span class="t">Sort</span></div>
+          <div class="carte piege" style="--r:7deg" tabindex="0" role="button"><span class="n">Mur de fumée</span><div class="i">🌫️</div><span class="t">Piège</span></div>
+          <div class="carte bonus" style="--r:14deg" tabindex="0" role="button"><span class="n">Armure légère</span><div class="i">🦺</div><span class="t">Bonus +300 DEF</span></div>
+        </div>
+        <div class="bas" id="bas">Toi seul vois ta main. Appuie sur une carte pour la choisir.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var stage=document.getElementById('stage');
+  var puces=[].slice.call(document.querySelectorAll('#ordre .puce'));
+  var etat=document.getElementById('etat');
+  var noms=['A1','B1','A2','B2','A3','B3'];
+  var i=0;
+  function tour(){
+    puces.forEach(function(p,k){p.classList.toggle('actif',k===i)});
+    etat.textContent='Tour de '+noms[i]+' : pose, attaque ou joue une carte.';
+    i=(i+1)%puces.length;
+  }
+  setInterval(tour,3000);
+
+  function attaque(){
+    stage.classList.remove('go');
+    void stage.offsetWidth;
+    stage.classList.add('go');
+  }
+  document.getElementById('rejouer').addEventListener('click',attaque);
+  setTimeout(attaque,1200);
+  setInterval(attaque,9000);
+
+  function reveler(e){
+    var d=e.currentTarget;
+    d.parentNode.classList.add('revealed');
+  }
+  [].slice.call(document.querySelectorAll('.dos')).forEach(function(d){
+    d.addEventListener('click',reveler);
+    d.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();reveler(e)}});
+  });
+
+  var cartes=[].slice.call(document.querySelectorAll('#main .carte'));
+  var bas=document.getElementById('bas');
+  function choisir(c){
+    cartes.forEach(function(x){x.classList.toggle('choisie',x===c&&!x.classList.contains('choisie'))});
+    var on=c.classList.contains('choisie');
+    bas.textContent=on?'Choisie : '+c.querySelector('.n').textContent+'. Appuie sur un emplacement de la télé pour la poser.':'Toi seul vois ta main. Appuie sur une carte pour la choisir.';
+  }
+  cartes.forEach(function(c){
+    c.addEventListener('click',function(){choisir(c)});
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();choisir(c)}});
+  });
+})();
+</script>
+</body>
+</html>
