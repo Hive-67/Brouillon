@@ -29,8 +29,11 @@ a{color:inherit}
 .saut:focus{top:12px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Fond : le système en 3D */
-#fond{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0}
+/* Fond : les alvéoles, et le système en 3D quand on parle de la Ruche */
+#fond,#fond3d{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;transition:opacity .9s ease}
+#fond3d{opacity:0}
+body.sys #fond3d{opacity:1}
+body.sys #fond{opacity:0}
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 42%,transparent 22%,var(--bg) 90%)}
 #voile{position:fixed;inset:0;width:100%;height:100%;z-index:30;pointer-events:none;display:none}
 .page{position:relative;z-index:1}
@@ -130,13 +133,15 @@ h2 em{font-style:normal;color:var(--acc)}
 .etape small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .etape b{display:block;font-size:1.1rem;line-height:1.25;margin-bottom:5px}
 .etape p{color:var(--mut);font-size:.95rem}
-.tarifs{display:grid;gap:12px;margin-top:22px;grid-template-columns:1fr}
-@media(min-width:600px){.tarifs{grid-template-columns:1fr 1fr;max-width:620px}}
-.tarif{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
-.tarif.fort{border-color:rgba(184,255,61,.5);box-shadow:0 0 0 1px rgba(184,255,61,.25)}
-.tarif small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
-.tarif b{display:block;font-size:1.9rem;line-height:1.1;letter-spacing:-.02em}
-.tarif p{color:var(--mut);font-size:.92rem;margin-top:4px}
+.double{display:grid;gap:12px;margin-top:30px;grid-template-columns:1fr}
+@media(min-width:760px){.double{grid-template-columns:1fr 1fr;gap:14px}}
+.duo{position:relative;padding:20px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
+.duo small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.duo b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
+.duo p{color:var(--mut);font-size:.98rem}
+.slogans{list-style:none;display:grid;gap:10px;margin-top:26px}
+.slogans li{position:relative;padding-left:28px;font-size:clamp(1.05rem,3.8vw,1.3rem);font-weight:700;line-height:1.3;max-width:34ch}
+.slogans li::before{content:"";position:absolute;left:0;top:.38em;width:14px;height:14px;background:var(--acc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 .faits{margin-top:22px;color:var(--mut);font-size:.95rem;max-width:56ch}
 .faits strong{color:var(--ink);font-weight:600}
 
@@ -318,6 +323,7 @@ h2 em{font-style:normal;color:var(--acc)}
 <body>
 <a class="saut" href="#savoir">Aller au contenu</a>
 <canvas id="fond" aria-hidden="true"></canvas>
+<canvas id="fond3d" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
 <canvas id="voile" aria-hidden="true"></canvas>
 
@@ -333,7 +339,7 @@ h2 em{font-style:normal;color:var(--acc)}
   <nav class="portes" aria-label="Choisir son chemin">
     <a class="porte lueur mag" href="#commerce" data-porte><i aria-hidden="true">→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
     <a class="porte lueur mag" href="#communaute" data-porte><i aria-hidden="true">→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
-    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : ma méthode, session de 2 heures dès 97 €.</small></a>
+    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : un deuxième cerveau qui construit, en session de 2 heures.</small></a>
   </nav>
   <span class="defile" aria-hidden="true"></span>
 </header>
@@ -527,22 +533,27 @@ h2 em{font-style:normal;color:var(--acc)}
 <section id="ruche" class="monde" aria-labelledby="t-ruche">
   <div class="monde-tete">
     <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>La Ruche · bientôt</p>
-    <h2 id="t-ruche" class="rv" style="--d:1">Ton idée en ligne, <em>sans écrire une ligne de code.</em></h2>
-    <p class="intro rv" style="--d:2">La Ruche, c'est ma méthode pour construire avec l'IA, depuis un téléphone. Une session de 2 heures, en direct, en petit groupe. <strong>Tu repars avec ton site ou ton appli en ligne.</strong></p>
+    <h2 id="t-ruche" class="rv" style="--d:1">Le deuxième cerveau, <em>qui construit vraiment.</em></h2>
+    <p class="intro rv" style="--d:2">Tout le monde parle du deuxième cerveau : un outil qui retient pour toi. La Ruche fait ça, et surtout l'autre moitié. <strong>Elle construit ton site ou ton appli avec toi, et la met en ligne.</strong></p>
   </div>
+  <div class="double">
+    <article class="duo rv lueur" style="--d:0"><small>Action 1</small><b>Il retient et il range</b><p>Une mémoire qui dure : tes dossiers sont tenus à jour, et chaque conversation sait où tu en étais.</p></article>
+    <article class="duo rv lueur" style="--d:1"><small>Action 2</small><b>Il met en ligne</b><p>Déjà branché, déjà réglé. Ce que tu construis, tu le vois en ligne tout de suite.</p></article>
+  </div>
+  <ul class="slogans">
+    <li class="rv" style="--d:0">Tu apprends en construisant, pas en regardant des vidéos.</li>
+    <li class="rv" style="--d:1">Pensé pour ceux qui n'y connaissent rien.</li>
+    <li class="rv" style="--d:2">Des repères à chaque étape : tu ne te perds pas.</li>
+  </ul>
   <ul class="etapes">
     <li class="etape rv lueur" style="--d:0"><small>Étape 1</small><b>Tu installes</b><p>On met en place ta Ruche ensemble. Rien de technique à connaître avant.</p></li>
-    <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux.</p></li>
+    <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux, et on t'explique chaque étape.</p></li>
     <li class="etape rv lueur" style="--d:2"><small>Étape 3</small><b>Tu mets en ligne</b><p>Tu repars avec ta première page ou ta première appli, visible sur Internet.</p></li>
   </ul>
-  <div class="tarifs">
-    <div class="tarif fort rv lueur" style="--d:0"><small>Premier groupe</small><b>97 €</b><p>Prix de lancement, par personne.</p></div>
-    <div class="tarif rv lueur" style="--d:1"><small>Ensuite</small><b>147 €</b><p>Par personne.</p></div>
-  </div>
-  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu reçois un message de préparation avant la session. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
+  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu repars avec quelque chose de concret, déjà en ligne. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
   <div class="appel rv">
-    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : réserver ma place" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Réserver ma place</a>
-    <span class="devis">Par mail. <b>Tu paies à la confirmation, pas avant.</b></span>
+    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : me prévenir de la première session" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Me prévenir de la première session</a>
+    <span class="devis">Par mail. <b>Aucun engagement.</b></span>
   </div>
 </section>
 
@@ -647,28 +658,102 @@ document.querySelectorAll('.lueur').forEach(function(el){
   el.addEventListener('pointercancel', quitte);
 });
 
-/* ---------- Le fond : le système en 3D, dossiers reliés qui bougent ---------- */
+/* ---------- Le fond : la ruche ---------- */
 var cv = document.getElementById('fond'), ctx = cv.getContext('2d');
-var W = 0, H = 0, raf = 0, visible = true, t0 = performance.now();
-var tx = 0, ty = 0, px = 0, py = 0, vue = 1;
-/* Le plan de la Ruche (101 fenêtres), sans aucun nom : seulement la forme, le genre et les liens */
-var SYS = {n:101,t:'01333333243233333323244432333425533526662777777777713333324322333332332224425501333332432233333233252',p:[-1,0,1,1,1,1,1,1,1,8,8,1,11,11,11,11,11,11,1,18,1,20,20,20,20,1,25,25,25,25,1,30,30,32,32,30,1,36,36,36,1,40,40,40,40,40,40,40,40,40,40,0,51,51,51,51,51,51,57,57,57,51,61,61,61,61,61,51,67,67,67,51,51,72,72,51,75,75,51,0,79,79,79,79,79,79,85,85,85,79,89,89,89,89,89,79,95,95,95,79,79],x:[0,0,-1,137,-78,60,32,-74,54,251,-87,40,215,-77,146,115,-45,-45,103,-136,154,182,-184,35,94,-183,-64,59,-140,-171,91,-302,-96,280,-217,165,272,-333,131,245,-293,251,353,-307,201,395,-197,202,365,-211,100,308,-178,271,83,-226,93,49,-335,122,-8,64,93,-59,66,-18,-111,129,62,-86,96,187,11,172,157,294,8,-41,219,44,-125,393,64,-1,364,75,-115,403,-25,-78,223,-153,-121,242,-256,-178,217,-129,-259,271,-80,-339,200,-175,-358,326,-187,-166,201,49,110,162,50,199,136,96,38,283,119,167,48,-19,324,21,78,266,165,-7,359,-82,10,348,97,-31,440,-42,-81,276,7,89,387,-18,-102,399,-8,-2,443,108,79,389,86,-122,371,-232,-79,-66,-299,-142,-137,-156,-157,-92,-291,-1,-132,-204,-154,7,-158,-64,-149,-249,-59,-247,-161,-44,-311,-274,-105,-350,-304,6,-325,-239,-283,-127,-302,-331,-211,-217,-370,-51,-323,-356,-97,-187,-313,-229,-185,-389,-152,-250,-125,118,-263,-231,170,-266,-127,234,-353,-144,173,-247,37,-56,-396,-69,-91,-483,-15,-137,-496,-114,-70,-329,15,38,-419,83,55,-341,57,146,-325,-132,-10,3,263,-132,96,298,-204,24,254,-31,-105,286,-99,-91,234,-195,70,189,-179,0,236,-301,4,130,-332,57,252,-397,-65,261,-389,-67,413,-24,-125,406,78,-177,444,-38,-50,511,-74,-100,509,36,0,459,59,148,318,-49,215,358,35,255,327,-91,196,421,-62,32,373,-177,-66,344,-198],k:[21,53,21,54,21,55,21,56,21,58,22,51,2,53,9,58,26,51,38,51,41,67,37,67,5,56,21,81,21,82,21,83,21,84,21,86,22,79,2,81,9,86,26,79,38,79,41,95,37,95,5,84,21,24,21,23,22,23,22,24,21,32,10,9,37,17,37,16,44,37,45,37,45,51,42,39,38,41,38,9,43,77,77,78,76,78,71,78,50,37,46,37,33,26,73,76]};
-var COUL = ['201,209,224','106,168,255','247,183,51','95,211,141','56,214,208','232,121,166','255,138,92','255,208,107'];
-var NB = SYS.n, PH = [], AR = [], PU = [];
-for(var i = 0; i < NB; i++){
-  PH.push([i * 1.7, i * 2.9 + 1, i * 4.3 + 2]);
-  if(SYS.p[i] >= 0){ AR.push([SYS.p[i], i, 0]); }
-}
-for(var j = 0; j < SYS.k.length; j += 2){ AR.push([SYS.k[j], SYS.k[j + 1], 1]); }
-for(var q = 0; q < 26; q++){ PU.push({ e: (q * 37 + 5) % AR.length, t: (q * .137) % 1, v: .10 + (q % 5) * .035 }); }
-var PT = [];
-for(var m = 0; m < NB; m++){ PT.push({ x: 0, y: 0, e: 0, pr: 0, a: 0 }); }
+var W = 0, H = 0, S = 40, maxD = 1, hexes = [];
+var px = -999, py = -999, tx = -999, ty = -999, touche = false, t0 = performance.now(), raf = 0, visible = true;
+var vue = 1; // 1 en haut de page, plus discret ensuite
+var cache = false; // vrai quand le fond 3D a pris la place des alvéoles
 
-function taille(){
-  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+function construit(){
   W = window.innerWidth; H = window.innerHeight;
   cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  S = Math.max(30, Math.min(52, W / 13));
+  var w = Math.sqrt(3) * S, h = 1.5 * S, cols = Math.ceil(W / w) + 2, rows = Math.ceil(H / h) + 2;
+  var cx = W / 2, cy = H * .45;
+  maxD = Math.hypot(W, H) / 2;
+  hexes = [];
+  for(var r = -1; r < rows; r++){
+    for(var c = -1; c < cols; c++){
+      var x = c * w + ((r & 1) ? w / 2 : 0), y = r * h;
+      hexes.push({ x: x, y: y, d: Math.hypot(x - cx, y - cy) });
+    }
+  }
+}
+function hexa(c, x, y, s){
+  c.beginPath();
+  for(var k = 0; k < 6; k++){
+    var a = Math.PI / 180 * (60 * k - 30), X = x + s * Math.cos(a), Y = y + s * Math.sin(a);
+    if(k){ c.lineTo(X, Y); } else { c.moveTo(X, Y); }
+  }
+  c.closePath();
+}
+function dessine(now){
+  var t = reduce ? 99 : (now - t0) / 1000;
+  var cible = Math.max(.35, 1 - window.scrollY / (H * .9));
+  vue += (cible - vue) * .08;
+  if(!touche && !reduce){
+    tx = W / 2 + Math.cos(t * .7) * W * .3;
+    ty = H * .45 + Math.sin(t * .9) * H * .2;
+  }
+  if(px === -999 && tx !== -999){ px = tx; py = ty; }
+  px += (tx - px) * .14; py += (ty - py) * .14;
+  ctx.clearRect(0, 0, W, H);
+  var vague = ((t * .55) % 1.8) * maxD * 1.15;
+  ctx.lineWidth = 1;
+  for(var i = 0; i < hexes.length; i++){
+    var h = hexes[i];
+    var rev = Math.min(1, Math.max(0, (t * 1.15 - h.d / maxD * 1.4 - .25) * 1.6));
+    if(rev <= 0){ continue; }
+    var a = .07 * rev * vue;
+    var g = Math.max(0, 1 - Math.hypot(h.x - px, h.y - py) / 170);
+    a += g * g * .75 * (.45 + .55 * vue);
+    if(!reduce){
+      var dw = Math.abs(h.d - vague);
+      if(dw < 60){ a += (1 - dw / 60) * .35 * vue; }
+    }
+    if(a < .01){ continue; }
+    ctx.strokeStyle = 'rgba(' + ACC + ',' + Math.min(a, .95).toFixed(3) + ')';
+    hexa(ctx, h.x, h.y, S * .94 * (.9 + .1 * rev) + g * 2);
+    ctx.stroke();
+    if(g > .5){
+      ctx.fillStyle = 'rgba(' + ACC + ',' + (g * g * .06).toFixed(3) + ')';
+      ctx.fill();
+    }
+  }
+  raf = (visible && !cache) ? requestAnimationFrame(dessine) : 0;
+}
+function lance(){ if(!raf && visible && !cache && !document.hidden){ raf = requestAnimationFrame(dessine); } }
+function arrete(){ cancelAnimationFrame(raf); raf = 0; }
+window.addEventListener('pointermove', function(e){ touche = true; tx = e.clientX; ty = e.clientY; }, { passive: true });
+window.addEventListener('pointerdown', function(e){ touche = true; tx = e.clientX; ty = e.clientY; }, { passive: true });
+var attente;
+window.addEventListener('resize', function(){ clearTimeout(attente); attente = setTimeout(function(){ construit(); taille3(); if(reduce){ dessine(performance.now()); dessine3(performance.now()); } }, 120); });
+document.addEventListener('visibilitychange', function(){ if(document.hidden){ arrete(); } else { lance(); lance3(); } });
+construit();
+if(reduce){ visible = false; dessine(performance.now()); }
+else { lance(); }
+
+/* ---------- Le fond du bloc « La Ruche » : le système en 3D, dossiers reliés qui bougent ---------- */
+var cv3 = document.getElementById('fond3d'), ctx3 = cv3.getContext('2d');
+var raf3 = 0, vivant3 = false, on3 = false, th3 = 0, tf3 = 0;
+var ax3 = 0, ay3 = 0, bx3 = 0, by3 = 0;
+/* Le plan de la Ruche (101 fenêtres), sans aucun nom : seulement la forme, le genre et les liens */
+var SYS = {n:101,t:'01333333243233333323244432333425533526662777777777713333324322333332332224425501333332432233333233252',p:[-1,0,1,1,1,1,1,1,1,8,8,1,11,11,11,11,11,11,1,18,1,20,20,20,20,1,25,25,25,25,1,30,30,32,32,30,1,36,36,36,1,40,40,40,40,40,40,40,40,40,40,0,51,51,51,51,51,51,57,57,57,51,61,61,61,61,61,51,67,67,67,51,51,72,72,51,75,75,51,0,79,79,79,79,79,79,85,85,85,79,89,89,89,89,89,79,95,95,95,79,79],x:[0,0,-1,137,-78,60,32,-74,54,251,-87,40,215,-77,146,115,-45,-45,103,-136,154,182,-184,35,94,-183,-64,59,-140,-171,91,-302,-96,280,-217,165,272,-333,131,245,-293,251,353,-307,201,395,-197,202,365,-211,100,308,-178,271,83,-226,93,49,-335,122,-8,64,93,-59,66,-18,-111,129,62,-86,96,187,11,172,157,294,8,-41,219,44,-125,393,64,-1,364,75,-115,403,-25,-78,223,-153,-121,242,-256,-178,217,-129,-259,271,-80,-339,200,-175,-358,326,-187,-166,201,49,110,162,50,199,136,96,38,283,119,167,48,-19,324,21,78,266,165,-7,359,-82,10,348,97,-31,440,-42,-81,276,7,89,387,-18,-102,399,-8,-2,443,108,79,389,86,-122,371,-232,-79,-66,-299,-142,-137,-156,-157,-92,-291,-1,-132,-204,-154,7,-158,-64,-149,-249,-59,-247,-161,-44,-311,-274,-105,-350,-304,6,-325,-239,-283,-127,-302,-331,-211,-217,-370,-51,-323,-356,-97,-187,-313,-229,-185,-389,-152,-250,-125,118,-263,-231,170,-266,-127,234,-353,-144,173,-247,37,-56,-396,-69,-91,-483,-15,-137,-496,-114,-70,-329,15,38,-419,83,55,-341,57,146,-325,-132,-10,3,263,-132,96,298,-204,24,254,-31,-105,286,-99,-91,234,-195,70,189,-179,0,236,-301,4,130,-332,57,252,-397,-65,261,-389,-67,413,-24,-125,406,78,-177,444,-38,-50,511,-74,-100,509,36,0,459,59,148,318,-49,215,358,35,255,327,-91,196,421,-62,32,373,-177,-66,344,-198],k:[21,53,21,54,21,55,21,56,21,58,22,51,2,53,9,58,26,51,38,51,41,67,37,67,5,56,21,81,21,82,21,83,21,84,21,86,22,79,2,81,9,86,26,79,38,79,41,95,37,95,5,84,21,24,21,23,22,23,22,24,21,32,10,9,37,17,37,16,44,37,45,37,45,51,42,39,38,41,38,9,43,77,77,78,76,78,71,78,50,37,46,37,33,26,73,76]};
+var COUL = ['201,209,224','106,168,255','247,183,51','95,211,141','56,214,208','232,121,166','255,138,92','255,208,107'];
+var NB = SYS.n, PH = [], AR = [], PU = [], PT = [];
+for(var i3 = 0; i3 < NB; i3++){
+  PH.push([i3 * 1.7, i3 * 2.9 + 1, i3 * 4.3 + 2]);
+  PT.push({ x: 0, y: 0, e: 0, pr: 0, a: 0 });
+  if(SYS.p[i3] >= 0){ AR.push([SYS.p[i3], i3, 0]); }
+}
+for(var j3 = 0; j3 < SYS.k.length; j3 += 2){ AR.push([SYS.k[j3], SYS.k[j3 + 1], 1]); }
+for(var q3 = 0; q3 < 26; q3++){ PU.push({ e: (q3 * 37 + 5) % AR.length, t: (q3 * .137) % 1, v: .10 + (q3 % 5) * .035 }); }
+
+function taille3(){
+  cv3.width = Math.round(W * dpr); cv3.height = Math.round(H * dpr);
+  ctx3.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 function arrondi(c, x, y, w, h, r){
   c.beginPath();
@@ -678,17 +763,15 @@ function arrondi(c, x, y, w, h, r){
   c.lineTo(x, y + r); c.quadraticCurveTo(x, y, x + r, y);
   c.closePath();
 }
-function dessine(now){
-  var t = reduce ? 9 : (now - t0) / 1000;
-  var cible = Math.max(.3, 1 - window.scrollY / (H * .9));
-  vue += (cible - vue) * .08;
-  px += (tx - px) * .05; py += (ty - py) * .05;
-  var yaw = t * .07 + window.scrollY * .0009 + px * .45;
-  var pitch = -.3 + py * .22;
+function dessine3(now){
+  var t = reduce ? 9 : (now - t0) / 1000, vue3 = .9;
+  bx3 += (ax3 - bx3) * .05; by3 += (ay3 - by3) * .05;
+  var yaw = t * .07 + window.scrollY * .0009 + bx3 * .45;
+  var pitch = -.3 + by3 * .22;
   var cl = Math.cos(yaw), sl = Math.sin(yaw), ct = Math.cos(pitch), st = Math.sin(pitch);
   var dist = 1500, e0 = Math.min(W, H) * (W < 720 ? .62 : .5) / 520, fl = e0 * dist;
   var cx = W < 720 ? W * .5 : W * .64, cy = H * .5;
-  var i, a, b, x, y, z, x1, z1, y1, z2, pr, e;
+  var i, a, b, x, y, z, x1, z1, y1, z2, pr, e, k;
   for(i = 0; i < NB; i++){
     x = SYS.x[i * 3] + Math.sin(t * .55 + PH[i][0]) * 12;
     y = SYS.x[i * 3 + 1] + Math.sin(t * .47 + PH[i][1]) * 12;
@@ -700,33 +783,32 @@ function dessine(now){
     p.x = cx + x1 * e; p.y = cy + y1 * e; p.e = e; p.pr = pr;
     p.a = Math.max(0, Math.min(1, 1 - (pr - 980) / 1040));
   }
-  ctx.clearRect(0, 0, W, H);
+  ctx3.clearRect(0, 0, W, H);
   /* les fils : le dossier vers ce qu'il contient (vert), les liens entre fenêtres (pointillés) */
-  ctx.lineWidth = 1;
-  var k;
+  ctx3.lineWidth = 1;
   for(k = 0; k < AR.length; k++){
     a = PT[AR[k][0]]; b = PT[AR[k][1]];
     var df = (a.a + b.a) / 2;
     if(AR[k][2]){
-      ctx.setLineDash([3, 6]);
-      ctx.strokeStyle = 'rgba(160,175,200,' + ((.05 + .17 * df) * vue).toFixed(3) + ')';
+      ctx3.setLineDash([3, 6]);
+      ctx3.strokeStyle = 'rgba(160,175,200,' + ((.05 + .17 * df) * vue3).toFixed(3) + ')';
     } else {
-      ctx.setLineDash([]);
-      ctx.strokeStyle = 'rgba(184,255,61,' + ((.06 + .2 * df) * vue).toFixed(3) + ')';
+      ctx3.setLineDash([]);
+      ctx3.strokeStyle = 'rgba(184,255,61,' + ((.06 + .2 * df) * vue3).toFixed(3) + ')';
     }
-    ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    ctx3.beginPath(); ctx3.moveTo(a.x, a.y); ctx3.lineTo(b.x, b.y); ctx3.stroke();
   }
-  ctx.setLineDash([]);
+  ctx3.setLineDash([]);
   /* les petites lumières qui courent sur les fils */
   for(k = 0; k < PU.length; k++){
     var u = PU[k];
     if(!reduce){ u.t += u.v / 60; if(u.t > 1){ u.t = 0; u.e = (u.e + 11) % AR.length; } }
     a = PT[AR[u.e][0]]; b = PT[AR[u.e][1]];
     var qx = a.x + (b.x - a.x) * u.t, qy = a.y + (b.y - a.y) * u.t, qa = (a.a + b.a) / 2;
-    ctx.fillStyle = 'rgba(184,255,61,' + ((.10 + .22 * qa) * vue).toFixed(3) + ')';
-    ctx.beginPath(); ctx.arc(qx, qy, 4.5 * Math.max(.5, a.e / e0 * .6), 0, 6.283); ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,' + ((.25 + .5 * qa) * vue).toFixed(3) + ')';
-    ctx.beginPath(); ctx.arc(qx, qy, 1.6 * Math.max(.6, a.e / e0 * .6), 0, 6.283); ctx.fill();
+    ctx3.fillStyle = 'rgba(184,255,61,' + ((.10 + .22 * qa) * vue3).toFixed(3) + ')';
+    ctx3.beginPath(); ctx3.arc(qx, qy, 4.5 * Math.max(.5, a.e / e0 * .6), 0, 6.283); ctx3.fill();
+    ctx3.fillStyle = 'rgba(255,255,255,' + ((.25 + .5 * qa) * vue3).toFixed(3) + ')';
+    ctx3.beginPath(); ctx3.arc(qx, qy, 1.6 * Math.max(.6, a.e / e0 * .6), 0, 6.283); ctx3.fill();
   }
   /* les fenêtres, de la plus loin à la plus proche */
   var ordre = [];
@@ -734,38 +816,48 @@ function dessine(now){
   ordre.sort(function(m, n){ return PT[n].pr - PT[m].pr; });
   for(k = 0; k < NB; k++){
     i = ordre[k]; var P = PT[i], c = COUL[+SYS.t.charAt(i)];
-    var s = P.e / e0, w = 72 * P.e, h = 46 * P.e, al = (.10 + .36 * P.a) * vue;
+    var w = 72 * P.e, h = 46 * P.e, al = (.10 + .36 * P.a) * vue3;
     if(i === 0){ w *= 1.5; h *= 1.5; al = Math.min(.7, al * 1.5); }
-    arrondi(ctx, P.x - w / 2, P.y - h / 2, w, h, Math.max(2, 7 * P.e));
-    ctx.fillStyle = 'rgba(10,14,18,' + Math.min(.92, al * 2).toFixed(3) + ')'; ctx.fill();
-    ctx.strokeStyle = 'rgba(' + c + ',' + al.toFixed(3) + ')'; ctx.stroke();
+    arrondi(ctx3, P.x - w / 2, P.y - h / 2, w, h, Math.max(2, 7 * P.e));
+    ctx3.fillStyle = 'rgba(10,14,18,' + Math.min(.92, al * 2).toFixed(3) + ')'; ctx3.fill();
+    ctx3.strokeStyle = 'rgba(' + c + ',' + al.toFixed(3) + ')'; ctx3.stroke();
     if(w > 14){
-      ctx.fillStyle = 'rgba(' + c + ',' + (al * .9).toFixed(3) + ')';
-      ctx.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .18, w * .24, Math.max(1.5, h * .1));
-      ctx.fillStyle = 'rgba(234,240,244,' + (al * .55).toFixed(3) + ')';
-      ctx.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .45, w * .72, Math.max(1, h * .07));
-      ctx.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .64, w * .5, Math.max(1, h * .07));
+      ctx3.fillStyle = 'rgba(' + c + ',' + (al * .9).toFixed(3) + ')';
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .18, w * .24, Math.max(1.5, h * .1));
+      ctx3.fillStyle = 'rgba(234,240,244,' + (al * .55).toFixed(3) + ')';
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .45, w * .72, Math.max(1, h * .07));
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .64, w * .5, Math.max(1, h * .07));
     }
   }
-  raf = visible ? requestAnimationFrame(dessine) : 0;
+  raf3 = (vivant3 && !reduce) ? requestAnimationFrame(dessine3) : 0;
 }
-function lance(){ if(!raf && visible && !document.hidden){ raf = requestAnimationFrame(dessine); } }
-function arrete(){ cancelAnimationFrame(raf); raf = 0; }
-window.addEventListener('pointermove', function(e){ tx = e.clientX / W * 2 - 1; ty = e.clientY / H * 2 - 1; }, { passive: true });
-var attente;
-window.addEventListener('resize', function(){ clearTimeout(attente); attente = setTimeout(function(){ taille(); if(reduce){ dessine(performance.now()); } }, 120); });
-document.addEventListener('visibilitychange', function(){ if(document.hidden){ arrete(); } else { lance(); } });
-taille();
-if(reduce){ visible = false; dessine(performance.now()); }
-else { lance(); }
+function lance3(){ if(!raf3 && vivant3 && !document.hidden){ raf3 = requestAnimationFrame(dessine3); } }
+window.addEventListener('pointermove', function(e){ ax3 = e.clientX / W * 2 - 1; ay3 = e.clientY / H * 2 - 1; }, { passive: true });
+taille3();
+if(reduce){ dessine3(performance.now()); }
 
-function hexa(c, x, y, s){
-  c.beginPath();
-  for(var k = 0; k < 6; k++){
-    var a = Math.PI / 180 * (60 * k - 30), X = x + s * Math.cos(a), Y = y + s * Math.sin(a);
-    if(k){ c.lineTo(X, Y); } else { c.moveTo(X, Y); }
+/* Le fond change : alvéoles partout, le système en 3D seulement quand on parle de la Ruche */
+function systeme(on){
+  if(on === on3){ return; }
+  on3 = on;
+  document.body.classList.toggle('sys', on);
+  clearTimeout(th3); clearTimeout(tf3);
+  if(on){
+    vivant3 = true; lance3();
+    th3 = setTimeout(function(){ cache = true; }, 1000);
+  } else {
+    cache = false; lance();
+    tf3 = setTimeout(function(){ vivant3 = false; }, 1000);
   }
-  c.closePath();
+}
+var zonesSys = [document.getElementById('ruche'), document.querySelector('#savoir .carte.large')];
+var vuSys = [false, false];
+if('IntersectionObserver' in window){
+  var io3 = new IntersectionObserver(function(es){
+    es.forEach(function(e){ vuSys[zonesSys.indexOf(e.target)] = e.isIntersecting; });
+    systeme(vuSys[0] || vuSys[1]);
+  }, { rootMargin: '-22% 0px -22% 0px' });
+  zonesSys.forEach(function(el){ if(el){ io3.observe(el); } });
 }
 
 /* ---------- Les portes : balayage d'hexagones vers la section ---------- */
