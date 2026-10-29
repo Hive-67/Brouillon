@@ -54,6 +54,7 @@ h1 .point{color:var(--acc);animation-name:monte,clignote;animation-duration:.95s
 .porte{position:relative;display:block;text-decoration:none;color:var(--ink);padding:18px 48px 18px 20px;border:1px solid rgba(184,255,61,.28);border-radius:14px;background:rgba(10,14,18,.8);overflow:hidden;transition:border-color .25s,box-shadow .25s;touch-action:manipulation}
 .porte:nth-child(1){animation:leve .8s 1.6s backwards}
 .porte:nth-child(2){animation:leve .8s 1.75s backwards}
+.porte:nth-child(3){animation:leve .8s 1.9s backwards}
 .porte b{display:block;font-size:1.08rem;margin-bottom:5px;line-height:1.25}
 .porte small{display:block;color:var(--mut);font-size:.92rem;line-height:1.35}
 .porte i{position:absolute;right:18px;top:18px;font-style:normal;color:var(--acc);transition:transform .25s var(--ease)}
@@ -121,6 +122,16 @@ h2 em{font-style:normal;color:var(--acc)}
 .bouton.bientot::after{content:"bientôt";font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(184,255,61,.16);color:var(--acc)}
 .devis{color:var(--mut);font-size:.95rem}
 .devis b{color:var(--acc);font-weight:700}
+
+/* La Ruche : la session de 2 heures */
+.etapes{display:grid;gap:12px;margin-top:30px;grid-template-columns:1fr;list-style:none}
+@media(min-width:760px){.etapes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}}
+.etape{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+.etape small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.etape b{display:block;font-size:1.1rem;line-height:1.25;margin-bottom:5px}
+.etape p{color:var(--mut);font-size:.95rem}
+.faits{margin-top:22px;color:var(--mut);font-size:.95rem;max-width:56ch}
+.faits strong{color:var(--ink);font-weight:600}
 
 /* Bas de page */
 .fin{text-align:left;padding-bottom:calc(60px + env(safe-area-inset-bottom))}
@@ -242,7 +253,7 @@ h2 em{font-style:normal;color:var(--acc)}
 .carte.large{margin-top:28px}
 @media(min-width:760px){.carte.large{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}.carte.large .scene{height:auto;min-height:200px;border-bottom:0;border-right:1px solid var(--line)}.carte.large .ecran{top:50%;transform:translate(-50%,-50%)}.carte.large .ia-murs{top:50%;transform:translate(-50%,-38%)}}
 
-/* Workflow Dev : l'ordre, le GO, la page */
+/* La Ruche (ma méthode) : l'ordre, le GO, la page */
 .wf .wf-ordre{position:absolute;left:12px;top:26px;width:52%;display:grid;gap:7px}
 .wf .wf-l{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.4);transform-origin:left;animation:wf-ecrit 7s infinite}
 .wf .wf-l:nth-child(2){animation-delay:.25s}.wf .wf-l:nth-child(3){animation-delay:.5s}
@@ -315,6 +326,7 @@ h2 em{font-style:normal;color:var(--acc)}
   <nav class="portes" aria-label="Choisir son chemin">
     <a class="porte lueur mag" href="#commerce" data-porte><i aria-hidden="true">→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
     <a class="porte lueur mag" href="#communaute" data-porte><i aria-hidden="true">→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
+    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : ma méthode, en session de 2 heures.</small></a>
   </nav>
   <span class="defile" aria-hidden="true"></span>
 </header>
@@ -335,7 +347,7 @@ h2 em{font-style:normal;color:var(--acc)}
     <li class="alveole rv lueur" style="--d:7"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="hx" d="M20 2l15.6 9v18L20 38 4.4 29V11z"/><path class="ic" d="M12 14a3 3 0 1 0 6 0 3 3 0 1 0-6 0M22 26a3 3 0 1 0 6 0 3 3 0 1 0-6 0M18 15l5 9M25 14h4M27 12v4"/></svg>IA et automatisations</li>
   </ul>
   <article class="carte large rv lueur" style="--d:1">
-    <div class="scene wf" role="img" aria-label="Animation : un ordre s'écrit, le mot GO s'allume, puis une page se construit bloc par bloc et se valide.">
+    <div class="scene wf" role="img" aria-label="Animation : une demande s'écrit, puis une page se construit bloc par bloc et se valide.">
       <div class="ecran">
         <div class="barre"><i></i><i></i><i></i></div>
         <div class="wf-ordre"><span class="wf-l" style="width:72%"></span><span class="wf-l" style="width:54%"></span><span class="wf-l" style="width:63%"></span></div>
@@ -346,9 +358,9 @@ h2 em{font-style:normal;color:var(--acc)}
     </div>
     <div class="carte-corps">
       <span class="genre">Ma méthode</span>
-      <h3>Workflow Dev</h3>
-      <p>Ma façon de construire avec l'IA. Une conversation décide et écrit les ordres, une autre les exécute au mot GO, et tout reste écrit dans le projet, règles comprises. Si une conversation saute, on repart sans rien perdre. C'est elle qui fait tourner tous les projets de cette page.</p>
-      <div class="liens"><span class="note">Expliquée sur demande.</span></div>
+      <h3>La Ruche</h3>
+      <p>Ma façon de construire avec l'IA, sans coder, depuis un téléphone. C'est elle qui fait tourner tous les projets de cette page : tu as une idée, elle prend forme et se met en ligne. Le détail se découvre en session.</p>
+      <div class="liens"><a class="lien" href="#ruche" data-porte>La session de 2 heures <span aria-hidden="true">→</span></a></div>
     </div>
   </article>
 </section>
@@ -505,6 +517,24 @@ h2 em{font-style:normal;color:var(--acc)}
   </div>
 </section>
 
+<section id="ruche" class="monde" aria-labelledby="t-ruche">
+  <div class="monde-tete">
+    <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>La Ruche · bientôt</p>
+    <h2 id="t-ruche" class="rv" style="--d:1">Ton idée en ligne, <em>sans écrire une ligne de code.</em></h2>
+    <p class="intro rv" style="--d:2">La Ruche, c'est ma méthode pour construire avec l'IA, depuis un téléphone. Une session de 2 heures, en direct, en petit groupe. <strong>Tu repars avec ton site ou ton appli en ligne.</strong></p>
+  </div>
+  <ul class="etapes">
+    <li class="etape rv lueur" style="--d:0"><small>Étape 1</small><b>Tu installes</b><p>On met en place ta Ruche ensemble. Rien de technique à connaître avant.</p></li>
+    <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux.</p></li>
+    <li class="etape rv lueur" style="--d:2"><small>Étape 3</small><b>Tu mets en ligne</b><p>Tu repars avec ta première page ou ta première appli, visible sur Internet.</p></li>
+  </ul>
+  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Prix de lancement pour le premier groupe. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
+  <div class="appel rv">
+    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : me prévenir de la première session" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Me prévenir de la première session</a>
+    <span class="devis">Par mail. <b>Aucun engagement.</b></span>
+  </div>
+</section>
+
 <section id="contact" class="fin" aria-labelledby="t-contact">
   <p class="etiquette rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>Contact</p>
   <h2 id="t-contact" class="rv" style="--d:1">Ton idée tient en deux lignes ? <em>Ça suffit pour commencer.</em></h2>
@@ -558,7 +588,7 @@ document.querySelectorAll('[data-contact]').forEach(function(b){
     b.addEventListener('click', function(e){
       e.preventDefault();
       window.location.href = 'mailto:' + CONTACT_MAIL.nom + '@' + CONTACT_MAIL.domaine +
-        '?subject=' + encodeURIComponent('Mon projet (devis gratuit)');
+        '?subject=' + encodeURIComponent(b.getAttribute('data-sujet') || 'Mon projet (devis gratuit)');
     });
   }
 });
