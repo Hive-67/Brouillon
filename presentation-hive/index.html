@@ -139,6 +139,12 @@ h2 em{font-style:normal;color:var(--acc)}
 .duo small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .duo b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
 .duo p{color:var(--mut);font-size:.98rem}
+.souverain{position:relative;margin-top:14px;padding:22px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
+.souverain small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.souverain b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
+.souverain p{color:var(--mut);font-size:.98rem;max-width:60ch}
+.lieux{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lieux span{padding:6px 14px;border:1px solid rgba(184,255,61,.35);border-radius:99px;font-size:.88rem;font-weight:600}
 .slogans{list-style:none;display:grid;gap:10px;margin-top:26px}
 .slogans li{position:relative;padding-left:28px;font-size:clamp(1.05rem,3.8vw,1.3rem);font-weight:700;line-height:1.3;max-width:34ch}
 .slogans li::before{content:"";position:absolute;left:0;top:.38em;width:14px;height:14px;background:var(--acc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
@@ -540,6 +546,12 @@ h2 em{font-style:normal;color:var(--acc)}
     <article class="duo rv lueur" style="--d:0"><small>Action 1</small><b>Il retient et il range</b><p>Une mémoire qui dure : tes dossiers sont tenus à jour, et chaque conversation sait où tu en étais.</p></article>
     <article class="duo rv lueur" style="--d:1"><small>Action 2</small><b>Il met en ligne</b><p>Déjà branché, déjà réglé. Ce que tu construis, tu le vois en ligne tout de suite.</p></article>
   </div>
+  <article class="souverain rv lueur" style="--d:0">
+    <small>Souverain</small>
+    <b>Ta mémoire reste chez toi.</b>
+    <p>Elle est écrite en simples fichiers texte. Tu choisis où elle vit, et tu changes d'intelligence artificielle quand tu veux : ta mémoire, elle, ne bouge pas.</p>
+    <div class="lieux"><span>Ton GitHub</span><span>Ton serveur privé</span><span>Ton ordinateur</span></div>
+  </article>
   <ul class="slogans">
     <li class="rv" style="--d:0">Tu apprends en construisant, pas en regardant des vidéos.</li>
     <li class="rv" style="--d:1">Pensé pour ceux qui n'y connaissent rien.</li>
@@ -550,7 +562,7 @@ h2 em{font-style:normal;color:var(--acc)}
     <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux, et on t'explique chaque étape.</p></li>
     <li class="etape rv lueur" style="--d:2"><small>Étape 3</small><b>Tu mets en ligne</b><p>Tu repars avec ta première page ou ta première appli, visible sur Internet.</p></li>
   </ul>
-  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu repars avec quelque chose de concret, déjà en ligne. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
+  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu repars avec quelque chose de concret, déjà en ligne. Aujourd'hui, la Ruche tourne avec Claude : il te faut un abonnement, à ta charge, et un compte GitHub gratuit.</p>
   <div class="appel rv">
     <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : me prévenir de la première session" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Me prévenir de la première session</a>
     <span class="devis">Par mail. <b>Aucun engagement.</b></span>
