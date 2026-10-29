@@ -130,6 +130,13 @@ h2 em{font-style:normal;color:var(--acc)}
 .etape small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .etape b{display:block;font-size:1.1rem;line-height:1.25;margin-bottom:5px}
 .etape p{color:var(--mut);font-size:.95rem}
+.tarifs{display:grid;gap:12px;margin-top:22px;grid-template-columns:1fr}
+@media(min-width:600px){.tarifs{grid-template-columns:1fr 1fr;max-width:620px}}
+.tarif{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+.tarif.fort{border-color:rgba(184,255,61,.5);box-shadow:0 0 0 1px rgba(184,255,61,.25)}
+.tarif small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.tarif b{display:block;font-size:1.9rem;line-height:1.1;letter-spacing:-.02em}
+.tarif p{color:var(--mut);font-size:.92rem;margin-top:4px}
 .faits{margin-top:22px;color:var(--mut);font-size:.95rem;max-width:56ch}
 .faits strong{color:var(--ink);font-weight:600}
 
@@ -326,7 +333,7 @@ h2 em{font-style:normal;color:var(--acc)}
   <nav class="portes" aria-label="Choisir son chemin">
     <a class="porte lueur mag" href="#commerce" data-porte><i aria-hidden="true">→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
     <a class="porte lueur mag" href="#communaute" data-porte><i aria-hidden="true">→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
-    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : ma méthode, en session de 2 heures.</small></a>
+    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : ma méthode, session de 2 heures dès 97 €.</small></a>
   </nav>
   <span class="defile" aria-hidden="true"></span>
 </header>
@@ -528,10 +535,14 @@ h2 em{font-style:normal;color:var(--acc)}
     <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux.</p></li>
     <li class="etape rv lueur" style="--d:2"><small>Étape 3</small><b>Tu mets en ligne</b><p>Tu repars avec ta première page ou ta première appli, visible sur Internet.</p></li>
   </ul>
-  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Prix de lancement pour le premier groupe. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
+  <div class="tarifs">
+    <div class="tarif fort rv lueur" style="--d:0"><small>Premier groupe</small><b>97 €</b><p>Prix de lancement, par personne.</p></div>
+    <div class="tarif rv lueur" style="--d:1"><small>Ensuite</small><b>147 €</b><p>Par personne.</p></div>
+  </div>
+  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu reçois un message de préparation avant la session. Il te faut un abonnement Claude, à ta charge, et un compte GitHub gratuit.</p>
   <div class="appel rv">
-    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : me prévenir de la première session" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Me prévenir de la première session</a>
-    <span class="devis">Par mail. <b>Aucun engagement.</b></span>
+    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : réserver ma place" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Réserver ma place</a>
+    <span class="devis">Par mail. <b>Tu paies à la confirmation, pas avant.</b></span>
   </div>
 </section>
 
