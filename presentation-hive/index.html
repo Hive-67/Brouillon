@@ -139,6 +139,16 @@ h2 em{font-style:normal;color:var(--acc)}
 .duo small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .duo b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
 .duo p{color:var(--mut);font-size:.98rem}
+.apprend{position:relative;margin-top:14px;padding:22px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
+.apprend small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.apprend b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:8px}
+.apprend p{color:var(--mut);font-size:.98rem;max-width:60ch}
+.apprend p+p{margin-top:8px}
+.apprend p strong{color:var(--ink);font-weight:600}
+.sans{list-style:none;display:grid;gap:8px;margin-top:14px}
+@media(min-width:600px){.sans{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.sans li{padding:10px 14px;border:1px solid rgba(184,255,61,.35);border-radius:12px;font-weight:600;font-size:.95rem;line-height:1.3}
+.sans li::before{content:"✓ ";color:var(--acc)}
 .souverain{position:relative;margin-top:14px;padding:22px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
 .souverain small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .souverain b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
@@ -148,6 +158,13 @@ h2 em{font-style:normal;color:var(--acc)}
 .slogans{list-style:none;display:grid;gap:10px;margin-top:26px}
 .slogans li{position:relative;padding-left:28px;font-size:clamp(1.05rem,3.8vw,1.3rem);font-weight:700;line-height:1.3;max-width:34ch}
 .slogans li::before{content:"";position:absolute;left:0;top:.38em;width:14px;height:14px;background:var(--acc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.tarifs{display:grid;gap:12px;margin-top:22px;grid-template-columns:1fr}
+@media(min-width:600px){.tarifs{grid-template-columns:1fr 1fr;max-width:620px}}
+.tarif{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+.tarif.fort{border-color:rgba(184,255,61,.5);box-shadow:0 0 0 1px rgba(184,255,61,.25)}
+.tarif small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.tarif b{display:block;font-size:1.9rem;line-height:1.1;letter-spacing:-.02em}
+.tarif p{color:var(--mut);font-size:.92rem;margin-top:4px}
 .faits{margin-top:22px;color:var(--mut);font-size:.95rem;max-width:56ch}
 .faits strong{color:var(--ink);font-weight:600}
 
@@ -345,7 +362,7 @@ h2 em{font-style:normal;color:var(--acc)}
   <nav class="portes" aria-label="Choisir son chemin">
     <a class="porte lueur mag" href="#commerce" data-porte><i aria-hidden="true">→</i><b>Je tiens un commerce ou une asso</b><small>Un site, un outil sur mesure, un petit logiciel.</small></a>
     <a class="porte lueur mag" href="#communaute" data-porte><i aria-hidden="true">→</i><b>J'ai une communauté ou je crée du contenu</b><small>Serveur Discord, bots, jeux, vidéo motion design.</small></a>
-    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : un deuxième cerveau qui construit, en session de 2 heures.</small></a>
+    <a class="porte lueur mag" href="#ruche" data-porte><i aria-hidden="true">→</i><b>Je veux créer mon projet moi-même</b><small>La Ruche : un deuxième cerveau qui construit, session de 2 heures dès 199 €.</small></a>
   </nav>
   <span class="defile" aria-hidden="true"></span>
 </header>
@@ -546,6 +563,22 @@ h2 em{font-style:normal;color:var(--acc)}
     <article class="duo rv lueur" style="--d:0"><small>Action 1</small><b>Il retient et il range</b><p>Une mémoire qui dure : tes dossiers sont tenus à jour, et chaque conversation sait où tu en étais.</p></article>
     <article class="duo rv lueur" style="--d:1"><small>Action 2</small><b>Il met en ligne</b><p>Déjà branché, déjà réglé. Ce que tu construis, tu le vois en ligne tout de suite.</p></article>
   </div>
+  <article class="apprend rv lueur" style="--d:0">
+    <small>Tout est piloté pour toi</small>
+    <b>Tu pilotes avec Claude. Il s'occupe du reste.</b>
+    <p>La Ruche te monte ton deuxième cerveau et ton atelier de travail, déjà en place. Tu demandes avec tes mots, et tout se pilote avec Claude.</p>
+    <ul class="sans">
+      <li>Pas de code à écrire</li>
+      <li>Pas de bugs à chercher</li>
+      <li>La sécurité prise en compte pour toi</li>
+    </ul>
+  </article>
+  <article class="apprend rv lueur" style="--d:1">
+    <small>Tu apprends en faisant</small>
+    <b>Deux emplois en un : ça t'apprend, et ça fait.</b>
+    <p>Le système sait qu'il parle à quelqu'un qui n'y connaît rien. Il t'explique pendant qu'il construit, et tu as des commandes toujours à portée de main pour lui demander d'apprendre telle ou telle chose.</p>
+    <p><strong>Résultat : ce que tu construis fonctionne tout de suite.</strong> Tu peux déjà t'en servir, et même en faire un business si tu veux.</p>
+  </article>
   <article class="souverain rv lueur" style="--d:0">
     <small>Souverain</small>
     <b>Ta mémoire reste chez toi.</b>
@@ -562,10 +595,14 @@ h2 em{font-style:normal;color:var(--acc)}
     <li class="etape rv lueur" style="--d:1"><small>Étape 2</small><b>Tu lances</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux, et on t'explique chaque étape.</p></li>
     <li class="etape rv lueur" style="--d:2"><small>Étape 3</small><b>Tu mets en ligne</b><p>Tu repars avec ta première page ou ta première appli, visible sur Internet.</p></li>
   </ul>
-  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Tu repars avec quelque chose de concret, déjà en ligne. Aujourd'hui, la Ruche tourne avec Claude : il te faut un abonnement, à ta charge, et un compte GitHub gratuit.</p>
+  <div class="tarifs">
+    <div class="tarif fort rv lueur" style="--d:0"><small>Premier groupe</small><b>199 €</b><p>Prix de lancement, par personne.</p></div>
+    <div class="tarif rv lueur" style="--d:1"><small>Ensuite</small><b>299 €</b><p>Par personne.</p></div>
+  </div>
+  <p class="faits rv"><strong>2 heures, en ligne, 6 places par session.</strong> Ton système est installé proprement chez toi, et tu peux commencer tout de suite. Tu repars avec quelque chose de concret, déjà en ligne. Aujourd'hui, la Ruche tourne avec Claude : il te faut un abonnement, à ta charge, et un compte GitHub gratuit.</p>
   <div class="appel rv">
-    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : me prévenir de la première session" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Me prévenir de la première session</a>
-    <span class="devis">Par mail. <b>Aucun engagement.</b></span>
+    <a class="bouton lueur mag" data-contact="mail" data-sujet="La Ruche : réserver ma place" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Réserver ma place</a>
+    <span class="devis">Par mail. <b>Je te réponds pour confirmer.</b></span>
   </div>
 </section>
 
