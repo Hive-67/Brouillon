@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#06080b">
+<title>La Ruche · mets ton site ou ton appli en ligne, sans coder</title>
+<meta name="description" content="La Ruche est un deuxième cerveau qui retient et qui construit vraiment avec toi. Session de 2 heures en ligne : tu l'installes et tu lances ton projet.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="La Ruche · mets ton site ou ton appli en ligne, sans coder">
+<meta property="og:description" content="Un deuxième cerveau qui construit vraiment. Session de 2 heures, en ligne, 6 places.">
+<meta property="og:url" content="https://hive-67.github.io/Brouillon/ruche/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2306080b'/%3E%3Cpath d='M12 3.5l7.4 4.25v8.5L12 20.5l-7.4-4.25v-8.5z' fill='none' stroke='%23b8ff3d' stroke-width='2'/%3E%3C/svg%3E">
+<style>
+:root{--bg:#06080b;--card:rgba(12,17,22,.88);--line:rgba(184,255,61,.16);--ink:#eaf0f4;--mut:#93a0ad;--acc:#b8ff3d;--acc-d:rgba(184,255,61,.45);--ease:cubic-bezier(.2,.9,.2,1);color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;padding-bottom:calc(86px + env(safe-area-inset-bottom))}
+@supports(overflow:clip){body{overflow-x:clip}}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px;border-radius:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#fond,#fond3d{position:fixed;inset:0;width:100%;height:100%;display:block;z-index:0;transition:opacity .9s ease}
+#fond3d{opacity:0}
+body.sys #fond3d{opacity:1}
+body.sys #fond{opacity:0}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 42%,transparent 22%,var(--bg) 90%)}
+.page{position:relative;z-index:1}
+.haut-nav{position:absolute;top:calc(18px + env(safe-area-inset-top));left:22px;right:22px;display:flex;justify-content:space-between;align-items:center;z-index:2;max-width:1040px;margin:0 auto}
+.marque{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.18em;font-size:.78rem;color:var(--mut);text-decoration:none}
+.marque svg{width:22px;height:22px;stroke:var(--acc);fill:none;stroke-width:1.6}
+.retour{color:var(--mut);font-size:.85rem;text-decoration:none}
+.retour:hover{color:var(--ink)}
+.heros{position:relative;min-height:92vh;min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding:calc(90px + env(safe-area-inset-top)) 22px 56px;max-width:1040px;margin:0 auto}
+.kicker{color:var(--acc);font-size:.78rem;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px}
+h1{font-size:clamp(2.3rem,9.4vw,4.8rem);line-height:1.04;font-weight:800;letter-spacing:-.035em;max-width:16ch}
+h1 em,h2 em{font-style:normal;color:var(--acc)}
+.sous{margin-top:18px;font-size:clamp(1.05rem,3.8vw,1.3rem);color:var(--ink);opacity:.9;max-width:36ch}
+.cta-ligne{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px}
+.bouton{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:14px 28px;border-radius:14px;background:var(--acc);color:#0b1004;font-weight:800;font-size:1.08rem;text-decoration:none;border:0;cursor:pointer;overflow:hidden;box-shadow:0 10px 34px -10px var(--acc-d);touch-action:manipulation;font-family:inherit;transition:transform .2s}
+.bouton:active{transform:scale(.97)}
+.bouton svg{width:20px;height:20px;flex:none}
+.bouton.bientot{background:rgba(184,255,61,.12);color:var(--mut);box-shadow:none;cursor:default;border:1px dashed rgba(184,255,61,.4)}
+.lien-sec{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--acc-d);padding-bottom:2px}
+.faits-ligne{margin-top:22px;color:var(--mut);font-size:.92rem}
+.faits-ligne b{color:var(--ink);font-weight:600}
+section{position:relative;padding:72px 22px;max-width:1040px;margin:0 auto}
+.etiquette{display:flex;align-items:center;gap:10px;color:var(--acc);font-size:.76rem;letter-spacing:.26em;text-transform:uppercase;margin-bottom:14px}
+.etiquette::after{content:"";flex:1;max-width:120px;height:1px;background:linear-gradient(90deg,var(--acc-d),transparent)}
+h2{font-size:clamp(1.7rem,6.2vw,2.9rem);line-height:1.1;letter-spacing:-.025em;font-weight:800;max-width:20ch}
+.intro{margin-top:14px;color:var(--mut);font-size:1.05rem;max-width:48ch}
+.intro strong{color:var(--ink);font-weight:600}
+.grille{display:grid;gap:12px;margin-top:28px;grid-template-columns:1fr}
+@media(min-width:760px){.grille.trois{grid-template-columns:repeat(3,minmax(0,1fr))}.grille.deux{grid-template-columns:1fr 1fr}}
+.carte{position:relative;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden}
+.carte.fort{border-color:rgba(184,255,61,.45)}
+.carte small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.carte b{display:block;font-size:1.2rem;line-height:1.25;margin-bottom:6px}
+.carte p{color:var(--mut);font-size:.98rem}
+.lueur{--mx:50%;--my:50%}
+.lueur::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(220px circle at var(--mx) var(--my),rgba(184,255,61,.14),transparent 60%);opacity:0;transition:opacity .3s}
+.lueur.vise::before{opacity:1}
+.bloc-large{position:relative;margin-top:14px;padding:22px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
+.bloc-large small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.bloc-large b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:8px}
+.bloc-large p{color:var(--mut);font-size:.98rem;max-width:60ch}
+.bloc-large p+p{margin-top:8px}
+.bloc-large p strong{color:var(--ink);font-weight:600}
+.pastilles{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pastilles li{padding:7px 14px;border:1px solid rgba(184,255,61,.35);border-radius:99px;font-size:.9rem;font-weight:600}
+.pastilles.coches li::before{content:"✓ ";color:var(--acc)}
+.scene{position:relative;overflow:hidden}
+.scene *{animation-play-state:paused}
+.scene.joue *{animation-play-state:running}
+.scene.schema{margin-top:14px;padding:22px 18px 20px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card)}
+.sc-titre{color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.sc-flux{display:flex;flex-direction:column;align-items:center}
+.sc-col{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;flex:none}
+.sc-col small{color:var(--mut);font-size:.82rem;line-height:1.3;max-width:16ch}
+.sc-etiq{font-weight:800;font-size:.95rem}
+.sc-bulle{width:124px;padding:12px;border:1.5px solid rgba(234,240,244,.4);border-radius:14px 14px 14px 4px;display:grid;gap:6px}
+.sc-bulle i{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.45);transform-origin:left;animation:sc-ecrit 9s infinite}
+.sc-bulle i:nth-child(2){width:70%;animation-delay:.2s}
+.sc-hex{width:68px;height:68px;animation:sc-claude 9s infinite}
+.sc-hex path{fill:rgba(184,255,61,.08);stroke:var(--acc);stroke-width:2;stroke-linejoin:round}
+.sc-hex circle{fill:var(--acc)}
+.sc-lien{position:relative;flex:none;width:2px;height:34px;margin:6px 0;background:linear-gradient(var(--acc-d),rgba(184,255,61,.12))}
+.sc-point{position:absolute;left:50%;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 12px var(--acc),0 0 4px #fff;opacity:0;animation:sc-v 9s infinite;animation-delay:var(--o)}
+.sc-etapes{list-style:none;display:grid;gap:7px;width:100%;max-width:220px}
+.sc-etapes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 12px;border:1px solid rgba(234,240,244,.16);border-radius:10px;font-size:.88rem;font-weight:600;color:var(--mut);animation:sc-chip 9s infinite;animation-delay:calc(var(--i)*.45s - 9s)}
+.sc-etapes li i{font-style:normal;color:var(--acc);opacity:0;animation:sc-ok 9s infinite;animation-delay:calc(var(--i)*.45s - 9s)}
+.sc-site{position:relative;width:136px;border:1.5px solid rgba(184,255,61,.5);border-radius:10px;overflow:hidden;background:#0e1318;animation:sc-fin 9s infinite}
+.sc-site .b{height:12px;border-bottom:1px solid rgba(234,240,244,.12)}
+.sc-site .c{padding:8px 8px 30px;display:grid;gap:5px}
+.sc-site .c i{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.4)}
+.sc-site .c i:first-child{width:60%;background:rgba(184,255,61,.6)}
+.sc-site .c i.bloc{height:22px;border-radius:5px;background:rgba(184,255,61,.14);border:1px solid rgba(184,255,61,.3)}
+.sc-v{position:absolute;right:7px;bottom:7px;width:22px;height:22px;border-radius:50%;background:var(--acc);animation:sc-valide 9s infinite}
+.sc-v::after{content:"";position:absolute;left:8px;top:4px;width:5px;height:10px;border:solid #0b1004;border-width:0 2.4px 2.4px 0;transform:rotate(45deg)}
+.sc-legende{margin-top:18px;color:var(--mut);font-size:.98rem;max-width:60ch}
+.sc-legende strong{color:var(--ink);font-weight:600}
+@media(min-width:760px){
+  .sc-flux{flex-direction:row;justify-content:space-between}
+  .sc-lien{flex:1 1 0;width:auto;height:2px;min-width:22px;margin:0 8px;background:linear-gradient(90deg,rgba(184,255,61,.12),var(--acc-d))}
+  .sc-point{left:0;top:50%;animation-name:sc-h}
+  .sc-etapes{width:200px}
+}
+@keyframes sc-ecrit{0%{transform:scaleX(0)}8%,90%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+@keyframes sc-claude{0%,20%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(184,255,61,0))}25%,30%{transform:scale(1.12);filter:drop-shadow(0 0 12px rgba(184,255,61,.7))}36%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(184,255,61,0))}}
+@keyframes sc-v{0%{top:0;opacity:0}2%{opacity:1}12%{top:100%;opacity:1}13%,100%{top:100%;opacity:0}}
+@keyframes sc-h{0%{left:0;opacity:0}2%{opacity:1}12%{left:100%;opacity:1}13%,100%{left:100%;opacity:0}}
+@keyframes sc-chip{0%,36%{border-color:rgba(234,240,244,.16);color:var(--mut);background:transparent}42%,80%{border-color:var(--acc);color:var(--ink);background:rgba(184,255,61,.1)}88%,100%{border-color:rgba(234,240,244,.16);color:var(--mut);background:transparent}}
+@keyframes sc-ok{0%,40%{opacity:0;transform:scale(0)}46%,80%{opacity:1;transform:scale(1)}88%,100%{opacity:0;transform:scale(0)}}
+@keyframes sc-fin{0%,56%{opacity:.4;transform:scale(.96);box-shadow:none}64%,90%{opacity:1;transform:none;box-shadow:0 0 28px -8px var(--acc-d)}97%,100%{opacity:.4;transform:scale(.96);box-shadow:none}}
+@keyframes sc-valide{0%,60%{transform:scale(0)}66%{transform:scale(1.2)}70%,90%{transform:scale(1)}97%,100%{transform:scale(0)}}
+.temps{list-style:none;display:grid;gap:12px;margin-top:28px;grid-template-columns:1fr;counter-reset:t}
+@media(min-width:760px){.temps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.temps li{position:relative;padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--card);overflow:hidden}
+.temps small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.temps b{display:block;font-size:1.15rem;margin-bottom:5px}
+.temps p{color:var(--mut);font-size:.95rem}
+.note{margin-top:16px;color:var(--mut);font-size:.95rem}
+.pour li{list-style:none;position:relative;padding-left:26px;margin-top:9px;color:var(--ink);font-size:1rem}
+.pour li::before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+.pour.non li::before{content:"✕";color:#ff7a6b}
+.pour.non li{color:var(--mut)}
+.pour h3{font-size:1.1rem}
+.preuves{list-style:none;display:grid;gap:10px;margin-top:26px;grid-template-columns:1fr}
+@media(min-width:760px){.preuves{grid-template-columns:1fr 1fr}}
+.preuves li{display:flex;gap:12px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.preuves li::before{content:"";flex:none;width:14px;height:14px;margin-top:.3em;background:var(--acc);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.preuves b{display:block;font-size:1.02rem}
+.preuves span{color:var(--mut);font-size:.92rem}
+.preuves a{color:var(--acc)}
+.prix{display:grid;gap:14px;margin-top:28px;grid-template-columns:1fr}
+@media(min-width:760px){.prix{grid-template-columns:1.15fr 1fr;align-items:stretch}}
+.offre{position:relative;padding:24px;border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden;display:flex;flex-direction:column;gap:6px}
+.offre.fort{border-color:rgba(184,255,61,.6);box-shadow:0 0 0 1px rgba(184,255,61,.25),0 20px 50px -24px var(--acc-d)}
+.offre small{color:var(--acc);font-size:.74rem;letter-spacing:.2em;text-transform:uppercase}
+.offre .montant{font-size:3rem;font-weight:800;letter-spacing:-.03em;line-height:1.05}
+.offre .par{color:var(--mut);font-size:.92rem}
+.offre ul{list-style:none;margin:10px 0 14px;display:grid;gap:7px}
+.offre li{position:relative;padding-left:24px;font-size:.98rem}
+.offre li::before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+.offre .bouton{margin-top:auto;width:100%}
+.offre.calme .montant{color:var(--mut)}
+.sous-prix{margin-top:16px;color:var(--mut);font-size:.92rem;max-width:60ch}
+.faq{margin-top:24px;display:grid;gap:10px;max-width:760px}
+.faq details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 18px}
+.faq summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:700;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--acc);font-size:1.4rem;line-height:1;flex:none}
+.faq details[open] summary::after{content:"–"}
+.faq p{color:var(--mut);padding:0 0 16px;font-size:.98rem}
+.final{text-align:left;padding-bottom:60px}
+.pied{margin-top:50px;padding-top:22px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 18px;justify-content:space-between;color:var(--mut);font-size:.86rem}
+.pied a{color:var(--mut)}
+.barre-cta{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(6,8,11,.92);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;transform:translateY(110%);transition:transform .35s var(--ease);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.barre-cta.on{transform:none}
+.barre-cta span{font-size:.9rem;color:var(--mut);line-height:1.25}
+.barre-cta span b{display:block;color:var(--ink);font-size:1rem}
+.barre-cta .bouton{min-height:48px;padding:10px 20px;font-size:1rem;flex:none}
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:calc(var(--d,0)*110ms)}
+.js .rv.vu{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .js .rv{opacity:1;transform:none}
+  .sc-bulle i{transform:none}.sc-etapes li{border-color:var(--acc);color:var(--ink)}.sc-etapes li i{opacity:1;transform:none}.sc-site{opacity:1}.sc-v{transform:none}.sc-point{display:none}
+}
+</style>
+</head>
+<body>
+<canvas id="fond" aria-hidden="true"></canvas>
+<canvas id="fond3d" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<div class="page">
+<header class="heros" id="haut">
+  <div class="haut-nav">
+    <a class="marque" href="../presentation-hive/" aria-label="Hive, accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></svg>HIVE</a>
+    <a class="retour" href="../presentation-hive/">Voir mes réalisations</a>
+  </div>
+  <p class="kicker">La Ruche · session de 2 heures</p>
+  <h1>Mets ton site ou ton appli en ligne. <em>Sans coder.</em></h1>
+  <p class="sous">La Ruche est un deuxième cerveau qui retient tout, et qui construit vraiment avec toi. En 2 heures, tu l'installes et tu lances ton projet.</p>
+  <div class="cta-ligne">
+    <a class="bouton" data-contact="mail" href="#reserver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Réserver ma place · 199 €</a>
+    <a class="lien-sec" href="#systeme">Voir comment ça marche</a>
+  </div>
+  <p class="faits-ligne"><b>En ligne · 6 places par session.</b> 199 € pour le premier groupe, 299 € ensuite.</p>
+</header>
+
+<main>
+<section id="probleme" aria-labelledby="t-probleme">
+  <p class="etiquette rv">Le problème</p>
+  <h2 id="t-probleme" class="rv" style="--d:1">Tu as une idée. <em>Tu ne sais pas coder.</em></h2>
+  <p class="intro rv" style="--d:2">C'est là que tout le monde se bloque. Voilà pourquoi.</p>
+  <div class="grille trois">
+    <div class="carte rv lueur" style="--d:0"><b>Les vidéos t'apprennent à regarder</b><p>Tu suis, tu comprends à moitié, et tu n'as toujours rien de concret à la fin.</p></div>
+    <div class="carte rv lueur" style="--d:1"><b>Une IA seule repart de zéro</b><p>À chaque conversation, elle a tout oublié. Tu répètes, tu te perds, tu abandonnes.</p></div>
+    <div class="carte rv lueur" style="--d:2"><b>Un vrai site, c'est beaucoup de choses</b><p>Sécurité, design, facilité d'usage, référencement. Tout seul, c'est trop.</p></div>
+  </div>
+</section>
+
+<section id="systeme" aria-labelledby="t-systeme">
+  <p class="etiquette rv">La Ruche</p>
+  <h2 id="t-systeme" class="rv" style="--d:1">Un deuxième cerveau, <em>qui construit vraiment.</em></h2>
+  <p class="intro rv" style="--d:2">Tout le monde parle du deuxième cerveau : un outil qui retient pour toi. La Ruche fait ça, et surtout l'autre moitié. <strong>Elle construit ton site ou ton appli avec toi, et la met en ligne.</strong></p>
+  <div class="grille deux">
+    <div class="carte fort rv lueur" style="--d:0"><small>Action 1</small><b>Il retient et il range</b><p>Une mémoire qui dure : tes dossiers sont tenus à jour, et chaque conversation sait où tu en étais.</p></div>
+    <div class="carte fort rv lueur" style="--d:1"><small>Action 2</small><b>Il met en ligne</b><p>Déjà branché, déjà réglé. Ce que tu construis, tu le vois en ligne tout de suite.</p></div>
+  </div>
+  <div class="scene schema rv" id="schema" role="img" aria-label="Schéma animé : tu envoies ta demande à Claude. Claude la fait passer par la sécurité, le design, l'ergonomie, le référencement et la mise en ligne. Tu reçois un résultat propre, sûr et qui fonctionne.">
+    <p class="sc-titre">Comment ça marche</p>
+    <div class="sc-flux">
+      <div class="sc-col"><span class="sc-etiq">Toi</span><div class="sc-bulle"><i></i><i></i></div><small>Tu demandes avec tes mots</small></div>
+      <div class="sc-lien"><span class="sc-point" style="--o:-8.28s"></span></div>
+      <div class="sc-col"><span class="sc-etiq">Claude</span><svg class="sc-hex" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 4l26 15v30L34 64 8 49V19z"/><circle cx="34" cy="34" r="5"/></svg><small>Il fait le travail</small></div>
+      <div class="sc-lien"><span class="sc-point" style="--o:-6.3s"></span></div>
+      <ul class="sc-etapes">
+        <li style="--i:0">Sécurité<i>✓</i></li>
+        <li style="--i:1">Design<i>✓</i></li>
+        <li style="--i:2">Ergonomie<i>✓</i></li>
+        <li style="--i:3">Référencement<i>✓</i></li>
+        <li style="--i:4">Mise en ligne<i>✓</i></li>
+      </ul>
+      <div class="sc-lien"><span class="sc-point" style="--o:-3.96s"></span></div>
+      <div class="sc-col"><span class="sc-etiq">Toi, au bout</span><div class="sc-site"><div class="b"></div><div class="c"><i></i><i></i><i class="bloc"></i></div><span class="sc-v"></span></div><small>Propre, sûr, qui marche</small></div>
+    </div>
+    <p class="sc-legende"><strong>Tu n'as rien à penser :</strong> la sécurité, le design, la facilité d'usage, le référencement, tout est pris en charge à ta place.</p>
+  </div>
+  <article class="bloc-large rv lueur" style="--d:0">
+    <small>Tout est piloté pour toi</small>
+    <b>Tu pilotes avec Claude. Il s'occupe du reste.</b>
+    <p>La Ruche te monte ton deuxième cerveau et ton atelier de travail, déjà en place. Tu demandes avec tes mots, et tout se pilote avec Claude.</p>
+    <ul class="pastilles coches"><li>Pas de code à écrire</li><li>Pas de bugs à chercher</li><li>La sécurité prise en compte pour toi</li></ul>
+  </article>
+  <article class="bloc-large rv lueur" style="--d:1">
+    <small>Tu apprends en faisant</small>
+    <b>Deux emplois en un : ça t'apprend, et ça fait.</b>
+    <p>Le système sait qu'il parle à quelqu'un qui n'y connaît rien. Il t'explique pendant qu'il construit, et tu as des commandes toujours à portée de main pour lui demander d'apprendre telle ou telle chose.</p>
+    <p><strong>Résultat : ce que tu construis fonctionne tout de suite.</strong> Tu peux déjà t'en servir, et même en faire un business si tu veux.</p>
+  </article>
+  <article class="bloc-large rv lueur" style="--d:2">
+    <small>Souverain</small>
+    <b>Ta mémoire reste chez toi.</b>
+    <p>Elle est écrite en simples fichiers texte. Tu choisis où elle vit, et tu changes d'intelligence artificielle quand tu veux : ta mémoire, elle, ne bouge pas.</p>
+    <ul class="pastilles"><li>Ton GitHub</li><li>Ton serveur privé</li><li>Ton ordinateur</li></ul>
+  </article>
+</section>
+
+<section id="session" aria-labelledby="t-session">
+  <p class="etiquette rv">La session</p>
+  <h2 id="t-session" class="rv" style="--d:1">2 heures. <em>Tu repars avec ton projet en ligne.</em></h2>
+  <ol class="temps">
+    <li class="rv lueur" style="--d:0"><small>20 minutes</small><b>La démo</b><p>Tu vois la Ruche travailler en direct, sur un vrai projet.</p></li>
+    <li class="rv lueur" style="--d:1"><small>1 h 10</small><b>L'installation</b><p>On met en place ta Ruche ensemble. Rien de technique à connaître avant.</p></li>
+    <li class="rv lueur" style="--d:2"><small>30 minutes</small><b>Le lancement</b><p>Tu décris ton idée avec tes mots. Elle prend forme sous tes yeux.</p></li>
+  </ol>
+  <p class="note rv">Tu reçois un message de préparation avant la session, pour arriver prêt.</p>
+</section>
+
+<section id="pourqui" aria-labelledby="t-pourqui">
+  <p class="etiquette rv">Pour qui</p>
+  <h2 id="t-pourqui" class="rv" style="--d:1">Fait pour ceux qui <em>n'y connaissent rien.</em></h2>
+  <div class="grille deux">
+    <div class="carte rv" style="--d:0">
+      <h3>C'est pour toi si</h3>
+      <ul class="pour"><li>Tu as une idée de site ou d'appli, même floue</li><li>Tu ne sais pas coder, et ça ne gêne pas</li><li>Tu veux apprendre en faisant, pas en regardant</li><li>Tu veux quelque chose de concret dès la session</li></ul>
+    </div>
+    <div class="carte rv" style="--d:1">
+      <h3>Ce n'est pas pour toi si</h3>
+      <ul class="pour non"><li>Tu n'as aucune idée de ce que tu veux construire</li><li>Tu veux seulement regarder, sans rien faire toi-même</li><li>Tu refuses de prendre un abonnement Claude</li></ul>
+    </div>
+  </div>
+  <p class="note rv"><strong style="color:var(--ink)">Ce qu'il te faut :</strong> un abonnement Claude, à ta charge, un compte GitHub gratuit, et 2 heures devant toi.</p>
+</section>
+
+<section id="preuve" aria-labelledby="t-preuve">
+  <p class="etiquette rv">Les preuves</p>
+  <h2 id="t-preuve" class="rv" style="--d:1">Je ne montre pas un diplôme. <em>Je montre ce qui tourne.</em></h2>
+  <p class="intro rv" style="--d:2">Tout ça a été construit avec la Ruche. Ça existe, tu peux l'essayer.</p>
+  <ul class="preuves">
+    <li class="rv" style="--d:0"><div><b>Un serveur Discord de plus de 600 membres</b><span>Créé et géré de A à Z : salons, rôles, bots, et son site.</span></div></li>
+    <li class="rv" style="--d:1"><div><b>Cabas, une appli de repas et de courses</b><span><a href="https://hiveostools.netlify.app/outils/cabas/" target="_blank" rel="noopener">Essayer Cabas ↗</a></span></div></li>
+    <li class="rv" style="--d:2"><div><b>Des jeux jouables dans le navigateur</b><span><a href="https://hiveostools.netlify.app/jeux/uno-maison/" target="_blank" rel="noopener">Rancune ↗</a> · <a href="https://hiveostools.netlify.app/jeux/pont/" target="_blank" rel="noopener">PONT ↗</a></span></div></li>
+    <li class="rv" style="--d:3"><div><b>Une vidéo de présentation en motion design</b><span>Animée et calée sur le temps de la musique.</span></div></li>
+  </ul>
+</section>
+
+<section id="prix" aria-labelledby="t-prix">
+  <p class="etiquette rv">Le prix</p>
+  <h2 id="t-prix" class="rv" style="--d:1">Une session, <em>un système qui reste.</em></h2>
+  <div class="prix">
+    <div class="offre fort rv" style="--d:0">
+      <small>Premier groupe · prix de lancement</small>
+      <span class="montant">199 €</span><span class="par">par personne</span>
+      <ul><li>2 heures en ligne, 6 places</li><li>Ta Ruche installée chez toi</li><li>Ton projet lancé, en ligne</li><li>Un message de préparation avant</li></ul>
+      <a class="bouton" data-contact="mail" href="#reserver">Réserver ma place</a>
+    </div>
+    <div class="offre calme rv" style="--d:1">
+      <small>Ensuite</small>
+      <span class="montant">299 €</span><span class="par">par personne</span>
+      <ul><li>La même session</li><li>Le même système</li></ul>
+    </div>
+  </div>
+  <p class="sous-prix rv">L'abonnement Claude reste à ta charge, il n'est pas compris dans le prix.</p>
+</section>
+
+<section id="faq" aria-labelledby="t-faq">
+  <p class="etiquette rv">Questions</p>
+  <h2 id="t-faq" class="rv" style="--d:1">Tu te demandes <em>peut-être…</em></h2>
+  <div class="faq rv" style="--d:2">
+    <details><summary>Je ne sais pas coder, c'est un problème ?</summary><p>Non, la Ruche est faite pour ça. Tu parles avec tes mots, elle s'occupe du code.</p></details>
+    <details><summary>Qu'est-ce qu'il me faut ?</summary><p>Un abonnement Claude (à ta charge), un compte GitHub gratuit, et 2 heures. Une idée de site ou d'appli en tête, même floue.</p></details>
+    <details><summary>Et la sécurité ?</summary><p>Elle est prise en compte à chaque étape, tu n'as pas à t'en occuper seul.</p></details>
+    <details><summary>Je peux changer d'IA plus tard ?</summary><p>Ta mémoire est écrite en simples fichiers texte : elle reste à toi, même si tu changes d'IA. Aujourd'hui, la Ruche tourne avec Claude.</p></details>
+    <details><summary>Je peux en faire un business ?</summary><p>Oui. Ce que tu construis fonctionne tout de suite : tu peux déjà t'en servir, et le vendre si tu veux.</p></details>
+    <details><summary>Quand a lieu la prochaine session ?</summary><p>Je te préviens par mail dès que la date est fixée. Écris-moi pour réserver ta place.</p></details>
+  </div>
+</section>
+
+<section id="reserver" class="final" aria-labelledby="t-reserver">
+  <p class="etiquette rv">Réserver</p>
+  <h2 id="t-reserver" class="rv" style="--d:1">Ta place t'attend. <em>6 seulement.</em></h2>
+  <p class="intro rv" style="--d:2">Écris-moi par mail. Je te réponds pour confirmer ta place et te donner la date.</p>
+  <div class="cta-ligne rv" style="--d:3">
+    <a class="bouton" data-contact="mail" href="#reserver"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>Réserver ma place · 199 €</a>
+  </div>
+  <footer class="pied">
+    <span>La Ruche, par Hive</span>
+    <span><a href="../presentation-hive/">Voir mes réalisations</a></span>
+  </footer>
+</section>
+</main>
+</div>
+
+<div class="barre-cta" id="barre" aria-hidden="true">
+  <span><b>La Ruche · 2 heures</b>199 € le premier groupe</span>
+  <a class="bouton" data-contact="mail" href="#reserver" tabindex="-1">Réserver</a>
+</div>
+
+<script>
+var CONTACT_MAIL = { nom: 'systemhiveos', domaine: 'gmail.com' };
+(function(){
+'use strict';
+document.documentElement.classList.add('js');
+var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var dpr = Math.min(window.devicePixelRatio || 1, 2);
+var ACC = '184,255,61';
+
+/* Contacts : le mail est assemblé au clic, rien en clair dans la page */
+var mailPret = !!(CONTACT_MAIL.nom && CONTACT_MAIL.domaine);
+document.querySelectorAll('[data-contact]').forEach(function(b){
+  if(!mailPret){ b.classList.add('bientot'); b.removeAttribute('href'); b.setAttribute('aria-disabled','true'); return; }
+  b.addEventListener('click', function(e){
+    e.preventDefault();
+    window.location.href = 'mailto:' + CONTACT_MAIL.nom + '@' + CONTACT_MAIL.domaine +
+      '?subject=' + encodeURIComponent('La Ruche : réserver ma place');
+  });
+});
+
+/* Apparitions au défilement */
+var rv = document.querySelectorAll('.rv');
+if('IntersectionObserver' in window && !reduce){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: .12 });
+  rv.forEach(function(el){ io.observe(el); });
+} else { rv.forEach(function(el){ el.classList.add('vu'); }); }
+
+/* Le schéma ne tourne que quand il est à l'écran */
+if('IntersectionObserver' in window && !reduce){
+  var io2 = new IntersectionObserver(function(es){
+    es.forEach(function(e){ e.target.classList.toggle('joue', e.isIntersecting); });
+  });
+  document.querySelectorAll('.scene').forEach(function(s){ io2.observe(s); });
+}
+
+/* Lueur qui suit le doigt */
+document.querySelectorAll('.lueur').forEach(function(el){
+  function suit(e){
+    var r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    el.classList.add('vise');
+  }
+  function quitte(){ el.classList.remove('vise'); }
+  el.addEventListener('pointermove', suit, { passive: true });
+  el.addEventListener('pointerdown', suit, { passive: true });
+  el.addEventListener('pointerleave', quitte);
+  el.addEventListener('pointercancel', quitte);
+});
+
+/* Barre de réservation fixe : visible après le haut de page, cachée sur les prix et la réservation */
+var barre = document.getElementById('barre');
+var vuHaut = true, vuPrix = false;
+function majBarre(){
+  var on = !vuHaut && !vuPrix;
+  barre.classList.toggle('on', on);
+  barre.setAttribute('aria-hidden', on ? 'false' : 'true');
+  barre.querySelector('a').tabIndex = on ? 0 : -1;
+}
+if('IntersectionObserver' in window){
+  var ioB = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.target.id === 'haut'){ vuHaut = e.isIntersecting; } else { vuPrix = e.isIntersecting; }
+    });
+    majBarre();
+  }, { rootMargin: '0px 0px -25% 0px' });
+  ['haut','prix','reserver'].forEach(function(id){ var el = document.getElementById(id); if(el){ ioB.observe(el); } });
+}
+
+/* Fond : la ruche */
+var cv = document.getElementById('fond'), ctx = cv.getContext('2d');
+var W = 0, H = 0, S = 40, maxD = 1, hexes = [];
+var px = -999, py = -999, tx = -999, ty = -999, touche = false, t0 = performance.now(), raf = 0, visible = true;
+var vue = 1, cache = false;
+function construit(){
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  S = Math.max(30, Math.min(52, W / 13));
+  var w = Math.sqrt(3) * S, h = 1.5 * S, cols = Math.ceil(W / w) + 2, rows = Math.ceil(H / h) + 2;
+  var cx = W / 2, cy = H * .45;
+  maxD = Math.hypot(W, H) / 2;
+  hexes = [];
+  for(var r = -1; r < rows; r++){
+    for(var c = -1; c < cols; c++){
+      var x = c * w + ((r & 1) ? w / 2 : 0), y = r * h;
+      hexes.push({ x: x, y: y, d: Math.hypot(x - cx, y - cy) });
+    }
+  }
+}
+function hexa(c, x, y, s){
+  c.beginPath();
+  for(var k = 0; k < 6; k++){
+    var a = Math.PI / 180 * (60 * k - 30), X = x + s * Math.cos(a), Y = y + s * Math.sin(a);
+    if(k){ c.lineTo(X, Y); } else { c.moveTo(X, Y); }
+  }
+  c.closePath();
+}
+function dessine(now){
+  var t = reduce ? 99 : (now - t0) / 1000;
+  var cible = Math.max(.85, 1 - window.scrollY / (H * 3));
+  vue += (cible - vue) * .08;
+  if(!touche && !reduce){
+    tx = W / 2 + Math.cos(t * .7) * W * .3;
+    ty = H * .45 + Math.sin(t * .9) * H * .2;
+  }
+  if(px === -999 && tx !== -999){ px = tx; py = ty; }
+  px += (tx - px) * .14; py += (ty - py) * .14;
+  ctx.clearRect(0, 0, W, H);
+  var vague = ((t * .55) % 1.8) * maxD * 1.15;
+  ctx.lineWidth = 1;
+  for(var i = 0; i < hexes.length; i++){
+    var h = hexes[i];
+    var rev = Math.min(1, Math.max(0, (t * 1.15 - h.d / maxD * 1.4 - .25) * 1.6));
+    if(rev <= 0){ continue; }
+    var a = .07 * rev * vue;
+    var g = Math.max(0, 1 - Math.hypot(h.x - px, h.y - py) / 170);
+    a += g * g * .75 * (.45 + .55 * vue);
+    if(!reduce){
+      var dw = Math.abs(h.d - vague);
+      if(dw < 60){ a += (1 - dw / 60) * .35 * vue; }
+    }
+    if(a < .01){ continue; }
+    ctx.strokeStyle = 'rgba(' + ACC + ',' + Math.min(a, .95).toFixed(3) + ')';
+    hexa(ctx, h.x, h.y, S * .94 * (.9 + .1 * rev) + g * 2);
+    ctx.stroke();
+    if(g > .5){ ctx.fillStyle = 'rgba(' + ACC + ',' + (g * g * .06).toFixed(3) + ')'; ctx.fill(); }
+  }
+  raf = (visible && !cache) ? requestAnimationFrame(dessine) : 0;
+}
+function lance(){ if(!raf && visible && !cache && !document.hidden){ raf = requestAnimationFrame(dessine); } }
+function arrete(){ cancelAnimationFrame(raf); raf = 0; }
+window.addEventListener('pointermove', function(e){ touche = true; tx = e.clientX; ty = e.clientY; }, { passive: true });
+window.addEventListener('pointerdown', function(e){ touche = true; tx = e.clientX; ty = e.clientY; }, { passive: true });
+var attente;
+window.addEventListener('resize', function(){ clearTimeout(attente); attente = setTimeout(function(){ construit(); taille3(); if(reduce){ dessine(performance.now()); dessine3(performance.now()); } }, 120); });
+document.addEventListener('visibilitychange', function(){ if(document.hidden){ arrete(); } else { lance(); lance3(); } });
+construit();
+if(reduce){ visible = false; dessine(performance.now()); } else { lance(); }
+
+/* Fond de la partie « La Ruche » : le système en 3D, dossiers reliés qui bougent */
+var cv3 = document.getElementById('fond3d'), ctx3 = cv3.getContext('2d');
+var raf3 = 0, vivant3 = false, on3 = false, th3 = 0, tf3 = 0;
+var ax3 = 0, ay3 = 0, bx3 = 0, by3 = 0;
+var SYS = {n:101,t:'01333333243233333323244432333425533526662777777777713333324322333332332224425501333332432233333233252',p:[-1,0,1,1,1,1,1,1,1,8,8,1,11,11,11,11,11,11,1,18,1,20,20,20,20,1,25,25,25,25,1,30,30,32,32,30,1,36,36,36,1,40,40,40,40,40,40,40,40,40,40,0,51,51,51,51,51,51,57,57,57,51,61,61,61,61,61,51,67,67,67,51,51,72,72,51,75,75,51,0,79,79,79,79,79,79,85,85,85,79,89,89,89,89,89,79,95,95,95,79,79],x:[0,0,-1,137,-78,60,32,-74,54,251,-87,40,215,-77,146,115,-45,-45,103,-136,154,182,-184,35,94,-183,-64,59,-140,-171,91,-302,-96,280,-217,165,272,-333,131,245,-293,251,353,-307,201,395,-197,202,365,-211,100,308,-178,271,83,-226,93,49,-335,122,-8,64,93,-59,66,-18,-111,129,62,-86,96,187,11,172,157,294,8,-41,219,44,-125,393,64,-1,364,75,-115,403,-25,-78,223,-153,-121,242,-256,-178,217,-129,-259,271,-80,-339,200,-175,-358,326,-187,-166,201,49,110,162,50,199,136,96,38,283,119,167,48,-19,324,21,78,266,165,-7,359,-82,10,348,97,-31,440,-42,-81,276,7,89,387,-18,-102,399,-8,-2,443,108,79,389,86,-122,371,-232,-79,-66,-299,-142,-137,-156,-157,-92,-291,-1,-132,-204,-154,7,-158,-64,-149,-249,-59,-247,-161,-44,-311,-274,-105,-350,-304,6,-325,-239,-283,-127,-302,-331,-211,-217,-370,-51,-323,-356,-97,-187,-313,-229,-185,-389,-152,-250,-125,118,-263,-231,170,-266,-127,234,-353,-144,173,-247,37,-56,-396,-69,-91,-483,-15,-137,-496,-114,-70,-329,15,38,-419,83,55,-341,57,146,-325,-132,-10,3,263,-132,96,298,-204,24,254,-31,-105,286,-99,-91,234,-195,70,189,-179,0,236,-301,4,130,-332,57,252,-397,-65,261,-389,-67,413,-24,-125,406,78,-177,444,-38,-50,511,-74,-100,509,36,0,459,59,148,318,-49,215,358,35,255,327,-91,196,421,-62,32,373,-177,-66,344,-198],k:[21,53,21,54,21,55,21,56,21,58,22,51,2,53,9,58,26,51,38,51,41,67,37,67,5,56,21,81,21,82,21,83,21,84,21,86,22,79,2,81,9,86,26,79,38,79,41,95,37,95,5,84,21,24,21,23,22,23,22,24,21,32,10,9,37,17,37,16,44,37,45,37,45,51,42,39,38,41,38,9,43,77,77,78,76,78,71,78,50,37,46,37,33,26,73,76]};
+var COUL = ['201,209,224','106,168,255','247,183,51','95,211,141','56,214,208','232,121,166','255,138,92','255,208,107'];
+var NB = SYS.n, PH = [], AR = [], PU = [], PT = [];
+for(var i3 = 0; i3 < NB; i3++){
+  PH.push([i3 * 1.7, i3 * 2.9 + 1, i3 * 4.3 + 2]);
+  PT.push({ x: 0, y: 0, e: 0, pr: 0, a: 0 });
+  if(SYS.p[i3] >= 0){ AR.push([SYS.p[i3], i3, 0]); }
+}
+for(var j3 = 0; j3 < SYS.k.length; j3 += 2){ AR.push([SYS.k[j3], SYS.k[j3 + 1], 1]); }
+for(var q3 = 0; q3 < 26; q3++){ PU.push({ e: (q3 * 37 + 5) % AR.length, t: (q3 * .137) % 1, v: .10 + (q3 % 5) * .035 }); }
+function taille3(){ cv3.width = Math.round(W * dpr); cv3.height = Math.round(H * dpr); ctx3.setTransform(dpr, 0, 0, dpr, 0, 0); }
+function arrondi(c, x, y, w, h, r){
+  c.beginPath();
+  c.moveTo(x + r, y); c.lineTo(x + w - r, y); c.quadraticCurveTo(x + w, y, x + w, y + r);
+  c.lineTo(x + w, y + h - r); c.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  c.lineTo(x + r, y + h); c.quadraticCurveTo(x, y + h, x, y + h - r);
+  c.lineTo(x, y + r); c.quadraticCurveTo(x, y, x + r, y);
+  c.closePath();
+}
+function dessine3(now){
+  var t = reduce ? 9 : (now - t0) / 1000, vue3 = .9;
+  bx3 += (ax3 - bx3) * .05; by3 += (ay3 - by3) * .05;
+  var yaw = t * .07 + window.scrollY * .0009 + bx3 * .45;
+  var pitch = -.3 + by3 * .22;
+  var cl = Math.cos(yaw), sl = Math.sin(yaw), ct = Math.cos(pitch), st = Math.sin(pitch);
+  var dist = 1500, e0 = Math.min(W, H) * (W < 720 ? .62 : .5) / 520, fl = e0 * dist;
+  var cx = W < 720 ? W * .5 : W * .64, cy = H * .5;
+  var i, a, b, x, y, z, x1, z1, y1, z2, pr, e, k;
+  for(i = 0; i < NB; i++){
+    x = SYS.x[i * 3] + Math.sin(t * .55 + PH[i][0]) * 12;
+    y = SYS.x[i * 3 + 1] + Math.sin(t * .47 + PH[i][1]) * 12;
+    z = SYS.x[i * 3 + 2] + Math.sin(t * .51 + PH[i][2]) * 12;
+    x1 = x * cl - z * sl; z1 = x * sl + z * cl;
+    y1 = y * ct - z1 * st; z2 = y * st + z1 * ct;
+    pr = z2 + dist; e = fl / pr;
+    var p = PT[i];
+    p.x = cx + x1 * e; p.y = cy + y1 * e; p.e = e; p.pr = pr;
+    p.a = Math.max(0, Math.min(1, 1 - (pr - 980) / 1040));
+  }
+  ctx3.clearRect(0, 0, W, H);
+  ctx3.lineWidth = 1;
+  for(k = 0; k < AR.length; k++){
+    a = PT[AR[k][0]]; b = PT[AR[k][1]];
+    var df = (a.a + b.a) / 2;
+    if(AR[k][2]){ ctx3.setLineDash([3, 6]); ctx3.strokeStyle = 'rgba(160,175,200,' + ((.05 + .17 * df) * vue3).toFixed(3) + ')'; }
+    else { ctx3.setLineDash([]); ctx3.strokeStyle = 'rgba(184,255,61,' + ((.06 + .2 * df) * vue3).toFixed(3) + ')'; }
+    ctx3.beginPath(); ctx3.moveTo(a.x, a.y); ctx3.lineTo(b.x, b.y); ctx3.stroke();
+  }
+  ctx3.setLineDash([]);
+  for(k = 0; k < PU.length; k++){
+    var u = PU[k];
+    if(!reduce){ u.t += u.v / 60; if(u.t > 1){ u.t = 0; u.e = (u.e + 11) % AR.length; } }
+    a = PT[AR[u.e][0]]; b = PT[AR[u.e][1]];
+    var qx = a.x + (b.x - a.x) * u.t, qy = a.y + (b.y - a.y) * u.t, qa = (a.a + b.a) / 2;
+    ctx3.fillStyle = 'rgba(184,255,61,' + ((.10 + .22 * qa) * vue3).toFixed(3) + ')';
+    ctx3.beginPath(); ctx3.arc(qx, qy, 4.5 * Math.max(.5, a.e / e0 * .6), 0, 6.283); ctx3.fill();
+    ctx3.fillStyle = 'rgba(255,255,255,' + ((.25 + .5 * qa) * vue3).toFixed(3) + ')';
+    ctx3.beginPath(); ctx3.arc(qx, qy, 1.6 * Math.max(.6, a.e / e0 * .6), 0, 6.283); ctx3.fill();
+  }
+  var ordre = [];
+  for(i = 0; i < NB; i++){ ordre.push(i); }
+  ordre.sort(function(m, n){ return PT[n].pr - PT[m].pr; });
+  for(k = 0; k < NB; k++){
+    i = ordre[k]; var P = PT[i], c = COUL[+SYS.t.charAt(i)];
+    var w = 72 * P.e, h = 46 * P.e, al = (.10 + .36 * P.a) * vue3;
+    if(i === 0){ w *= 1.5; h *= 1.5; al = Math.min(.7, al * 1.5); }
+    arrondi(ctx3, P.x - w / 2, P.y - h / 2, w, h, Math.max(2, 7 * P.e));
+    ctx3.fillStyle = 'rgba(10,14,18,' + Math.min(.92, al * 2).toFixed(3) + ')'; ctx3.fill();
+    ctx3.strokeStyle = 'rgba(' + c + ',' + al.toFixed(3) + ')'; ctx3.stroke();
+    if(w > 14){
+      ctx3.fillStyle = 'rgba(' + c + ',' + (al * .9).toFixed(3) + ')';
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .18, w * .24, Math.max(1.5, h * .1));
+      ctx3.fillStyle = 'rgba(234,240,244,' + (al * .55).toFixed(3) + ')';
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .45, w * .72, Math.max(1, h * .07));
+      ctx3.fillRect(P.x - w / 2 + w * .1, P.y - h / 2 + h * .64, w * .5, Math.max(1, h * .07));
+    }
+  }
+  raf3 = (vivant3 && !reduce) ? requestAnimationFrame(dessine3) : 0;
+}
+function lance3(){ if(!raf3 && vivant3 && !document.hidden){ raf3 = requestAnimationFrame(dessine3); } }
+window.addEventListener('pointermove', function(e){ ax3 = e.clientX / W * 2 - 1; ay3 = e.clientY / H * 2 - 1; }, { passive: true });
+taille3();
+if(reduce){ dessine3(performance.now()); }
+function systeme(on){
+  if(on === on3){ return; }
+  on3 = on;
+  document.body.classList.toggle('sys', on);
+  clearTimeout(th3); clearTimeout(tf3);
+  if(on){ vivant3 = true; lance3(); th3 = setTimeout(function(){ cache = true; }, 1000); }
+  else { cache = false; lance(); tf3 = setTimeout(function(){ vivant3 = false; }, 1000); }
+}
+var zoneSys = document.getElementById('systeme');
+if('IntersectionObserver' in window && zoneSys){
+  new IntersectionObserver(function(es){ systeme(es[0].isIntersecting); }, { rootMargin: '-22% 0px -22% 0px' }).observe(zoneSys);
+}
+})();
+</script>
+</body>
+</html>
