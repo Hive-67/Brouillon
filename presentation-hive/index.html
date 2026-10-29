@@ -139,6 +139,47 @@ h2 em{font-style:normal;color:var(--acc)}
 .duo small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .duo b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:6px}
 .duo p{color:var(--mut);font-size:.98rem}
+.scene.schema{height:auto;margin-top:14px;padding:22px 18px 20px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card)}
+.sc-titre{color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+.sc-flux{display:flex;flex-direction:column;align-items:center}
+.sc-col{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;flex:none}
+.sc-col small{color:var(--mut);font-size:.82rem;line-height:1.3;max-width:16ch}
+.sc-etiq{font-weight:800;font-size:.95rem}
+.sc-bulle{width:124px;padding:12px;border:1.5px solid rgba(234,240,244,.4);border-radius:14px 14px 14px 4px;display:grid;gap:6px}
+.sc-bulle i{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.45);transform-origin:left;animation:sc-ecrit 9s infinite}
+.sc-bulle i:nth-child(2){width:70%;animation-delay:.2s}
+.sc-hex{width:68px;height:68px;animation:sc-claude 9s infinite}
+.sc-hex path{fill:rgba(184,255,61,.08);stroke:var(--acc);stroke-width:2;stroke-linejoin:round}
+.sc-hex circle{fill:var(--acc)}
+.sc-lien{position:relative;flex:none;width:2px;height:34px;margin:6px 0;background:linear-gradient(var(--acc-d),rgba(184,255,61,.12))}
+.sc-point{position:absolute;left:50%;top:0;width:10px;height:10px;margin:-5px 0 0 -5px;border-radius:50%;background:#fff;box-shadow:0 0 12px var(--acc),0 0 4px #fff;opacity:0;animation:sc-v 9s infinite;animation-delay:var(--o)}
+.sc-etapes{list-style:none;display:grid;gap:7px;width:100%;max-width:220px}
+.sc-etapes li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 12px;border:1px solid rgba(234,240,244,.16);border-radius:10px;font-size:.88rem;font-weight:600;color:var(--mut);animation:sc-chip 9s infinite;animation-delay:calc(var(--i)*.45s - 9s)}
+.sc-etapes li i{font-style:normal;color:var(--acc);opacity:0;animation:sc-ok 9s infinite;animation-delay:calc(var(--i)*.45s - 9s)}
+.sc-site{position:relative;width:136px;border:1.5px solid rgba(184,255,61,.5);border-radius:10px;overflow:hidden;background:#0e1318;animation:sc-fin 9s infinite}
+.sc-site .b{height:12px;border-bottom:1px solid rgba(234,240,244,.12)}
+.sc-site .c{padding:8px 8px 30px;display:grid;gap:5px}
+.sc-site .c i{display:block;height:6px;border-radius:3px;background:rgba(234,240,244,.4)}
+.sc-site .c i:first-child{width:60%;background:rgba(184,255,61,.6)}
+.sc-site .c i.bloc{height:22px;border-radius:5px;background:rgba(184,255,61,.14);border:1px solid rgba(184,255,61,.3)}
+.sc-v{position:absolute;right:7px;bottom:7px;width:22px;height:22px;border-radius:50%;background:var(--acc);animation:sc-valide 9s infinite}
+.sc-v::after{content:"";position:absolute;left:8px;top:4px;width:5px;height:10px;border:solid #0b1004;border-width:0 2.4px 2.4px 0;transform:rotate(45deg)}
+.sc-legende{margin-top:18px;color:var(--mut);font-size:.98rem;max-width:60ch}
+.sc-legende strong{color:var(--ink);font-weight:600}
+@media(min-width:760px){
+  .sc-flux{flex-direction:row;justify-content:space-between}
+  .sc-lien{flex:1 1 0;width:auto;height:2px;min-width:22px;margin:0 8px;background:linear-gradient(90deg,rgba(184,255,61,.12),var(--acc-d))}
+  .sc-point{left:0;top:50%;animation-name:sc-h}
+  .sc-etapes{width:200px}
+}
+@keyframes sc-ecrit{0%{transform:scaleX(0)}8%,90%{transform:scaleX(1)}97%,100%{transform:scaleX(0)}}
+@keyframes sc-claude{0%,20%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(184,255,61,0))}25%,30%{transform:scale(1.12);filter:drop-shadow(0 0 12px rgba(184,255,61,.7))}36%,100%{transform:scale(1);filter:drop-shadow(0 0 0 rgba(184,255,61,0))}}
+@keyframes sc-v{0%{top:0;opacity:0}2%{opacity:1}12%{top:100%;opacity:1}13%,100%{top:100%;opacity:0}}
+@keyframes sc-h{0%{left:0;opacity:0}2%{opacity:1}12%{left:100%;opacity:1}13%,100%{left:100%;opacity:0}}
+@keyframes sc-chip{0%,36%{border-color:rgba(234,240,244,.16);color:var(--mut);background:transparent}42%,80%{border-color:var(--acc);color:var(--ink);background:rgba(184,255,61,.1)}88%,100%{border-color:rgba(234,240,244,.16);color:var(--mut);background:transparent}}
+@keyframes sc-ok{0%,40%{opacity:0;transform:scale(0)}46%,80%{opacity:1;transform:scale(1)}88%,100%{opacity:0;transform:scale(0)}}
+@keyframes sc-fin{0%,56%{opacity:.4;transform:scale(.96);box-shadow:none}64%,90%{opacity:1;transform:none;box-shadow:0 0 28px -8px var(--acc-d)}97%,100%{opacity:.4;transform:scale(.96);box-shadow:none}}
+@keyframes sc-valide{0%,60%{transform:scale(0)}66%{transform:scale(1.2)}70%,90%{transform:scale(1)}97%,100%{transform:scale(0)}}
 .apprend{position:relative;margin-top:14px;padding:22px;border:1px solid rgba(184,255,61,.4);border-radius:16px;background:var(--card);overflow:hidden}
 .apprend small{display:block;color:var(--acc);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
 .apprend b{display:block;font-size:1.3rem;line-height:1.2;margin-bottom:8px}
@@ -339,6 +380,7 @@ h2 em{font-style:normal;color:var(--acc)}
   .bunker .msgs{transform:none}
   .video .spectre{left:35%}.video .spectre.g{left:55%}
   .video .frise i{height:60%}
+  .sc-bulle i{transform:none}.sc-etapes li{border-color:var(--acc);color:var(--ink)}.sc-etapes li i{opacity:1;transform:none}.sc-site{opacity:1}.sc-v{transform:none}.sc-point{display:none}
   .wf .wf-l,.wf .wf-page i{transform:none;opacity:1}.wf .wf-ok{transform:none}.ia .ia-pulse{left:50%;top:22%}
 }
 </style>
@@ -563,6 +605,25 @@ h2 em{font-style:normal;color:var(--acc)}
     <article class="duo rv lueur" style="--d:0"><small>Action 1</small><b>Il retient et il range</b><p>Une mémoire qui dure : tes dossiers sont tenus à jour, et chaque conversation sait où tu en étais.</p></article>
     <article class="duo rv lueur" style="--d:1"><small>Action 2</small><b>Il met en ligne</b><p>Déjà branché, déjà réglé. Ce que tu construis, tu le vois en ligne tout de suite.</p></article>
   </div>
+  <div class="scene schema rv" role="img" aria-label="Schéma animé : tu envoies ta demande à Claude. Claude la fait passer par la sécurité, le design, l'ergonomie, le référencement et la mise en ligne. Tu reçois un résultat propre, sûr et qui fonctionne.">
+    <p class="sc-titre">Comment ça marche</p>
+    <div class="sc-flux">
+      <div class="sc-col"><span class="sc-etiq">Toi</span><div class="sc-bulle"><i></i><i></i></div><small>Tu demandes avec tes mots</small></div>
+      <div class="sc-lien"><span class="sc-point" style="--o:-8.28s"></span></div>
+      <div class="sc-col"><span class="sc-etiq">Claude</span><svg class="sc-hex" viewBox="0 0 68 68" aria-hidden="true"><path d="M34 4l26 15v30L34 64 8 49V19z"/><circle cx="34" cy="34" r="5"/></svg><small>Il fait le travail</small></div>
+      <div class="sc-lien"><span class="sc-point" style="--o:-6.3s"></span></div>
+      <ul class="sc-etapes">
+        <li style="--i:0">Sécurité<i>✓</i></li>
+        <li style="--i:1">Design<i>✓</i></li>
+        <li style="--i:2">Ergonomie<i>✓</i></li>
+        <li style="--i:3">Référencement<i>✓</i></li>
+        <li style="--i:4">Mise en ligne<i>✓</i></li>
+      </ul>
+      <div class="sc-lien"><span class="sc-point" style="--o:-3.96s"></span></div>
+      <div class="sc-col"><span class="sc-etiq">Toi, au bout</span><div class="sc-site"><div class="b"></div><div class="c"><i></i><i></i><i class="bloc"></i></div><span class="sc-v"></span></div><small>Propre, sûr, qui marche</small></div>
+    </div>
+    <p class="sc-legende"><strong>Tu n'as rien à penser :</strong> la sécurité, le design, la facilité d'usage, le référencement, tout est pris en charge à ta place.</p>
+  </div>
   <article class="apprend rv lueur" style="--d:0">
     <small>Tout est piloté pour toi</small>
     <b>Tu pilotes avec Claude. Il s'occupe du reste.</b>
@@ -711,7 +772,7 @@ document.querySelectorAll('.lueur').forEach(function(el){
 var cv = document.getElementById('fond'), ctx = cv.getContext('2d');
 var W = 0, H = 0, S = 40, maxD = 1, hexes = [];
 var px = -999, py = -999, tx = -999, ty = -999, touche = false, t0 = performance.now(), raf = 0, visible = true;
-var vue = 1; // 1 en haut de page, plus discret ensuite
+var vue = 1; // 1 en haut de page, un peu plus discret ensuite
 var cache = false; // vrai quand le fond 3D a pris la place des alvéoles
 
 function construit(){
@@ -740,7 +801,7 @@ function hexa(c, x, y, s){
 }
 function dessine(now){
   var t = reduce ? 99 : (now - t0) / 1000;
-  var cible = Math.max(.35, 1 - window.scrollY / (H * .9));
+  var cible = Math.max(.85, 1 - window.scrollY / (H * 3));
   vue += (cible - vue) * .08;
   if(!touche && !reduce){
     tx = W / 2 + Math.cos(t * .7) * W * .3;
