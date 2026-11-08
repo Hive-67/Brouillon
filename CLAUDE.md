@@ -1,6 +1,6 @@
 # Brouillon — règles
 
-Ce dépôt a trois zones. Elles ne se mélangent jamais.
+Ce dépôt a quatre zones. Elles ne se mélangent jamais.
 
 ## La racine : le brouillon
 C'est le bac d'essai. Chaque nouvel essai écrase le précédent, on s'en fiche.
@@ -22,3 +22,11 @@ Adresse : https://hive-67.github.io/Brouillon/presentation-hive/
 - **Intouchable pendant les essais**, comme `store/`. Quand on nettoie ou qu'on écrase la racine, on ne supprime, ne vide et ne déplace jamais `presentation-hive/`.
 - On n'y touche que si Hive parle de sa page de présentation.
 - Il vit dans `main`, comme le store (GitHub Pages ne sert que `main`).
+
+## `ruche/` : la page de la Ruche
+La page perso de Hive et la page de vente de la Ruche.
+Adresse : https://hive-67.github.io/Brouillon/ruche/
+
+- **Intouchable pendant les essais**, comme `store/` et `presentation-hive/`. Quand on nettoie ou qu'on écrase la racine, on ne supprime, ne vide et ne déplace jamais `ruche/`.
+- On n'y touche que si Hive parle de la Ruche ou de sa page de vente.
+- Elle vit dans `main` (GitHub Pages ne sert que `main`).

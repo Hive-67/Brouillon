@@ -1,4 +1,4 @@
-⏳ À faire
+✅ Fait
 
 # Ordre : la page Ruche, « Le système Hive » en tête
 
@@ -55,3 +55,14 @@ Le style (couleurs, polices, fond animé en 3D, apparitions), les preuves, le bl
 - Aucune étape ni promesse que la Ruche ne tient pas ; le retour dit lesquelles ont changé.
 - Lisible au téléphone à 390 de large, sans débordement ; `prefers-reduced-motion` toujours respecté ; aucune erreur dans la console ; aucun tiret long dans les textes ajoutés.
 - Jugement de Hive : le haut de page, au téléphone. Lui donner le lien de la page.
+
+## Retour
+
+- Fait par l'Exécutant de LaRuche (Hive a tapé GO là-bas, ordre relais `ordres/2026-11-08-c-page-ruche-brouillon.md` de LaRuche), sur `main` du Brouillon.
+- Le haut : « Le système Hive » en gros (« Hive » en vert), la pastille « La Ruche » dessous, « Ton deuxième cerveau, qui construit avec toi. », puis « Tu as une idée de site ou d'appli ? Tu la mets en ligne, sans coder. » ; bouton « Écris-moi » ; l'ancien `kicker` et la ligne des places et prix retirés ; `<title>`, `description`, `og:` mis à jour.
+- Retirés : les sections `#session` et `#prix`, la FAQ de la prochaine session, « et 2 heures » partout. Fin de page : « Une idée ? Écris-moi. », « Écris-moi par mail, je te réponds. », bouton « Écris-moi », étiquette « Contact » (au lieu de « Réserver ») ; barre du bas « Le système Hive / La Ruche » et « Écris-moi » ; sujet du mail « Le système Hive : la Ruche ». « Dès la session » devient « dès le premier jour » dans « Pour qui ».
+- Les promesses : « Pas de bugs à chercher » devient « Des essais avant chaque mise en ligne » ; « fonctionne tout de suite » devient « tu avances sur du concret, dès le premier jour » et, dans la FAQ, « Ce que tu construis est à toi ». Le schéma : Ergonomie et Référencement retirés (aucun membre de l'équipe ne les contrôle, `regles-annexes.md` : testeur, relecteur, designer, sécurité, directeur marketing), remplacés par Test, Relecture, Design, Sécurité, Mise en ligne ; « Propre, sûr, qui marche » devient « Propre, vérifié, sûr » ; la légende dit « la Ruche s'en occupe avec toi » ; même chose pour la carte « Un vrai site, c'est beaucoup de choses ».
+- `CLAUDE.md` : quatrième zone `ruche/`.
+- Contrôle : aucun « € », « 2 heures », « 6 places », « 199 », « 299 », « session », « Réserver » ; aucune erreur en console ; 390 de large sans débordement, en mouvement normal et réduit ; aucun tiret long ajouté (le seul présent est un signe « – » du CSS de la FAQ, déjà là).
+- À signaler, non touché (pas demandé) : la carte « Il met en ligne : déjà branché, déjà réglé, tu le vois en ligne tout de suite » ne colle plus au réel depuis la version 53 (Netlify se règle au premier projet, guidé).
+- Skills utilisés : aucun.
