@@ -1,32 +1,16 @@
 # Brouillon — règles
 
-Ce dépôt a quatre zones. Elles ne se mélangent jamais.
-
-## La racine : le brouillon
-C'est le bac d'essai. Chaque nouvel essai écrase le précédent, on s'en fiche.
-Adresse : https://hive-67.github.io/Brouillon/
+Ce dépôt ne contient plus qu'une chose : **le store de Nolan**.
 
 ## `store/` : NolanGame
 Le store de jeux (PWA installable sur mobile et tablette 10 pouces).
 Adresse : https://hive-67.github.io/Brouillon/store/
 
-- **Intouchable pendant les essais.** Quand on nettoie ou qu'on écrase la racine, on ne supprime, ne vide et ne déplace jamais `store/`.
+- **Intouchable.** On ne le supprime, ne le vide et ne le déplace jamais. Il reste où il est.
 - On n'y touche que si Hive parle du store ou de NolanGame.
 - Le détail est dans `store/CLAUDE.md`.
 - GitHub Pages ne sert que `main` : le store vit donc dans `main`, dossier `store/`. La branche `store` est vide de contenu utile, on ne s'en sert pas.
 
-## `presentation-hive/` : le site de présentation de Hive
-La page qui présente Hive à ses futurs clients (commerces, assos, communautés).
-Adresse : https://hive-67.github.io/Brouillon/presentation-hive/
-
-- **Intouchable pendant les essais**, comme `store/`. Quand on nettoie ou qu'on écrase la racine, on ne supprime, ne vide et ne déplace jamais `presentation-hive/`.
-- On n'y touche que si Hive parle de sa page de présentation.
-- Il vit dans `main`, comme le store (GitHub Pages ne sert que `main`).
-
-## `ruche/` : la page de la Ruche
-La page perso de Hive et la page de vente de la Ruche.
-Adresse : https://hive-67.github.io/Brouillon/ruche/
-
-- **Intouchable pendant les essais**, comme `store/` et `presentation-hive/`. Quand on nettoie ou qu'on écrase la racine, on ne supprime, ne vide et ne déplace jamais `ruche/`.
-- On n'y touche que si Hive parle de la Ruche ou de sa page de vente.
-- Elle vit dans `main` (GitHub Pages ne sert que `main`).
+## Le reste
+Vidé par Hive le 11/11/2026. Tout ce qui était là (bac d'essai, `coque-jeu/`, `jeu-cartes/`, `fenetres/`, `refonte/`, `plan-workflow-dev/`, `presentation-hive/`, `ruche/`) est gardé dans la branche `archive/avant-nettoyage-2026-11-11`.
+La page « Le système Hive » (`ruche/`) vit maintenant dans DigiHive : dépôt `Hive-67/digihive-site`, branche `page-systeme-hive`.
